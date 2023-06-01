@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 import HomePage from "./pages/Home";
 import Layout from "./components/Layout";
-
+import "./index.css";
 const INFURA_KEY = import.meta.env.VITE_INFURA_KEY;
 const ethereumRopsten = {
 	id: "0x3",
