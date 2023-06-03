@@ -1,7 +1,9 @@
-import { Web3OnboardProvider, init } from "@web3-onboard/react";
-import injectedModule from "@web3-onboard/injected-wallets";
+import "@rainbow-me/rainbowkit/styles.css";
+import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { configureChains, createConfig, WagmiConfig } from "wagmi";
+import { goerli } from "wagmi/chains";
+import { publicProvider } from "wagmi/providers/public";
 import {
-	Router,
 	Route,
 	Outlet,
 	createBrowserRouter,
@@ -11,23 +13,28 @@ import {
 import HomePage from "./pages/Home";
 import Layout from "./components/Layout";
 import "./index.css";
+import { infuraProvider } from "wagmi/providers/infura";
+import EvaluationsPage from "./pages/Evaluations";
+import OrganizationsPage from "./pages/Organizations";
+import ReportsPage from "./pages/Reports";
 const INFURA_KEY = import.meta.env.VITE_INFURA_KEY;
-const ethereumRopsten = {
-	id: "0x3",
-	token: "rETH",
-	label: "Ethereum Ropsten",
-	rpcUrl: `https://ropsten.infura.io/v3/${INFURA_KEY}`,
-};
-const chains = [ethereumRopsten];
-const wallets = [injectedModule()];
-const web3Onboard = init({
-	wallets,
+
+const { chains, publicClient } = configureChains(
+	[goerli],
+	[infuraProvider({ apiKey: INFURA_KEY }), publicProvider()]
+);
+
+const { connectors } = getDefaultWallets({
+	appName: "BaseX",
 	chains,
-	appMetadata: {
-		name: "BasedX",
-		description: "Buidl in progress!",
-	},
 });
+
+const wagmiConfig = createConfig({
+	autoConnect: true,
+	connectors,
+	publicClient,
+});
+
 function App() {
 	const router = createBrowserRouter(
 		createRoutesFromElements(
@@ -39,13 +46,18 @@ function App() {
 				}
 			>
 				<Route path="/" element={<HomePage />} />
+				<Route path="/reports" element={<ReportsPage />} />
+				<Route path="/organizations" element={<OrganizationsPage />} />
+				<Route path="/evaluations" element={<EvaluationsPage />} />
 			</Route>
 		)
 	);
 	return (
-		<Web3OnboardProvider web3Onboard={web3Onboard}>
-			<RouterProvider router={router} />
-		</Web3OnboardProvider>
+		<WagmiConfig config={wagmiConfig}>
+			<RainbowKitProvider chains={chains}>
+				<RouterProvider router={router} />
+			</RainbowKitProvider>
+		</WagmiConfig>
 	);
 }
 
