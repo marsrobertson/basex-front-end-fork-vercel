@@ -23,7 +23,6 @@ const ReportsPage = () => {
 				{reports.map((report, i) => (
 					<ReportCard report={report} key={i} />
 				))}
-				d
 			</div>
 		</div>
 	);

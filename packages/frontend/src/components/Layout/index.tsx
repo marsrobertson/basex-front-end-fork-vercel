@@ -25,7 +25,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 							</svg>
 						</label>
 					</div>
-					<div className="flex-1 px-2 mx-2 text-2xl font-semibold">BaseX</div>
+					<div className="flex-1 px-2 mx-2 text-2xl font-semibold">
+						<a href="/">BaseX</a>
+					</div>
 					<div className="flex-none hidden lg:block">
 						<ul className="menu menu-horizontal">
 							<li>
