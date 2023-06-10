@@ -1,12 +1,12 @@
-import { mockOrganisations } from "../mock/Organizations";
+import { mockOrganisations } from "../mock/Organisations";
 
-const OrganizationsPage = () => {
+const OrganisationsPage = () => {
 	return (
 		<div className="p-4">
 			<div className="max-w-5xl mx-auto">
 				<div className="flex justify-between mb-4">
 					<h1 className="text-2xl font-bold text-black/60 my-auto">
-						Organization List
+						Organisation List
 					</h1>
 					<button className="btn btn-outline btn-primary my-2 btn-sm">
 						New Organisation
@@ -16,7 +16,7 @@ const OrganizationsPage = () => {
 					<thead>
 						<tr>
 							<th className="px-4 py-2">#</th>
-							<th className="px-4 py-2">Organization</th>
+							<th className="px-4 py-2">Organisation</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -33,4 +33,4 @@ const OrganizationsPage = () => {
 	);
 };
 
-export default OrganizationsPage;
+export default OrganisationsPage;

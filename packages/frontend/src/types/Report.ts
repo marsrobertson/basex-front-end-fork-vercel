@@ -1,5 +1,5 @@
 export interface Report {
-	organization: string;
+	organisation: string;
 	title: string;
 	comments: string;
 	uploadDate: Date;

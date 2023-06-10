@@ -15,7 +15,7 @@ import Layout from "./components/Layout";
 import "./index.css";
 import { infuraProvider } from "wagmi/providers/infura";
 import EvaluationsPage from "./pages/Evaluations";
-import OrganizationsPage from "./pages/Organizations";
+import OrganisationsPage from "./pages/Organisations";
 import ReportsPage from "./pages/Reports";
 const INFURA_KEY = import.meta.env.VITE_INFURA_KEY;
 
@@ -47,7 +47,7 @@ function App() {
 			>
 				<Route path="/" element={<HomePage />} />
 				<Route path="/reports" element={<ReportsPage />} />
-				<Route path="/organizations" element={<OrganizationsPage />} />
+				<Route path="/organisations" element={<OrganisationsPage />} />
 				<Route path="/evaluations" element={<EvaluationsPage />} />
 			</Route>
 		)

@@ -14,7 +14,7 @@ const EvaluationCard = ({ evaluation }: { evaluation: Evaluation }) => {
 			<div className="card-body">
 				<h2 className="card-title text-lg font-bold mb-3">{reportTitle}</h2>
 				<section>
-					<h3 className="text-base font-bold mb-2">Organization</h3>
+					<h3 className="text-base font-bold mb-2">Organisation</h3>
 					<p className="text-gray-600">{organisation}</p>
 				</section>
 				<section>

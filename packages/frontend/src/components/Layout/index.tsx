@@ -34,7 +34,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 								<a href="/reports">Reports</a>
 							</li>
 							<li>
-								<a href="/organizations">Organizations</a>
+								<a href="/organisations">Organisations</a>
 							</li>
 							<li>
 								<a href="/evaluations">Evaluations</a>
@@ -55,7 +55,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 						<a href="/reports">Reports</a>
 					</li>
 					<li>
-						<a href="/organizations">Organizations</a>
+						<a href="/organisations">Organisations</a>
 					</li>
 					<li>
 						<a href="/evaluations">Evaluations</a>

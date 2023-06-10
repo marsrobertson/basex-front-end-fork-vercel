@@ -1,7 +1,7 @@
 import { Report } from "../../types/Report";
 const ReportCard = ({ report }: { report: Report }) => {
 	const {
-		organization,
+		organisation,
 		title,
 		comments,
 		uploadDate,
@@ -15,7 +15,7 @@ const ReportCard = ({ report }: { report: Report }) => {
 		<div className="card bg-base-100  my-3 border-2 shadow-xl">
 			<div className="card-body">
 				<h2 className="card-title text-lg font-bold mb-3">{title}</h2>
-				<p className="text-gray-600 mb-2">{organization}</p>
+				<p className="text-gray-600 mb-2">{organisation}</p>
 				<p className="text-gray-600 mb-2">{comments}</p>
 				<p className="text-gray-600 mb-2">
 					Upload Date: {uploadDate.toDateString()}

@@ -1,7 +1,7 @@
 import { Report } from "../types/Report";
 const mockReports: Report[] = [
 	{
-		organization: "ABC Company",
+		organisation: "ABC Company",
 		title: "Financial Report",
 		comments: "This is the financial report for the current year.",
 		uploadDate: new Date("2023-05-15"),
@@ -11,7 +11,7 @@ const mockReports: Report[] = [
 		ipfs: "https://ipfs.io/ipfs/QmW7Gb3Aie9RtK3bqW4X8tzFrE2HZVeJ13tB8jEn2D5ty9",
 	},
 	{
-		organization: "XYZ Corporation",
+		organisation: "XYZ Corporation",
 		title: "Annual Report",
 		comments: "Please review the annual report for important information.",
 		uploadDate: new Date("2023-04-20"),
@@ -21,7 +21,7 @@ const mockReports: Report[] = [
 		ipfs: "https://ipfs.io/ipfs/QmY9Dm2Rf12CjX8tA2Wh6jEnZb8K3GqW7HzVeFrt9t5yE",
 	},
 	{
-		organization: "123 Corporation",
+		organisation: "123 Corporation",
 		title: "Quarterly Report",
 		comments: "Check out the quarterly report for detailed analysis.",
 		uploadDate: new Date("2023-03-10"),
@@ -31,7 +31,7 @@ const mockReports: Report[] = [
 		ipfs: "https://ipfs.io/ipfs/QmZ8Dk6Gf24TnV7tY3RtH7DnQb1En5Fy2Zb8CjXm9Hq4As",
 	},
 	{
-		organization: "PQR Corp",
+		organisation: "PQR Corp",
 		title: "Year-End Financial Statement",
 		comments:
 			"Review the year-end financial statement for performance evaluation.",
@@ -42,7 +42,7 @@ const mockReports: Report[] = [
 		ipfs: "https://ipfs.io/ipfs/QmX9FrE2GtB7Hb8Rf13CjX8tA2Zb6DnQk3Y7VeJ2Hq5Tn",
 	},
 	{
-		organization: "LMN Corporation",
+		organisation: "LMN Corporation",
 		title: "Monthly Sales Report",
 		comments:
 			"Analyze the monthly sales report for sales performance insights.",
