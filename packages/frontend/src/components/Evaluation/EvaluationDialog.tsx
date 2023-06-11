@@ -87,7 +87,8 @@ const EvaluationDialog = ({ report }: { report: Report }) => {
 			}));
 		} else if (name.includes("planetJustifications")) {
 			// Handle changes in the planetJustifications fields
-			const [fieldName, indexString, fieldType] = name.split("-");
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
+			const [_fieldName, indexString, fieldType] = name.split("-");
 			const index = Number(indexString);
 			const field = fieldType === "comment" ? "comment" : "percentage";
 			const updatedPlanetJustifications = [
