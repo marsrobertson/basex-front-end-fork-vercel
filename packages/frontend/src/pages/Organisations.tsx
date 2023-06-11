@@ -1,3 +1,4 @@
+import OrganisationDialog from "../components/Organisation/OrganisationDialog";
 import { mockOrganisations } from "../mock/Organisations";
 
 const OrganisationsPage = () => {
@@ -8,9 +9,7 @@ const OrganisationsPage = () => {
 					<h1 className="text-2xl font-bold text-black/60 my-auto">
 						Organisation List
 					</h1>
-					<button className="btn btn-outline btn-primary my-2 btn-sm">
-						New Organisation
-					</button>
+					<OrganisationDialog />
 				</div>
 				<table className="min-w-full table">
 					<thead>

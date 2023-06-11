@@ -1,4 +1,5 @@
 import { Report } from "../../types/Report";
+import EvaluationDialog from "../Evaluation/EvaluationDialog";
 const ReportCard = ({ report }: { report: Report }) => {
 	const {
 		organisation,
@@ -41,7 +42,7 @@ const ReportCard = ({ report }: { report: Report }) => {
 					>
 						View on IPFS
 					</a>
-					<button className="btn btn-primary">Evaluate</button>
+					<EvaluationDialog report={report} />
 				</div>
 			</div>
 		</div>
