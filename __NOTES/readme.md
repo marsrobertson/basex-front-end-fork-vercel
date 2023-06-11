@@ -65,19 +65,22 @@ Adding the data can be any of these:
 
 ```
     guid: guid
+
+    // REPORT PART
     title: string
-    source: www link (string)
-    upload: ipfshash
-    start date: date (can be stored as number in unix time)
+    source: string (URL validation)
+    uploadReport: string (UPLOAD then IPFS hash)
+    start date: date (or unix time number)
     end date: date 
     commentsReport: string
 
     // EVALUATION PART
     positive value: number
     negative value: number // Solidity does not have negative numbers
-    upload: ipfshash // evaluation is detailed, so it is a file
+    minted: boolean // after the evaluation is done, we can mint the tokens
+    uploadEval: string (UPLOAD then IPFS hash)
     ESGdata: JSON to IPFS // These 17 SDGs - that will be a treasure trove of data, we want to keep it
-    commentsEvaluation: string
-    reportGUID: guid // use guid of existing report else, or self reference (if report and evaluation at the same time)
+    commentsEval: string
+    reportGUID: guid // use guid of existing report or self reference (if report and evaluation at the same time)
 ```
 
