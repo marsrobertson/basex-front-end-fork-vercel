@@ -1,1 +1,36 @@
-{"title":"Remove an organisation from Organistions","description":"Someone requested to remove an organisation from Organistions","rulingOptions":{"titles":["Yes, Remove It","No, Don't Remove It"],"descriptions":["Select this if you think the organisation does not comply with the required criteria and should be removed.","Select this if you think the organisation complies with the required criteria and should not be removed."]},"category":"Curated Lists","question":"Does the organisation comply with the required criteria?","fileURI":"/ipfs/Qmc39QFr8BTXRSdtiycBVubhHjU1Viv7VizPWoqiFht9tQ/kleros-basex-policies-organisations.pdf","evidenceDisplayInterfaceURI":"/ipfs/QmQjJio59WkrQDzPC5kSP3EiGaqrWxjGfkvhmD2mWwm41M/index.html","metadata":{"tcrTitle":"Organistions","tcrDescription":"List of organistion","columns":[{"label":"Address","description":"The list address.","type":"GTCR address","isIdentifier":true}],"itemName":"organisation","itemNamePlural":"organisations","logoURI":"/ipfs/Qmb16xH76gS2C4zGYZZqm5qJishYmPrpZao8FJNi44XH3i/basex-logo-x.png","requireRemovalEvidence":true,"isTCRofTCRs":true,"relTcrDisabled":true}}
+{
+    "title":"Remove an organisation from Organistions",
+    "description":"Someone requested to remove an organisation from Organistions",
+    "rulingOptions":{
+       "titles":[
+          "Yes, Remove It",
+          "No, Don't Remove It"
+       ],
+       "descriptions":[
+          "Select this if you think the organisation does not comply with the required criteria and should be removed.",
+          "Select this if you think the organisation complies with the required criteria and should not be removed."
+       ]
+    },
+    "category":"Curated Lists",
+    "question":"Does the organisation comply with the required criteria?",
+    "fileURI":"/ipfs/Qmc39QFr8BTXRSdtiycBVubhHjU1Viv7VizPWoqiFht9tQ/kleros-basex-policies-organisations.pdf",
+    "evidenceDisplayInterfaceURI":"/ipfs/QmQjJio59WkrQDzPC5kSP3EiGaqrWxjGfkvhmD2mWwm41M/index.html",
+    "metadata":{
+       "tcrTitle":"Organistions",
+       "tcrDescription":"List of organistion",
+       "columns":[
+          {
+             "label":"Address",
+             "description":"The list address.",
+             "type":"GTCR address",
+             "isIdentifier":true
+          }
+       ],
+       "itemName":"organisation",
+       "itemNamePlural":"organisations",
+       "logoURI":"/ipfs/Qmb16xH76gS2C4zGYZZqm5qJishYmPrpZao8FJNi44XH3i/basex-logo-x.png",
+       "requireRemovalEvidence":true,
+       "isTCRofTCRs":true,
+       "relTcrDisabled":true
+    }
+ }
