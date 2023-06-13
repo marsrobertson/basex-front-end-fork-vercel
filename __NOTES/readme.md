@@ -76,11 +76,35 @@ Adding the data can be any of these:
 
     // EVALUATION PART
     positive value: number
-    negative value: number // Solidity does not have negative numbers
-    minted: boolean // after the evaluation is done, we can mint the tokens
+    negative value: number // Solidity does not have negative numbers + we do some shenanigans with negative value
+
     uploadEval: string (UPLOAD then IPFS hash)
-    ESGdata: JSON to IPFS // These 17 SDGs - that will be a treasure trove of data, we want to keep it
     commentsEval: string
     reportGUID: guid // use guid of existing report or self reference (if report and evaluation at the same time)
+
+    SDG1: number // 0: default value (not set), 1-100 positive, 101-200 negative
+    SDG1comment: string
+
+    SDG2: number
+    SDG2comment: string
+
+    ...
+
+    SDG17: number
+    SDG17comment: string
+    
 ```
 
+### Admin control
+
+Longer term there will be no admin.
+
+For the time being, using Gnosis Safe for admin operations: `0x2eEfcc9Ef215BC1a1E02d17276BB930BfA946a52`
+
+https://app.safe.global/home?safe=gor:0x2eEfcc9Ef215BC1a1E02d17276BB930BfA946a52
+
+Why do you need admin?
+
+1. Assigning wallet address to the organisation
+
+Currently anyone can create an organisation to evaluate their impact. But initially the organisation does not have a wallet. That's why, at some point, we need to assign the wallet to the organisation.
