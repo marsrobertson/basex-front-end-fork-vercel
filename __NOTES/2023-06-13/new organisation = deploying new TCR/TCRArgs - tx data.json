@@ -1,0 +1,29 @@
+[
+  "0x1128eD55ab2d796fa92D2F8E1f336d745354a77A",
+  "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001",
+  "0x78180dE5e2e846d1388be320AF109A43d29F1A31",
+  "/ipfs/QmcLd4ucxkU9TvjTUzKk2u2EzFcNV24UuvxwRq1JMhupmN/reg-meta-evidence.json",
+  "/ipfs/QmaiZUrRtKk1a12mW9zArG7TW1hXBraYB3u6AXwrrVGBH3/clr-meta-evidence.json",
+  "0x85A363699C6864248a6FfCA66e4a1A5cCf9f5567",
+  [
+    {
+      "_hex": "0xb1a2bc2ec50000" // 0.05
+    },
+    {
+      "_hex": "0xb1a2bc2ec50000" // 0.05
+    },
+    {
+      "_hex": "0x00"
+    },
+    {
+      "_hex": "0xb1a2bc2ec50000" // 0.05
+    }
+  ],
+  302400,
+  [
+    10000,
+    10000,
+    20000
+  ],
+  "0x0000000000000000000000000000000000000000"
+]

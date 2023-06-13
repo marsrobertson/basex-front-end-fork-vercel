@@ -1,3 +1,7 @@
+# How to run?
+
+* `yarn dev`
+
 # 🏗 Scaffold-ETH
 
 > everything you need to build on Ethereum! 🚀
