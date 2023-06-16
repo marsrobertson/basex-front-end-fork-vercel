@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Organisation } from "../../types/Organisation";
+import { CreateOrgJSON, RemoveOrgJSON } from "../../services/DataScructures";
 
 const OrganisationDialog = () => {
 	const [open, setOpen] = useState(false);
@@ -29,7 +30,24 @@ const OrganisationDialog = () => {
 	};
 
 	const handleSubmit = () => {
-		// Perform any additional validation or processing here
+		let createOrgJSONCopy = JSON.parse(JSON.stringify(CreateOrgJSON)); // THINK: unsure if needed, erring on the side of caution
+
+		createOrgJSONCopy.title                   = createOrgJSONCopy.title                  .replace("___NAME___", newOrganisation.name);
+		createOrgJSONCopy.description             = createOrgJSONCopy.description            .replace("___NAME___", newOrganisation.name);
+		createOrgJSONCopy.metadata.tcrTitle       = createOrgJSONCopy.metadata.tcrTitle      .replace("___NAME___", newOrganisation.name);
+		createOrgJSONCopy.metadata.tcrDescription = createOrgJSONCopy.metadata.tcrDescription.replace("___NAME___", newOrganisation.name);
+
+		// TODO: upload createOrgJSONCopy to IPFS
+
+		let removeOrgJSONCopy = JSON.parse(JSON.stringify(RemoveOrgJSON))
+		removeOrgJSONCopy.title                   = removeOrgJSONCopy.title                  .replace("___NAME___", newOrganisation.name);
+		removeOrgJSONCopy.description             = removeOrgJSONCopy.description            .replace("___NAME___", newOrganisation.name);
+		removeOrgJSONCopy.metadata.tcrTitle       = removeOrgJSONCopy.metadata.tcrTitle      .replace("___NAME___", newOrganisation.name);
+		removeOrgJSONCopy.metadata.tcrDescription = removeOrgJSONCopy.metadata.tcrDescription.replace("___NAME___", newOrganisation.name);
+
+		// TODO: upload removeOrgJSONCopy to IPFS
+
+		// Once both files are uploaded to IPFS, we can can send the ETH transaction
 
 		handleClose();
 	};
