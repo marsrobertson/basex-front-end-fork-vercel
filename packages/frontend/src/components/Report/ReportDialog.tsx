@@ -67,6 +67,12 @@ const ReportDialog = () => {
 				<div className="fixed inset-0 flex items-center justify-center z-10">
 					<div className="modal modal-open">
 						<div className="modal-box">
+							<button
+								onClick={handleClose}
+								className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+							>
+								✕
+							</button>
 							<h2 className="text-2xl font-bold">New Report</h2>
 							<div className="modal-body">
 								<div className="my-2">
