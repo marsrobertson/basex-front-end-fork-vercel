@@ -510,4 +510,18 @@ let RemoveOrgJSON = {
     }
 };
 
-export { CreateOrgJSON, RemoveOrgJSON };
+let AddOrgToKlerosJSON = {
+    "columns":[
+       {
+          "label":"Address",
+          "description":"The list address.",
+          "type":"GTCR address",
+          "isIdentifier":true
+       }
+    ],
+    "values":{
+       "Address":""
+    }
+ }
+
+export { CreateOrgJSON, RemoveOrgJSON, AddOrgToKlerosJSON };

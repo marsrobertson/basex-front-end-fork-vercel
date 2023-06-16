@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Organisation } from "../../types/Organisation";
-import { CreateOrgJSON, RemoveOrgJSON } from "../../services/DataScructures";
+import { CreateOrgJSON, RemoveOrgJSON, AddOrgToKlerosJSON } from "../../services/DataScructures";
 
 const OrganisationDialog = () => {
 	const [open, setOpen] = useState(false);
@@ -37,7 +37,7 @@ const OrganisationDialog = () => {
 		createOrgJSONCopy.metadata.tcrTitle       = createOrgJSONCopy.metadata.tcrTitle      .replace("___NAME___", newOrganisation.name);
 		createOrgJSONCopy.metadata.tcrDescription = createOrgJSONCopy.metadata.tcrDescription.replace("___NAME___", newOrganisation.name);
 
-		// TODO: upload createOrgJSONCopy to IPFS
+		// TODO 1A: upload createOrgJSONCopy to IPFS
 
 		let removeOrgJSONCopy = JSON.parse(JSON.stringify(RemoveOrgJSON))
 		removeOrgJSONCopy.title                   = removeOrgJSONCopy.title                  .replace("___NAME___", newOrganisation.name);
@@ -45,9 +45,23 @@ const OrganisationDialog = () => {
 		removeOrgJSONCopy.metadata.tcrTitle       = removeOrgJSONCopy.metadata.tcrTitle      .replace("___NAME___", newOrganisation.name);
 		removeOrgJSONCopy.metadata.tcrDescription = removeOrgJSONCopy.metadata.tcrDescription.replace("___NAME___", newOrganisation.name);
 
-		// TODO: upload removeOrgJSONCopy to IPFS
+		// TODO 1B: upload removeOrgJSONCopy to IPFS
 
-		// Once both files are uploaded to IPFS, we can can send the ETH transaction
+		// TODO 2: send ETH transaction to deploy organisation
+		// DEPLOY ORGANISATION
+		// https://goerli.etherscan.io/address/0x898b303a922016357e86ac2438719248225c11ef
+		// string memory orgGuid, string memory name, string memory registrationJSONIPFS, string memory removingJSONIPFS, address payoutAddress
+		// TODO 3: retrieve the address of the deployed organisation
+
+
+		let addOrgToKlerosJSONCopy = JSON.parse(JSON.stringify(AddOrgToKlerosJSON))
+		addOrgToKlerosJSONCopy.values.Address = "..............."; // Replace with address of deployed organisation
+
+		// TODO 5: upload addOrgToKlerosJSONCopy to IPFS
+
+		// TODO 6: 
+		// function addOrganisationToTheList(uint256 orgIndex, string memory organisationJSONIPFS) public payable
+		// We need to send ETH to this function, 0.06 ETH should be correct
 
 		handleClose();
 	};
