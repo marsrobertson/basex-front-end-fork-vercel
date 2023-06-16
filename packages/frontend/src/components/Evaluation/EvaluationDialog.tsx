@@ -12,7 +12,7 @@ const EvaluationDialog = ({ report }: { report: Report }) => {
 			people: { amount: 0, comment: "" },
 			planet: { amount: 0, comment: "" },
 			profit: { amount: 0, comment: "" },
-			planetJustifications: Array.from({ length: 14 }, (_, index) => ({
+			planetJustifications: Array.from({ length: 17 }, (_, index) => ({
 				comment: "",
 				percentage: 0,
 				planetImage: `/img/sdg${index + 1}.png`,
