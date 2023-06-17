@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Report } from "../../types/Report";
+import { useOnClickOutside } from "usehooks-ts";
 
 const ReportDialog = () => {
 	const [open, setOpen] = useState(false);
+	const ref = useRef(null);
+
 	const [newReport, setNewReport] = useState<Report>({
 		organisation: "",
 		title: "",
@@ -31,7 +34,9 @@ const ReportDialog = () => {
 			ipfs: "",
 		});
 	};
-
+	useOnClickOutside(ref, () => {
+		handleClose();
+	});
 	const handleChange = (
 		event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 	) => {
@@ -66,7 +71,7 @@ const ReportDialog = () => {
 			{open && (
 				<div className="fixed inset-0 flex items-center justify-center z-10">
 					<div className="modal modal-open">
-						<div className="modal-box">
+						<div className="modal-box" ref={ref}>
 							<button
 								onClick={handleClose}
 								className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"

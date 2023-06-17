@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Evaluation } from "../../types/Evaluation";
 import { Report } from "../../types/Report";
+import { useOnClickOutside } from "usehooks-ts";
 
 const EvaluationDialog = ({ report }: { report: Report }) => {
 	const [open, setOpen] = useState(false);
+	const ref = useRef(null);
 	const [newEvaluation, setNewEvaluation] = useState<Evaluation>({
 		organisation: report.organisation,
 		reportTitle: report.title,
@@ -41,7 +43,9 @@ const EvaluationDialog = ({ report }: { report: Report }) => {
 			date: new Date(),
 		});
 	};
-
+	useOnClickOutside(ref, () => {
+		handleClose();
+	});
 	const handleChange = (
 		event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 	) => {
@@ -145,7 +149,7 @@ const EvaluationDialog = ({ report }: { report: Report }) => {
 			{open && (
 				<div className="fixed inset-0 flex items-center justify-center z-10">
 					<div className="modal modal-open">
-						<div className="modal-box">
+						<div className="modal-box" ref={ref}>
 							<button
 								onClick={handleClose}
 								className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
