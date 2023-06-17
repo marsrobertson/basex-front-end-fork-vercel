@@ -54,7 +54,7 @@ function App() {
 	);
 	return (
 		<WagmiConfig config={wagmiConfig}>
-			<RainbowKitProvider chains={chains}>
+			<RainbowKitProvider chains={chains} showRecentTransactions={true}>
 				<RouterProvider router={router} />
 			</RainbowKitProvider>
 		</WagmiConfig>
