@@ -27,6 +27,7 @@ const { chains, publicClient } = configureChains(
 const { connectors } = getDefaultWallets({
 	appName: "BaseX",
 	chains,
+	projectId: import.meta.env.VITE_WALLETCONNECT_PROJECT_ID,
 });
 
 const wagmiConfig = createConfig({

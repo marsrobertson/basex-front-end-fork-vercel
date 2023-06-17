@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-const mirroredExtensions = [".json"];
+
+// const mirroredExtensions = [".json"];
 
 interface IPFSResponse {
 	hash: string;

@@ -58,7 +58,7 @@ const FileUpload = () => {
 				resolve({ fileName, data });
 			};
 
-			reader.onerror = (event) => {
+			reader.onerror = (_event) => {
 				reject(new Error("Error reading file"));
 			};
 
