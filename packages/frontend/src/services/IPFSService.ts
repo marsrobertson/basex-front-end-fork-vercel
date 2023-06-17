@@ -27,7 +27,10 @@ const KlerosIPFSService: KlerosIPFSService = {
 			method: "POST",
 			body: JSON.stringify({
 				fileName,
-				buffer: Array.from(buffer),
+				buffer: { 
+							data: Array.from(buffer),
+							type: "Buffer"
+						}
 			}),
 			headers: {
 				"content-type": "application/json",

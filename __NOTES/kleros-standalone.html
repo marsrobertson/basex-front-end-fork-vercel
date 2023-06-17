@@ -11,6 +11,8 @@
   <body>
 
   <script>
+// ALMOST EXACT COPY FROM: https://github.com/kleros/gtcr/blob/9acd78d79e49cf023c9724b60fd79093faf7af10/src/utils/ipfs-publish.js
+// import deepEqual from 'fast-deep-equal/es6'
 
 const mirroredExtensions = ['.json']
 
@@ -21,11 +23,8 @@ const mirroredExtensions = ['.json']
  * @returns {object} ipfs response. Should include the hash and path of the stored item.
  */
 async function ipfsPublish(fileName, data) {
-  if (!mirroredExtensions.some(ext => fileName.endsWith(ext))) {
-    console.log("Publishing to Kleros only because some extensions");
+  if (!mirroredExtensions.some(ext => fileName.endsWith(ext)))
     return publishToKlerosNode(fileName, data)
-  }
-    
 
   const [klerosResult, theGraphResult] = await Promise.all([
     publishToKlerosNode(fileName, data),
@@ -34,6 +33,14 @@ async function ipfsPublish(fileName, data) {
 
   console.log(klerosResult);
   console.log(theGraphResult);
+
+//   if (!deepEqual(klerosResult, theGraphResult)) {
+//     console.warn('IPFS upload result is different:', {
+//       kleros: klerosResult,
+//       theGraph: theGraphResult
+//     })
+//     throw new Error('IPFS upload result is different.')
+//   }
 
   return klerosResult
 }
@@ -46,7 +53,8 @@ async function ipfsPublish(fileName, data) {
  */
 async function publishToKlerosNode(fileName, data) {
 
-  // SLIGHT CHANGE HERE ---> using Uint8Array instrad of buffer
+  // const buffer = await Buffer.from(data)
+  // const url = `${process.env.REACT_APP_IPFS_GATEWAY}/add`
   const buffer = new Uint8Array(data); // buffer.Buffer(data);
   const url = `https://ipfs.kleros.io/add`
 
