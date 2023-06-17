@@ -43,7 +43,7 @@ const OrganisationDialog = () => {
 		createOrgJSONCopy.metadata.tcrTitle       = createOrgJSONCopy.metadata.tcrTitle      .replace("___NAME___", newOrganisation.name);
 		createOrgJSONCopy.metadata.tcrDescription = createOrgJSONCopy.metadata.tcrDescription.replace("___NAME___", newOrganisation.name);
 
-		// TODO 1A: upload createOrgJSONCopy to IPFS
+		// STEP 1A: upload createOrgJSONCopy to IPFS
 
 		let removeOrgJSONCopy = JSON.parse(JSON.stringify(RemoveOrgJSON))
 		removeOrgJSONCopy.title                   = removeOrgJSONCopy.title                  .replace("___NAME___", newOrganisation.name);
@@ -51,21 +51,22 @@ const OrganisationDialog = () => {
 		removeOrgJSONCopy.metadata.tcrTitle       = removeOrgJSONCopy.metadata.tcrTitle      .replace("___NAME___", newOrganisation.name);
 		removeOrgJSONCopy.metadata.tcrDescription = removeOrgJSONCopy.metadata.tcrDescription.replace("___NAME___", newOrganisation.name);
 
-		// TODO 1B: upload removeOrgJSONCopy to IPFS
+		// STEP 1B: upload removeOrgJSONCopy to IPFS
 
-		// TODO 2: send ETH transaction to deploy organisation
-		// DEPLOY ORGANISATION
+		// STEP 2: send ETH transaction to deploy organisation
 		// https://goerli.etherscan.io/address/0x898b303a922016357e86ac2438719248225c11ef
-		// string memory orgGuid, string memory name, string memory registrationJSONIPFS, string memory removingJSONIPFS, address payoutAddress
-		// TODO 3: retrieve the address of the deployed organisation
+		// string memory orgGuid, string memory name, string memory registrationJSONIPFS, string memory removingJSONIPFS, address payoutAddress (currently set it to 0x0000000000000000000000000000000000000000)
+		// DOCS: https://wagmi.sh/examples/contract-write-dynamic
 
+
+		// STEP 3: retrieve the address of the deployed organisation
 
 		let addOrgToKlerosJSONCopy = JSON.parse(JSON.stringify(AddOrgToKlerosJSON))
 		addOrgToKlerosJSONCopy.values.Address = "..............."; // Replace with address of deployed organisation
 
-		// TODO 5: upload addOrgToKlerosJSONCopy to IPFS
+		// STEP 4: upload addOrgToKlerosJSONCopy to IPFS
 
-		// TODO 6: 
+		// STEP 5: 
 		// function addOrganisationToTheList(uint256 orgIndex, string memory organisationJSONIPFS) public payable
 		// We need to send ETH to this function, 0.06 ETH should be correct
 
