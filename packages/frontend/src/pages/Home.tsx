@@ -1,4 +1,5 @@
 import { useWalletClient } from "wagmi";
+import FileUpload from "../components/FileUpload";
 
 const HomePage = () => {
 	const { data: walletClient, isError, isLoading } = useWalletClient();
@@ -33,6 +34,7 @@ const HomePage = () => {
 					<button className="btn btn-neutral my-4" onClick={handleSignMessage}>
 						Sign a message
 					</button>
+					<FileUpload />
 				</div>
 			)}
 		</div>
