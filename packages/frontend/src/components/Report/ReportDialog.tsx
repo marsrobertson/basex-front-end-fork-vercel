@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { useRef, useState } from "react";
 import { Report } from "../../types/Report";
 import { useOnClickOutside } from "usehooks-ts";
 import FileUpload from "../FileUpload";
+import KlerosIPFSService from "../../services/IPFSService";
 
 const ReportDialog = () => {
 	const [open, setOpen] = useState(false);
@@ -35,9 +37,11 @@ const ReportDialog = () => {
 			ipfs: "",
 		});
 	};
+
 	useOnClickOutside(ref, () => {
 		handleClose();
 	});
+
 	const handleChange = (
 		event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 	) => {
@@ -48,17 +52,54 @@ const ReportDialog = () => {
 		}));
 	};
 
-	const handleFileChange = (ipfsHash: string) => {
+	const handleFileChange = async (ipfsHash: string) => {
 		setNewReport((prevReport) => ({
 			...prevReport,
 			ipfs: ipfsHash,
 		}));
 	};
 
-	const handleSubmit = () => {
-		// Perform any additional validation or processing here
+	const handleSubmit = async () => {
+		try {
+			const item = {
+				columns: [
+					{
+						label: "Title",
+						description: "...",
+						type: "text",
+						isIdentifier: true,
+					},
+					{
+						label: "Source",
+						description: "...",
+						type: "text",
+						isIdentifier: false,
+					},
+					// Add other columns here
+				],
+				values: {
+					Title: newReport.title,
+					Source: newReport.source,
+					Report: newReport.ipfs,
+					// Set other values based on the form inputs
+				},
+			};
 
-		handleClose();
+			const itemJson = JSON.stringify(item);
+			const response = await KlerosIPFSService.publishToKlerosNode(
+				"item.json",
+				new TextEncoder().encode(itemJson)
+			);
+
+			// Handle the response from IPFS, e.g., save the hash
+			//@ts-ignore
+			console.log(response[0].hash);
+
+			handleClose();
+		} catch (error) {
+			// Handle error during IPFS upload
+			console.error("Error uploading report to IPFS:", error);
+		}
 	};
 
 	return (
