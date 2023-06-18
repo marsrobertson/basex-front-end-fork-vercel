@@ -1,0 +1,3 @@
+const ADDRESS = "0x898b303a922016357e86ac2438719248225C11eF";
+
+export default ADDRESS;
