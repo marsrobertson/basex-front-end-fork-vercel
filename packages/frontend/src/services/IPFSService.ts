@@ -2,7 +2,7 @@
 
 // const mirroredExtensions = [".json"];
 
-interface IPFSResponse {
+export interface IPFSResponse {
 	hash: string;
 	path: string;
 }
@@ -27,10 +27,10 @@ const KlerosIPFSService: KlerosIPFSService = {
 			method: "POST",
 			body: JSON.stringify({
 				fileName,
-				buffer: { 
-							data: Array.from(buffer),
-							type: "Buffer"
-						}
+				buffer: {
+					data: Array.from(buffer),
+					type: "Buffer",
+				},
 			}),
 			headers: {
 				"content-type": "application/json",

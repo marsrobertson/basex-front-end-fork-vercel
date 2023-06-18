@@ -34,7 +34,11 @@ const HomePage = () => {
 					<button className="btn btn-neutral my-4" onClick={handleSignMessage}>
 						Sign a message
 					</button>
-					<FileUpload />
+					<FileUpload
+						onUpload={(hash) => {
+							console.log(hash);
+						}}
+					/>
 				</div>
 			)}
 		</div>

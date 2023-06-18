@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Report } from "../../types/Report";
 import { useOnClickOutside } from "usehooks-ts";
+import FileUpload from "../FileUpload";
 
 const ReportDialog = () => {
 	const [open, setOpen] = useState(false);
@@ -47,14 +48,11 @@ const ReportDialog = () => {
 		}));
 	};
 
-	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const file = event.target.files?.[0];
-		if (file) {
-			setNewReport((prevReport) => ({
-				...prevReport,
-				ipfs: file.name,
-			}));
-		}
+	const handleFileChange = (ipfsHash: string) => {
+		setNewReport((prevReport) => ({
+			...prevReport,
+			ipfs: ipfsHash,
+		}));
 	};
 
 	const handleSubmit = () => {
@@ -116,13 +114,7 @@ const ReportDialog = () => {
 								</div>
 								<div className="my-2">
 									<p className="font-bold my-1">Add File</p>
-									<input
-										type="file"
-										name="ipfs"
-										onChange={handleFileChange}
-										className="file-input file-input-bordered w-full max-w-xs"
-										accept=".pdf,.doc,.docx"
-									/>
+									<FileUpload onUpload={handleFileChange} />
 								</div>
 								{/* Add other form fields here */}
 							</div>

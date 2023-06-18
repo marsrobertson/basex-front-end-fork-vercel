@@ -1,13 +1,24 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { deepEqual } from "wagmi";
-import KlerosIPFSService from "../services/IPFSService";
+import KlerosIPFSService, { IPFSResponse } from "../services/IPFSService";
 
-const FileUpload = () => {
+type FileUploadProps = {
+	onUpload: (ipfsHash: string) => void;
+};
+
+const FileUpload = ({ onUpload }: FileUploadProps) => {
 	const [selectedFile, setSelectedFile] = useState<File | null>(null);
 	const [uploading, setUploading] = useState(false);
 	const [ipfsHash, setIpfsHash] = useState<string | null>(null);
 	const [error, setError] = useState<string | null>(null);
+
+	useEffect(() => {
+		if (selectedFile) {
+			handleUpload();
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [selectedFile]);
 
 	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		if (event.target.files && event.target.files.length > 0) {
@@ -35,7 +46,11 @@ const FileUpload = () => {
 					throw new Error("IPFS upload result is different.");
 				}
 
-				setIpfsHash(klerosResult.hash);
+				//@ts-ignore
+				const ipfsHashes: IPFSResponse[] = klerosResult;
+				const ipfsHash = ipfsHashes[0].hash;
+				setIpfsHash(ipfsHash);
+				onUpload(ipfsHash);
 			} catch (error) {
 				//@ts-ignore
 				setError(error.message);
@@ -68,22 +83,25 @@ const FileUpload = () => {
 
 	return (
 		<div>
-			<h4 className="text-xl my-2 text-bold">Upload to Kleros IPFS</h4>
 			<input
+				disabled={uploading}
 				type="file"
-				className="file-input file-input-bordered file-input-secondary w-full max-w-xs"
+				className="file-input file-input-bordered w-full max-w-xs"
 				onChange={handleFileChange}
 			/>
-			<button
-				className="btn btn-active btn-secondary block mx-auto my-3"
-				onClick={handleUpload}
-				disabled={!selectedFile || uploading}
-			>
-				Upload File
-			</button>
 
 			{uploading && <div>Uploading...</div>}
-			{ipfsHash && <div>File uploaded. IPFS hash: {ipfsHash}</div>}
+			{!uploading && ipfsHash && (
+				<div>
+					<p className="font-bold">IPFS hash</p>
+					<a
+						href={`https://gateway.ipfs.io/ipfs/${ipfsHash}`}
+						className="text-sm link text-black/50"
+					>
+						{ipfsHash}
+					</a>
+				</div>
+			)}
 			{error && <div>Error: {error}</div>}
 		</div>
 	);
