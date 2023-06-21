@@ -1,6 +1,11 @@
 import "@rainbow-me/rainbowkit/styles.css";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
-import { configureChains, createConfig, WagmiConfig } from "wagmi";
+import {
+	configureChains,
+	createConfig,
+	useWatchPendingTransactions,
+	WagmiConfig,
+} from "wagmi";
 import { goerli } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import {
@@ -37,6 +42,9 @@ const wagmiConfig = createConfig({
 });
 
 function App() {
+	useWatchPendingTransactions({
+		listener: (hashes) => console.log(hashes),
+	});
 	const router = createBrowserRouter(
 		createRoutesFromElements(
 			<Route

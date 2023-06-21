@@ -4,11 +4,23 @@ import { Report } from "../../types/Report";
 import { useOnClickOutside } from "usehooks-ts";
 import FileUpload from "../FileUpload";
 import KlerosIPFSService from "../../services/IPFSService";
+import { useContractWrite } from "wagmi";
+import ADDRESS from "../../contracts/Address";
+import ABI from "../../contracts/ABI";
+import GUIDService from "../../services/GUIDService";
+import { parseEther } from "viem";
+import { useTransactor } from "../../hooks/useTransactor";
 
 const ReportDialog = () => {
 	const [open, setOpen] = useState(false);
 	const ref = useRef(null);
-
+	const writeTx = useTransactor();
+	//@ts-ignore
+	const contractAddReport = useContractWrite({
+		address: ADDRESS,
+		abi: ABI,
+		functionName: "addReport",
+	});
 	const [newReport, setNewReport] = useState<Report>({
 		organisation: "",
 		title: "",
@@ -95,10 +107,33 @@ const ReportDialog = () => {
 			//@ts-ignore
 			console.log(response[0].hash);
 
-			handleClose();
+			// THE CONTRACT CALL PARAMS
+			const params = {
+				reportGuid: GUIDService.createGUID(),
+				orgIndex: 0,
+				//@ts-ignore
+				JSONIPFS: response[0].hash,
+				PVTval: 0,
+				NVTval: 0,
+			};
+
+			//@ts-ignore
+			await writeTx(
+				contractAddReport.writeAsync({
+					args: [
+						params.reportGuid,
+						params.orgIndex,
+						params.JSONIPFS,
+						params.PVTval,
+						params.NVTval,
+					],
+					value: parseEther("0.08"),
+				}),
+				{ onBlockConfirmation: () => handleClose() }
+			);
 		} catch (error) {
-			// Handle error during IPFS upload
-			console.error("Error uploading report to IPFS:", error);
+			// Handle error during upload
+			console.error("Error uploading report", error);
 		}
 	};
 
