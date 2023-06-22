@@ -6,6 +6,7 @@ import { useOnClickOutside } from "usehooks-ts";
 const EvaluationDialog = ({ report }: { report: Report }) => {
 	const [open, setOpen] = useState(false);
 	const ref = useRef(null);
+	const [loading, setLoading] = useState(false);
 	const [newEvaluation, setNewEvaluation] = useState<Evaluation>({
 		organisation: report.organisation,
 		reportTitle: report.title,
@@ -137,8 +138,14 @@ const EvaluationDialog = ({ report }: { report: Report }) => {
 
 	const handleSubmit = () => {
 		// Perform any additional validation or processing here
-
-		handleClose();
+		try {
+			setLoading(true);
+			handleClose();
+			setLoading(false);
+		} catch (error) {
+			console.log("Couldn't upload evaluation", error);
+			setLoading(false);
+		}
 	};
 
 	return (

@@ -14,6 +14,7 @@ import { useTransactor } from "../../hooks/useTransactor";
 const ReportDialog = () => {
 	const [open, setOpen] = useState(false);
 	const ref = useRef(null);
+	const [loading, setLoading] = useState(false);
 	const writeTx = useTransactor();
 	//@ts-ignore
 	const contractAddReport = useContractWrite({
@@ -73,6 +74,7 @@ const ReportDialog = () => {
 
 	const handleSubmit = async () => {
 		try {
+			setLoading(true);
 			const item = {
 				columns: [
 					{
@@ -131,7 +133,10 @@ const ReportDialog = () => {
 				}),
 				{ onBlockConfirmation: () => handleClose() }
 			);
+			setLoading(false);
+			handleClose();
 		} catch (error) {
+			setLoading(false);
 			// Handle error during upload
 			console.error("Error uploading report", error);
 		}
@@ -198,8 +203,12 @@ const ReportDialog = () => {
 								<button className="btn" onClick={handleClose}>
 									Cancel
 								</button>
-								<button className="btn btn-primary" onClick={handleSubmit}>
-									Save
+								<button
+									className="btn btn-primary"
+									onClick={handleSubmit}
+									disabled={loading}
+								>
+									{!loading ? "Save" : "Loading"}
 								</button>
 							</div>
 						</div>
