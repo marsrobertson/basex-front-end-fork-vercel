@@ -22,6 +22,7 @@ import { infuraProvider } from "wagmi/providers/infura";
 import EvaluationsPage from "./pages/Evaluations";
 import OrganisationsPage from "./pages/Organisations";
 import ReportsPage from "./pages/Reports";
+import { Toaster } from "react-hot-toast";
 const INFURA_KEY = import.meta.env.VITE_INFURA_KEY;
 
 const { chains, publicClient } = configureChains(
@@ -65,6 +66,7 @@ function App() {
 		<WagmiConfig config={wagmiConfig}>
 			<RainbowKitProvider chains={chains} showRecentTransactions={true}>
 				<RouterProvider router={router} />
+				<Toaster />
 			</RainbowKitProvider>
 		</WagmiConfig>
 	);
