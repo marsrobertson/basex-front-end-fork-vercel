@@ -1,13 +1,6 @@
 const ABI = [
    {
       "inputs":[
-         
-      ],
-      "stateMutability":"nonpayable",
-      "type":"constructor"
-   },
-   {
-      "inputs":[
          {
             "internalType":"address",
             "name":"target",
@@ -36,7 +29,20 @@ const ABI = [
          {
             "indexed":false,
             "internalType":"string",
-            "name":"organisationJSONIPFS",
+            "name":"itemGuid",
+            "type":"string"
+         }
+      ],
+      "name":"ItemAdded",
+      "type":"event"
+   },
+   {
+      "anonymous":false,
+      "inputs":[
+         {
+            "indexed":false,
+            "internalType":"string",
+            "name":"orgGuid",
             "type":"string"
          }
       ],
@@ -51,36 +57,6 @@ const ABI = [
             "internalType":"string",
             "name":"orgGuid",
             "type":"string"
-         },
-         {
-            "indexed":false,
-            "internalType":"string",
-            "name":"name",
-            "type":"string"
-         },
-         {
-            "indexed":false,
-            "internalType":"string",
-            "name":"registrationJSONIPFS",
-            "type":"string"
-         },
-         {
-            "indexed":false,
-            "internalType":"string",
-            "name":"removingJSONIPFS",
-            "type":"string"
-         },
-         {
-            "indexed":false,
-            "internalType":"uint256",
-            "name":"index",
-            "type":"uint256"
-         },
-         {
-            "indexed":false,
-            "internalType":"address",
-            "name":"klerosAddress",
-            "type":"address"
          }
       ],
       "name":"OrganisationDeployed",
@@ -92,60 +68,11 @@ const ABI = [
          {
             "indexed":false,
             "internalType":"string",
-            "name":"reportGuid",
+            "name":"itemGuid",
             "type":"string"
-         },
-         {
-            "indexed":false,
-            "internalType":"uint256",
-            "name":"orgIndex",
-            "type":"uint256"
-         },
-         {
-            "indexed":false,
-            "internalType":"string",
-            "name":"JSONIPFS",
-            "type":"string"
-         },
-         {
-            "indexed":false,
-            "internalType":"uint256",
-            "name":"PVTval",
-            "type":"uint256"
-         },
-         {
-            "indexed":false,
-            "internalType":"uint256",
-            "name":"NVTval",
-            "type":"uint256"
-         },
-         {
-            "indexed":false,
-            "internalType":"bool",
-            "name":"minted",
-            "type":"bool"
          }
       ],
-      "name":"ReportAdded",
-      "type":"event"
-   },
-   {
-      "anonymous":false,
-      "inputs":[
-         {
-            "indexed":false,
-            "internalType":"string",
-            "name":"reportGuid",
-            "type":"string"
-         },
-         {
-            "indexed":false,
-            "internalType":"uint256",
-            "name":"PVTval",
-            "type":"uint256"
-         }
-      ],
-      "name":"ReportChangedNewPVT",
+      "name":"TokensMinted",
       "type":"event"
    },
    {
@@ -181,28 +108,13 @@ const ABI = [
    {
       "inputs":[
          {
-            "internalType":"uint256",
-            "name":"orgIndex",
-            "type":"uint256"
+            "internalType":"string",
+            "name":"itemGuid",
+            "type":"string"
          },
          {
             "internalType":"string",
-            "name":"organisationJSONIPFS",
-            "type":"string"
-         }
-      ],
-      "name":"addOrganisationToTheList",
-      "outputs":[
-         
-      ],
-      "stateMutability":"payable",
-      "type":"function"
-   },
-   {
-      "inputs":[
-         {
-            "internalType":"string",
-            "name":"reportGuid",
+            "name":"targetGuid",
             "type":"string"
          },
          {
@@ -226,7 +138,7 @@ const ABI = [
             "type":"uint256"
          }
       ],
-      "name":"addReport",
+      "name":"addItem",
       "outputs":[
          
       ],
@@ -236,42 +148,21 @@ const ABI = [
    {
       "inputs":[
          {
-            "internalType":"string",
-            "name":"reportGuid",
-            "type":"string"
-         },
-         {
             "internalType":"uint256",
             "name":"orgIndex",
             "type":"uint256"
          },
          {
-            "internalType":"uint256",
-            "name":"PVTval",
-            "type":"uint256"
-         },
-         {
-            "internalType":"uint256",
-            "name":"NVTval",
-            "type":"uint256"
+            "internalType":"string",
+            "name":"organisationJSONIPFS",
+            "type":"string"
          }
       ],
-      "name":"addReportTEST",
+      "name":"addOrganisationToTheList",
       "outputs":[
          
       ],
-      "stateMutability":"nonpayable",
-      "type":"function"
-   },
-   {
-      "inputs":[
-         
-      ],
-      "name":"addSomeOrgsForTesting",
-      "outputs":[
-         
-      ],
-      "stateMutability":"nonpayable",
+      "stateMutability":"payable",
       "type":"function"
    },
    {
@@ -303,26 +194,6 @@ const ABI = [
          }
       ],
       "name":"assignPayoutWallet",
-      "outputs":[
-         
-      ],
-      "stateMutability":"nonpayable",
-      "type":"function"
-   },
-   {
-      "inputs":[
-         {
-            "internalType":"uint256",
-            "name":"reportIndex",
-            "type":"uint256"
-         },
-         {
-            "internalType":"uint256",
-            "name":"PVTnew",
-            "type":"uint256"
-         }
-      ],
-      "name":"changeReportPVT",
       "outputs":[
          
       ],
@@ -396,11 +267,6 @@ const ABI = [
                   "type":"string"
                },
                {
-                  "internalType":"bytes32",
-                  "name":"hash",
-                  "type":"bytes32"
-               },
-               {
                   "internalType":"address",
                   "name":"klerosAddress",
                   "type":"address"
@@ -463,11 +329,6 @@ const ABI = [
                   "type":"string"
                },
                {
-                  "internalType":"bytes32",
-                  "name":"hash",
-                  "type":"bytes32"
-               },
-               {
                   "internalType":"address",
                   "name":"klerosAddress",
                   "type":"address"
@@ -527,6 +388,90 @@ const ABI = [
    },
    {
       "inputs":[
+         {
+            "internalType":"address",
+            "name":"_klerosFactory",
+            "type":"address"
+         },
+         {
+            "internalType":"address",
+            "name":"_klerosOrganisations",
+            "type":"address"
+         }
+      ],
+      "name":"initializer",
+      "outputs":[
+         
+      ],
+      "stateMutability":"nonpayable",
+      "type":"function"
+   },
+   {
+      "inputs":[
+         {
+            "internalType":"uint256",
+            "name":"",
+            "type":"uint256"
+         }
+      ],
+      "name":"items",
+      "outputs":[
+         {
+            "internalType":"string",
+            "name":"itemGuid",
+            "type":"string"
+         },
+         {
+            "internalType":"string",
+            "name":"targetGuid",
+            "type":"string"
+         },
+         {
+            "internalType":"uint256",
+            "name":"orgIndex",
+            "type":"uint256"
+         },
+         {
+            "internalType":"string",
+            "name":"JSONIPFS",
+            "type":"string"
+         },
+         {
+            "internalType":"uint256",
+            "name":"PVT",
+            "type":"uint256"
+         },
+         {
+            "internalType":"uint256",
+            "name":"NVT",
+            "type":"uint256"
+         },
+         {
+            "internalType":"bool",
+            "name":"approvedToKlerosAndTokensMinted",
+            "type":"bool"
+         }
+      ],
+      "stateMutability":"view",
+      "type":"function"
+   },
+   {
+      "inputs":[
+         
+      ],
+      "name":"itemsLength",
+      "outputs":[
+         {
+            "internalType":"uint256",
+            "name":"",
+            "type":"uint256"
+         }
+      ],
+      "stateMutability":"view",
+      "type":"function"
+   },
+   {
+      "inputs":[
          
       ],
       "name":"klerosFactory",
@@ -559,11 +504,11 @@ const ABI = [
       "inputs":[
          {
             "internalType":"uint256",
-            "name":"reportIndex",
+            "name":"index",
             "type":"uint256"
          }
       ],
-      "name":"mintTokensAfterReportIsAdded",
+      "name":"mintTokensAfterAdded",
       "outputs":[
          
       ],
@@ -613,11 +558,6 @@ const ABI = [
             "internalType":"string",
             "name":"JSONIPFS",
             "type":"string"
-         },
-         {
-            "internalType":"bytes32",
-            "name":"hash",
-            "type":"bytes32"
          },
          {
             "internalType":"address",
@@ -671,70 +611,6 @@ const ABI = [
    {
       "inputs":[
          {
-            "internalType":"uint256",
-            "name":"",
-            "type":"uint256"
-         }
-      ],
-      "name":"reports",
-      "outputs":[
-         {
-            "internalType":"string",
-            "name":"reportGuid",
-            "type":"string"
-         },
-         {
-            "internalType":"uint256",
-            "name":"orgIndex",
-            "type":"uint256"
-         },
-         {
-            "internalType":"string",
-            "name":"JSONIPFS",
-            "type":"string"
-         },
-         {
-            "internalType":"bytes32",
-            "name":"hash",
-            "type":"bytes32"
-         },
-         {
-            "internalType":"uint256",
-            "name":"PVT",
-            "type":"uint256"
-         },
-         {
-            "internalType":"uint256",
-            "name":"NVT",
-            "type":"uint256"
-         },
-         {
-            "internalType":"bool",
-            "name":"approvedToKlerosAndTokensMinted",
-            "type":"bool"
-         }
-      ],
-      "stateMutability":"view",
-      "type":"function"
-   },
-   {
-      "inputs":[
-         
-      ],
-      "name":"reportsLength",
-      "outputs":[
-         {
-            "internalType":"uint256",
-            "name":"",
-            "type":"uint256"
-         }
-      ],
-      "stateMutability":"view",
-      "type":"function"
-   },
-   {
-      "inputs":[
-         {
             "internalType":"address",
             "name":"PVTaddr",
             "type":"address"
@@ -754,9 +630,9 @@ const ABI = [
    }
 ]
 
- export default ABI;
+export default ABI;
 
- const deployOrganisation = {
+const deployOrganisation = {
    "inputs":[
       {
          "internalType":"string",
