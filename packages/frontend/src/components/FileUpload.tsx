@@ -95,7 +95,7 @@ const FileUpload = ({ onUpload }: FileUploadProps) => {
 				<div>
 					<p className="font-bold">IPFS hash</p>
 					<a
-						href={`https://gateway.ipfs.io/ipfs/${ipfsHash}`}
+						href={`https://ipfs.kleros.io/ipfs/${ipfsHash}`}
 						className="text-sm link text-black/50"
 					>
 						{ipfsHash}

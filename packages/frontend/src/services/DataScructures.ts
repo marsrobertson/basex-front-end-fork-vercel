@@ -64,7 +64,7 @@ let CreateOrgJSON = {
                 "type": "text"
             },
             {
-                "label": "GUID (referring to)",
+                "label": "GUID Target",
                 "description": "In case of the evaluation, we refer to the GUID of the item",
                 "type": "text"
             },
@@ -81,178 +81,178 @@ let CreateOrgJSON = {
 
 
             {
-                "label": "SDG1 value",
+                "label": "SDG1 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG1 comment",
+                "label": "SDG1 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG2 value",
+                "label": "SDG2 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG2 comment",
+                "label": "SDG2 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG3 value",
+                "label": "SDG3 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG3 comment",
+                "label": "SDG3 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG4 value",
+                "label": "SDG4 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG4 comment",
+                "label": "SDG4 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG15 value",
+                "label": "SDG15 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG5 comment",
+                "label": "SDG5 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG6 value",
+                "label": "SDG6 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG6 comment",
+                "label": "SDG6 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG7 value",
+                "label": "SDG7 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG7 comment",
+                "label": "SDG7 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG8 value",
+                "label": "SDG8 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG8 comment",
+                "label": "SDG8 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG9 value",
+                "label": "SDG9 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG9 comment",
+                "label": "SDG9 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG10 value",
+                "label": "SDG10 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG10 comment",
+                "label": "SDG10 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG11 value",
+                "label": "SDG11 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG11 comment",
+                "label": "SDG11 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG12 value",
+                "label": "SDG12 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG12 comment",
+                "label": "SDG12 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG13 value",
+                "label": "SDG13 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG13 comment",
+                "label": "SDG13 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG14 value",
+                "label": "SDG14 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG14 comment",
+                "label": "SDG14 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG15 value",
+                "label": "SDG15 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG15 comment",
+                "label": "SDG15 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG16 value",
+                "label": "SDG16 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG16 comment",
+                "label": "SDG16 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG17 value",
+                "label": "SDG17 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG17 comment",
+                "label": "SDG17 Comment",
                 "description": "...",
                 "type": "text"
             }
         ]
     }
-}
+};
 
 let RemoveOrgJSON = {
     "title": "Remove an item from ___NAME___",
@@ -337,172 +337,172 @@ let RemoveOrgJSON = {
 
 
             {
-                "label": "SDG1 value",
+                "label": "SDG1 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG1 comment",
+                "label": "SDG1 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG2 value",
+                "label": "SDG2 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG2 comment",
+                "label": "SDG2 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG3 value",
+                "label": "SDG3 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG3 comment",
+                "label": "SDG3 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG4 value",
+                "label": "SDG4 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG4 comment",
+                "label": "SDG4 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG15 value",
+                "label": "SDG15 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG5 comment",
+                "label": "SDG5 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG6 value",
+                "label": "SDG6 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG6 comment",
+                "label": "SDG6 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG7 value",
+                "label": "SDG7 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG7 comment",
+                "label": "SDG7 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG8 value",
+                "label": "SDG8 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG8 comment",
+                "label": "SDG8 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG9 value",
+                "label": "SDG9 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG9 comment",
+                "label": "SDG9 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG10 value",
+                "label": "SDG10 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG10 comment",
+                "label": "SDG10 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG11 value",
+                "label": "SDG11 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG11 comment",
+                "label": "SDG11 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG12 value",
+                "label": "SDG12 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG12 comment",
+                "label": "SDG12 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG13 value",
+                "label": "SDG13 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG13 comment",
+                "label": "SDG13 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG14 value",
+                "label": "SDG14 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG14 comment",
+                "label": "SDG14 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG15 value",
+                "label": "SDG15 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG15 comment",
+                "label": "SDG15 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG16 value",
+                "label": "SDG16 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG16 comment",
+                "label": "SDG16 Comment",
                 "description": "...",
                 "type": "text"
             },
             {
-                "label": "SDG17 value",
+                "label": "SDG17 Value",
                 "description": "...",
                 "type": "number"
             },
             {
-                "label": "SDG17 comment",
+                "label": "SDG17 Comment",
                 "description": "...",
                 "type": "text"
             }
@@ -551,7 +551,7 @@ let AddItemJSON = {
             "type": "text"
         },
         {
-            "label": "GUID (referring to)",
+            "label": "GUID Target",
             "description": "In case of the evaluation, we refer to the GUID of the item",
             "type": "text"
         },
@@ -568,172 +568,172 @@ let AddItemJSON = {
 
 
         {
-            "label": "SDG1 value",
+            "label": "SDG1 Value",
             "description": "...",
             "type": "number"
         },
         {
-            "label": "SDG1 comment",
+            "label": "SDG1 Comment",
             "description": "...",
             "type": "text"
         },
         {
-            "label": "SDG2 value",
+            "label": "SDG2 Value",
             "description": "...",
             "type": "number"
         },
         {
-            "label": "SDG2 comment",
+            "label": "SDG2 Comment",
             "description": "...",
             "type": "text"
         },
         {
-            "label": "SDG3 value",
+            "label": "SDG3 Value",
             "description": "...",
             "type": "number"
         },
         {
-            "label": "SDG3 comment",
+            "label": "SDG3 Comment",
             "description": "...",
             "type": "text"
         },
         {
-            "label": "SDG4 value",
+            "label": "SDG4 Value",
             "description": "...",
             "type": "number"
         },
         {
-            "label": "SDG4 comment",
+            "label": "SDG4 Comment",
             "description": "...",
             "type": "text"
         },
         {
-            "label": "SDG15 value",
+            "label": "SDG15 Value",
             "description": "...",
             "type": "number"
         },
         {
-            "label": "SDG5 comment",
+            "label": "SDG5 Comment",
             "description": "...",
             "type": "text"
         },
         {
-            "label": "SDG6 value",
+            "label": "SDG6 Value",
             "description": "...",
             "type": "number"
         },
         {
-            "label": "SDG6 comment",
+            "label": "SDG6 Comment",
             "description": "...",
             "type": "text"
         },
         {
-            "label": "SDG7 value",
+            "label": "SDG7 Value",
             "description": "...",
             "type": "number"
         },
         {
-            "label": "SDG7 comment",
+            "label": "SDG7 Comment",
             "description": "...",
             "type": "text"
         },
         {
-            "label": "SDG8 value",
+            "label": "SDG8 Value",
             "description": "...",
             "type": "number"
         },
         {
-            "label": "SDG8 comment",
+            "label": "SDG8 Comment",
             "description": "...",
             "type": "text"
         },
         {
-            "label": "SDG9 value",
+            "label": "SDG9 Value",
             "description": "...",
             "type": "number"
         },
         {
-            "label": "SDG9 comment",
+            "label": "SDG9 Comment",
             "description": "...",
             "type": "text"
         },
         {
-            "label": "SDG10 value",
+            "label": "SDG10 Value",
             "description": "...",
             "type": "number"
         },
         {
-            "label": "SDG10 comment",
+            "label": "SDG10 Comment",
             "description": "...",
             "type": "text"
         },
         {
-            "label": "SDG11 value",
+            "label": "SDG11 Value",
             "description": "...",
             "type": "number"
         },
         {
-            "label": "SDG11 comment",
+            "label": "SDG11 Comment",
             "description": "...",
             "type": "text"
         },
         {
-            "label": "SDG12 value",
+            "label": "SDG12 Value",
             "description": "...",
             "type": "number"
         },
         {
-            "label": "SDG12 comment",
+            "label": "SDG12 Comment",
             "description": "...",
             "type": "text"
         },
         {
-            "label": "SDG13 value",
+            "label": "SDG13 Value",
             "description": "...",
             "type": "number"
         },
         {
-            "label": "SDG13 comment",
+            "label": "SDG13 Comment",
             "description": "...",
             "type": "text"
         },
         {
-            "label": "SDG14 value",
+            "label": "SDG14 Value",
             "description": "...",
             "type": "number"
         },
         {
-            "label": "SDG14 comment",
+            "label": "SDG14 Comment",
             "description": "...",
             "type": "text"
         },
         {
-            "label": "SDG15 value",
+            "label": "SDG15 Value",
             "description": "...",
             "type": "number"
         },
         {
-            "label": "SDG15 comment",
+            "label": "SDG15 Comment",
             "description": "...",
             "type": "text"
         },
         {
-            "label": "SDG16 value",
+            "label": "SDG16 Value",
             "description": "...",
             "type": "number"
         },
         {
-            "label": "SDG16 comment",
+            "label": "SDG16 Comment",
             "description": "...",
             "type": "text"
         },
         {
-            "label": "SDG17 value",
+            "label": "SDG17 Value",
             "description": "...",
             "type": "number"
         },
         {
-            "label": "SDG17 comment",
+            "label": "SDG17 Comment",
             "description": "...",
             "type": "text"
         }
@@ -748,43 +748,43 @@ let AddItemJSON = {
             "Positive Value": "",
             "Negative Value": "",
             "GUID": "",
-            "GUID (referring to)": "",
-            "SDG1 value": "",
-            "SDG1 comment": "",
-            "SDG2 value": "",
-            "SDG2 comment": "",
-            "SDG3 value": "",
-            "SDG3 comment": "",
-            "SDG4 value": "",
-            "SDG4 comment": "",
-            "SDG5 value": "",
-            "SDG5 comment": "",
-            "SDG6 value": "",
-            "SDG6 comment": "",
-            "SDG7 value": "",
-            "SDG7 comment": "",
-            "SDG8 value": "",
-            "SDG8 comment": "",
-            "SDG9 value": "",
-            "SDG9 comment": "",
-            "SDG10 value": "",
-            "SDG10 comment": "",
-            "SDG11 value": "",
-            "SDG11 comment": "",
-            "SDG12 value": "",
-            "SDG12 comment": "",
-            "SDG13 value": "",
-            "SDG13 comment": "",
-            "SDG14 value": "",
-            "SDG14 comment": "",
-            "SDG15 value": "",
-            "SDG15 comment": "",
-            "SDG16 value": "",
-            "SDG16 comment": "",
-            "SDG17 value": "",
-            "SDG17 comment": ""
+            "GUID Target": "",
+            "SDG1 Value": "",
+            "SDG1 Comment": "",
+            "SDG2 Value": "",
+            "SDG2 Comment": "",
+            "SDG3 Value": "",
+            "SDG3 Comment": "",
+            "SDG4 Value": "",
+            "SDG4 Comment": "",
+            "SDG5 Value": "",
+            "SDG5 Comment": "",
+            "SDG6 Value": "",
+            "SDG6 Comment": "",
+            "SDG7 Value": "",
+            "SDG7 Comment": "",
+            "SDG8 Value": "",
+            "SDG8 Comment": "",
+            "SDG9 Value": "",
+            "SDG9 Comment": "",
+            "SDG10 Value": "",
+            "SDG10 Comment": "",
+            "SDG11 Value": "",
+            "SDG11 Comment": "",
+            "SDG12 Value": "",
+            "SDG12 Comment": "",
+            "SDG13 Value": "",
+            "SDG13 Comment": "",
+            "SDG14 Value": "",
+            "SDG14 Comment": "",
+            "SDG15 Value": "",
+            "SDG15 Comment": "",
+            "SDG16 Value": "",
+            "SDG16 Comment": "",
+            "SDG17 Value": "",
+            "SDG17 Comment": ""
         }
-    }
+};
 
 let AddOrgToKlerosJSON = {
     "columns":[
@@ -798,6 +798,6 @@ let AddOrgToKlerosJSON = {
     "values":{
        "Address":""
     }
- }
+};
 
 export { CreateOrgJSON, RemoveOrgJSON, AddItemJSON, AddOrgToKlerosJSON };
