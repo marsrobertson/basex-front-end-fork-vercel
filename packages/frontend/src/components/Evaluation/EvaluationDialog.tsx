@@ -9,7 +9,7 @@ import { Organisation } from "../../types/Organisation";
 import { parseEther } from "viem";
 import ABI from "../../contracts/ABI";
 import ADDRESS from "../../contracts/Address";
-
+import { useContractWrite } from "wagmi";
 const EvaluationDialog = ({
 	report,
 	organisation,
