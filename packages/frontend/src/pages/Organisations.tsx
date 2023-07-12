@@ -19,7 +19,7 @@ const OrganisationsPage = () => {
 			</div>
 		);
 	}
-	if (!isError) {
+	if (isError) {
 		return (
 			<div className="p-4">
 				<div className="alert alert-error">
