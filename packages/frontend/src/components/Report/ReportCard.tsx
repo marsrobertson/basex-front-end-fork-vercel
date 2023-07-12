@@ -22,13 +22,13 @@ const ReportCard = ({ report }: { report: Report }) => {
 		abi: ABI,
 		functionName: "getOrganisations",
 	});
-	const [organisationName, setOrganisationName] = useState("");
+	const [organisation, setOrganisation] = useState<Organisation>();
 	useEffect(() => {
 		if (getOrganisations.data) {
 			//@ts-ignore
-			getOrganisations.data.map((org: Organisation) => {
+			getOrganisations.data.map((org: Organisation, i: number) => {
 				if (org.orgGuid === organisationGUID) {
-					setOrganisationName(org.orgGuid);
+					setOrganisation({ ...org, id: i });
 				}
 			});
 		}
@@ -39,7 +39,7 @@ const ReportCard = ({ report }: { report: Report }) => {
 			<div className="card-body">
 				<h2 className="card-title text-lg font-bold mb-3">{title}</h2>
 				<p className="text-gray-400 mb-2">
-					{organisationName !== "" ? organisationName : "X Inc."}
+					{organisation?.name !== "" ? organisation?.name : "X Inc."}
 				</p>
 				<p className="text-gray-600 mb-2">{comments}</p>
 				<p className="text-gray-600 mb-2">
@@ -66,7 +66,16 @@ const ReportCard = ({ report }: { report: Report }) => {
 					>
 						View on IPFS
 					</a>
-					<EvaluationDialog report={report} />
+					<EvaluationDialog
+						report={report}
+						organisation={
+							organisation ?? {
+								name: "X Inc.",
+								id: 0,
+								orgGuid: "0000-0000-0000-0000",
+							}
+						}
+					/>
 				</div>
 			</div>
 		</div>

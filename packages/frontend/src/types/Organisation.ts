@@ -6,6 +6,7 @@ export interface Organisation {
 	PVTHistorical?: bigint;
 	klerosAddress?: string;
 	name: string;
+	id?: number;
 	orgGuid?: string;
 	payoutWallet?: string;
 }

@@ -1,14 +1,33 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { useRef, useState } from "react";
 import { Evaluation } from "../../types/Evaluation";
 import { Report } from "../../types/Report";
 import { useOnClickOutside } from "usehooks-ts";
+import KlerosIPFSService from "../../services/IPFSService";
+import GUIDService from "../../services/GUIDService";
+import { Organisation } from "../../types/Organisation";
+import { parseEther } from "viem";
+import ABI from "../../contracts/ABI";
+import ADDRESS from "../../contracts/Address";
 
-const EvaluationDialog = ({ report }: { report: Report }) => {
+const EvaluationDialog = ({
+	report,
+	organisation,
+}: {
+	report: Report;
+	organisation: Organisation;
+}) => {
+	//@ts-ignore
+	const contractAddEval = useContractWrite({
+		address: ADDRESS,
+		abi: ABI,
+		functionName: "addItem",
+	});
 	const [open, setOpen] = useState(false);
 	const ref = useRef(null);
 	const [loading, setLoading] = useState(false);
 	const [newEvaluation, setNewEvaluation] = useState<Evaluation>({
-		organisation: report.organisation,
+		organisationGUID: report.organisationGUID,
 		reportTitle: report.title,
 		evaluationContent: {
 			comments: "",
@@ -24,21 +43,24 @@ const EvaluationDialog = ({ report }: { report: Report }) => {
 		author: "",
 		date: new Date(),
 	});
-
 	const handleOpen = () => {
 		setOpen(true);
 	};
 	const handleClose = () => {
 		setOpen(false);
 		setNewEvaluation({
-			organisation: "",
+			organisationGUID: "",
 			reportTitle: "",
 			evaluationContent: {
 				comments: "",
 				people: { amount: 0, comment: "" },
 				planet: { amount: 0, comment: "" },
 				profit: { amount: 0, comment: "" },
-				planetJustifications: [],
+				planetJustifications: Array.from({ length: 17 }, (_, index) => ({
+					comment: "",
+					percentage: 0,
+					planetImage: `/img/sdg${index + 1}.png`,
+				})),
 			},
 			author: "",
 			date: new Date(),
@@ -136,11 +158,298 @@ const EvaluationDialog = ({ report }: { report: Report }) => {
 		}));
 	};
 
-	const handleSubmit = () => {
+	const handleSubmit = async () => {
 		// Perform any additional validation or processing here
 		try {
 			setLoading(true);
-			handleClose();
+			const itemGUID = GUIDService.createGUID();
+			const item = {
+				columns: [
+					{
+						label: "Title",
+						description: "...",
+						type: "text",
+						isIdentifier: true,
+					},
+					{
+						label: "Source URL",
+						description: "...",
+						type: "text",
+						isIdentifier: false,
+					},
+					{
+						label: "Start Date",
+						description: "...",
+						type: "number",
+					},
+					{
+						label: "End Date",
+						description: "...",
+						type: "number",
+					},
+					{
+						label: "File",
+						description: "...",
+						type: "file",
+						allowedFileTypes: "pdf",
+					},
+					{
+						label: "Comments",
+						description: "...",
+						type: "text",
+					},
+					{
+						label: "GUID",
+						description: "The GUID of this item",
+						type: "text",
+					},
+					{
+						label: "GUID Target",
+						description:
+							"In case of the evaluation, we refer to the GUID of the item",
+						type: "text",
+					},
+					{
+						label: "Positive Value",
+						description: "PVT",
+						type: "number",
+					},
+					{
+						label: "Negative Value",
+						description: "NVT",
+						type: "number",
+					},
+
+					{
+						label: "SDG1 Value",
+						description: "...",
+						type: "number",
+					},
+					{
+						label: "SDG1 Comment",
+						description: "...",
+						type: "text",
+					},
+					{
+						label: "SDG2 Value",
+						description: "...",
+						type: "number",
+					},
+					{
+						label: "SDG2 Comment",
+						description: "...",
+						type: "text",
+					},
+					{
+						label: "SDG3 Value",
+						description: "...",
+						type: "number",
+					},
+					{
+						label: "SDG3 Comment",
+						description: "...",
+						type: "text",
+					},
+					{
+						label: "SDG4 Value",
+						description: "...",
+						type: "number",
+					},
+					{
+						label: "SDG4 Comment",
+						description: "...",
+						type: "text",
+					},
+					{
+						label: "SDG15 Value",
+						description: "...",
+						type: "number",
+					},
+					{
+						label: "SDG5 Comment",
+						description: "...",
+						type: "text",
+					},
+					{
+						label: "SDG6 Value",
+						description: "...",
+						type: "number",
+					},
+					{
+						label: "SDG6 Comment",
+						description: "...",
+						type: "text",
+					},
+					{
+						label: "SDG7 Value",
+						description: "...",
+						type: "number",
+					},
+					{
+						label: "SDG7 Comment",
+						description: "...",
+						type: "text",
+					},
+					{
+						label: "SDG8 Value",
+						description: "...",
+						type: "number",
+					},
+					{
+						label: "SDG8 Comment",
+						description: "...",
+						type: "text",
+					},
+					{
+						label: "SDG9 Value",
+						description: "...",
+						type: "number",
+					},
+					{
+						label: "SDG9 Comment",
+						description: "...",
+						type: "text",
+					},
+					{
+						label: "SDG10 Value",
+						description: "...",
+						type: "number",
+					},
+					{
+						label: "SDG10 Comment",
+						description: "...",
+						type: "text",
+					},
+					{
+						label: "SDG11 Value",
+						description: "...",
+						type: "number",
+					},
+					{
+						label: "SDG11 Comment",
+						description: "...",
+						type: "text",
+					},
+					{
+						label: "SDG12 Value",
+						description: "...",
+						type: "number",
+					},
+					{
+						label: "SDG12 Comment",
+						description: "...",
+						type: "text",
+					},
+					{
+						label: "SDG13 Value",
+						description: "...",
+						type: "number",
+					},
+					{
+						label: "SDG13 Comment",
+						description: "...",
+						type: "text",
+					},
+					{
+						label: "SDG14 Value",
+						description: "...",
+						type: "number",
+					},
+					{
+						label: "SDG14 Comment",
+						description: "...",
+						type: "text",
+					},
+					{
+						label: "SDG15 Value",
+						description: "...",
+						type: "number",
+					},
+					{
+						label: "SDG15 Comment",
+						description: "...",
+						type: "text",
+					},
+					{
+						label: "SDG16 Value",
+						description: "...",
+						type: "number",
+					},
+					{
+						label: "SDG16 Comment",
+						description: "...",
+						type: "text",
+					},
+					{
+						label: "SDG17 Value",
+						description: "...",
+						type: "number",
+					},
+					{
+						label: "SDG17 Comment",
+						description: "...",
+						type: "text",
+					},
+				],
+				values: {
+					Title: newEvaluation,
+					"Source URL": "",
+					File: "",
+					Comments: "",
+					"Start Date": "",
+					"End Date": "",
+					"Positive Value": "",
+					"Negative Value": "",
+					GUID: itemGUID,
+					"GUID Target": report.reportGUID,
+					...newEvaluation.evaluationContent.planetJustifications.reduce(
+						(acc, justification, index) => {
+							const sdgValueKey = `SDG${index + 1} Value`;
+							const sdgCommentKey = `SDG${index + 1} Comment`;
+							return {
+								...acc,
+								[sdgValueKey]: justification.percentage,
+								[sdgCommentKey]: justification.comment,
+							};
+						},
+						{}
+					),
+				},
+			};
+			const itemJson = JSON.stringify(item);
+			const response = await KlerosIPFSService.publishToKlerosNode(
+				"item.json",
+				new TextEncoder().encode(itemJson)
+			);
+			// Handle the response from IPFS, e.g., save the hash
+			//@ts-ignore
+			console.log(response[0].hash);
+
+			// THE CONTRACT CALL PARAMS
+			const params = {
+				itemGuid: itemGUID,
+				targetGuid: report.reportGUID,
+				orgIndex: organisation.id,
+				//@ts-ignore
+				JSONIPFS: response[0].hash,
+				PVTval: 0,
+				NVTval: 0,
+			};
+			//@ts-ignore
+			await writeTx(
+				contractAddEval.writeAsync({
+					args: [
+						params.itemGuid,
+						params.targetGuid,
+						params.orgIndex,
+						params.JSONIPFS,
+						params.PVTval,
+						params.NVTval,
+					],
+					value: parseEther("0.08"),
+				}),
+				{ onBlockConfirmation: () => handleClose() }
+			);
 			setLoading(false);
 		} catch (error) {
 			console.log("Couldn't upload evaluation", error);
@@ -163,7 +472,7 @@ const EvaluationDialog = ({ report }: { report: Report }) => {
 							>
 								✕
 							</button>
-							<h2 className="text-2xl font-bold">{report.organisation}</h2>
+							<h2 className="text-2xl font-bold">{organisation.name}</h2>
 							<div className="modal-body">
 								<div className="mb-4 text-black/60">
 									<h4 className="text-lg">{report.title}</h4>
@@ -283,10 +592,18 @@ const EvaluationDialog = ({ report }: { report: Report }) => {
 								</div>
 							</div>
 							<div className="modal-footer space-x-2 text-right mt-3">
-								<button className="btn" onClick={handleClose}>
+								<button
+									className="btn"
+									disabled={loading}
+									onClick={handleClose}
+								>
 									Cancel
 								</button>
-								<button className="btn btn-primary" onClick={handleSubmit}>
+								<button
+									className="btn btn-primary"
+									disabled={loading}
+									onClick={handleSubmit}
+								>
 									Save
 								</button>
 							</div>

@@ -117,12 +117,16 @@ const ReportDialog = () => {
 			// Handle the response from IPFS, e.g., save the hash
 			//@ts-ignore
 			console.log(response[0].hash);
-
+			//@ts-ignore
+			const organizationIndex = getOrganisations.data.findIndex(
+				(organization: Organisation) =>
+					organization.orgGuid === newReport.organisationGUID
+			);
 			// THE CONTRACT CALL PARAMS
 			const params = {
 				itemGuid: GUIDService.createGUID(),
 				targetGuid: newReport.organisationGUID,
-				orgIndex: 0,
+				orgIndex: organizationIndex,
 				//@ts-ignore
 				JSONIPFS: response[0].hash,
 				PVTval: 0,

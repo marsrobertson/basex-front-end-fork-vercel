@@ -1,5 +1,5 @@
 export interface Evaluation {
-	organisation: string;
+	organisationGUID: string;
 	reportTitle: string;
 	evaluationContent: {
 		comments: string;
