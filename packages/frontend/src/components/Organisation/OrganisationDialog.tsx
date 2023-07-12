@@ -127,6 +127,7 @@ const OrganisationDialog = () => {
 			};
 
 			// STEP 2: send ETH transaction to deploy organisation
+			console.log(deployParams);
 			await writeTx(
 				contractDeployOrg.writeAsync({
 					args: [
@@ -135,7 +136,7 @@ const OrganisationDialog = () => {
 						deployParams.registrationJSONIPFS,
 						deployParams.removingJSONIPFS,
 					],
-					value: parseEther("0.06"),
+					//value: parseEther("0.08"),
 				})
 			);
 			// https://goerli.etherscan.io/address/0x898b303a922016357e86ac2438719248225c11ef
@@ -165,12 +166,12 @@ const OrganisationDialog = () => {
 			await writeTx(
 				contractAddOrgToList.writeAsync({
 					args: [
-						parseEther("0.06"),
+						//parseEther("0.06"),
 						deployedOrganisation.index,
 						//@ts-ignore
 						response[0].hash,
 					],
-					value: parseEther("0.06"),
+					value: parseEther("0.1"),
 				})
 			);
 			handleClose();

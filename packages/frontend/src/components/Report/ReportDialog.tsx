@@ -20,7 +20,7 @@ const ReportDialog = () => {
 	const contractAddReport = useContractWrite({
 		address: ADDRESS,
 		abi: ABI,
-		functionName: "addReport",
+		functionName: "addItem",
 	});
 	const [newReport, setNewReport] = useState<Report>({
 		organisation: "",
@@ -31,6 +31,7 @@ const ReportDialog = () => {
 		accountingPeriodEnd: new Date(),
 		source: "",
 		ipfs: "",
+		reportGUID: "",
 	});
 
 	const handleOpen = () => {
@@ -48,6 +49,7 @@ const ReportDialog = () => {
 			accountingPeriodEnd: new Date(),
 			source: "",
 			ipfs: "",
+			reportGUID: "",
 		});
 	};
 
@@ -111,7 +113,8 @@ const ReportDialog = () => {
 
 			// THE CONTRACT CALL PARAMS
 			const params = {
-				reportGuid: GUIDService.createGUID(),
+				itemGuid: GUIDService.createGUID(),
+				targetGuid: GUIDService.createGUID(),
 				orgIndex: 0,
 				//@ts-ignore
 				JSONIPFS: response[0].hash,
@@ -123,7 +126,8 @@ const ReportDialog = () => {
 			await writeTx(
 				contractAddReport.writeAsync({
 					args: [
-						params.reportGuid,
+						params.itemGuid,
+						params.targetGuid,
 						params.orgIndex,
 						params.JSONIPFS,
 						params.PVTval,

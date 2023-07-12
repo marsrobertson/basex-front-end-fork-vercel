@@ -7,4 +7,5 @@ export interface Report {
 	accountingPeriodEnd: Date;
 	source: string;
 	ipfs: string;
+	reportGUID: string;
 }

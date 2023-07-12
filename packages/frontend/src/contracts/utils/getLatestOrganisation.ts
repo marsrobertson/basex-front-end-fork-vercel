@@ -10,22 +10,24 @@ const getLatestOrganisation = async (): Promise<{
     
     try {
         //@ts-ignore
-    const lenghtData = await publicClient.readContract({
+    const lenghtData= await publicClient.readContract({
   address: ADDRESS,
   abi: ABI,
   functionName: 'organisationsLength',
     })
-    const orgData = await publicClient.readContract({
-  address:ADDRESS,
-  abi: ABI,
-  functionName: 'organisations',
-  args: [lenghtData]
-})
+        const latestOrgIndex = Number(lenghtData) - 1;
+        const orgData = await publicClient.readContract({
+            address: ADDRESS,
+            abi: ABI,
+            functionName: 'organisations',
+            args: [BigInt(latestOrgIndex)]
+        });
+        //@ts-ignore
     return {
         //@ts-ignore
-        index: lenghtData - 1,
+        index: latestOrgIndex,
         //@ts-ignore
-        address: orgData.klerosAddress
+        address: orgData[3]
     };
     }
     catch {
