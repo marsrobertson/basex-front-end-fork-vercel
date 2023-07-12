@@ -4,13 +4,13 @@ import { Report } from "../../types/Report";
 import { useOnClickOutside } from "usehooks-ts";
 import FileUpload from "../FileUpload";
 import KlerosIPFSService from "../../services/IPFSService";
-import { useContractWrite } from "wagmi";
+import { useContractRead, useContractWrite } from "wagmi";
 import ADDRESS from "../../contracts/Address";
 import ABI from "../../contracts/ABI";
 import GUIDService from "../../services/GUIDService";
 import { parseEther } from "viem";
 import { useTransactor } from "../../hooks/useTransactor";
-
+import { Organisation } from "../../types/Organisation";
 const ReportDialog = () => {
 	const [open, setOpen] = useState(false);
 	const ref = useRef(null);
@@ -22,8 +22,13 @@ const ReportDialog = () => {
 		abi: ABI,
 		functionName: "addItem",
 	});
+	const getOrganisations = useContractRead({
+		address: ADDRESS,
+		abi: ABI,
+		functionName: "getOrganisations",
+	});
 	const [newReport, setNewReport] = useState<Report>({
-		organisation: "",
+		organisationGUID: "",
 		title: "",
 		comments: "",
 		uploadDate: new Date(),
@@ -41,7 +46,7 @@ const ReportDialog = () => {
 	const handleClose = () => {
 		setOpen(false);
 		setNewReport({
-			organisation: "",
+			organisationGUID: "",
 			title: "",
 			comments: "",
 			uploadDate: new Date(),
@@ -58,7 +63,9 @@ const ReportDialog = () => {
 	});
 
 	const handleChange = (
-		event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+		event: React.ChangeEvent<
+			HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+		>
 	) => {
 		const { name, value } = event.target;
 		setNewReport((prevReport) => ({
@@ -114,7 +121,7 @@ const ReportDialog = () => {
 			// THE CONTRACT CALL PARAMS
 			const params = {
 				itemGuid: GUIDService.createGUID(),
-				targetGuid: GUIDService.createGUID(),
+				targetGuid: newReport.organisationGUID,
 				orgIndex: 0,
 				//@ts-ignore
 				JSONIPFS: response[0].hash,
@@ -165,7 +172,7 @@ const ReportDialog = () => {
 							<div className="modal-body">
 								<div className="my-2">
 									<p className="font-bold my-1">Organisation</p>
-									<input
+									{/* <input
 										type="text"
 										name="organisation"
 										value={newReport.organisation}
@@ -173,7 +180,26 @@ const ReportDialog = () => {
 										className="input input-bordered w-full"
 										placeholder="Enter organisation name"
 										required
-									/>
+									/> */}
+									<select
+										name="organisationGUID"
+										className="select select-bordered w-full"
+										value={newReport.organisationGUID}
+										onChange={handleChange}
+									>
+										<option disabled value="">
+											Select organisation to report on
+										</option>
+										{//@ts-ignore
+										getOrganisations.data?.map((organisation: Organisation) => (
+											<option
+												key={organisation.orgGuid}
+												value={organisation.orgGuid}
+											>
+												{organisation.name}
+											</option>
+										))}
+									</select>
 								</div>
 								<div className="my-2">
 									<p className="font-bold my-1">Title</p>
