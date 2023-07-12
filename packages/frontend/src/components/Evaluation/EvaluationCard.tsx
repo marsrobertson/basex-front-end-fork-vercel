@@ -1,13 +1,35 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import { useState, useEffect } from "react";
+import { useContractRead } from "wagmi";
+import ABI from "../../contracts/ABI";
+import ADDRESS from "../../contracts/Address";
 import { Evaluation } from "../../types/Evaluation";
+import { Organisation } from "../../types/Organisation";
 
 const EvaluationCard = ({ evaluation }: { evaluation: Evaluation }) => {
 	const {
-		organisation,
+		organisationGUID,
 		reportTitle,
 		evaluationContent,
 		author,
 		date,
 	} = evaluation;
+	const getOrganisations = useContractRead({
+		address: ADDRESS,
+		abi: ABI,
+		functionName: "getOrganisations",
+	});
+	const [organisation, setOrganisation] = useState<Organisation>();
+	useEffect(() => {
+		if (getOrganisations.data) {
+			//@ts-ignore
+			getOrganisations.data.map((org: Organisation, i: number) => {
+				if (org.orgGuid === organisationGUID) {
+					setOrganisation({ ...org, id: i });
+				}
+			});
+		}
+	}, [getOrganisations.data, organisationGUID]);
 
 	return (
 		<div className="card bg-base-100 my-3 border-2 shadow-xl">
@@ -15,39 +37,15 @@ const EvaluationCard = ({ evaluation }: { evaluation: Evaluation }) => {
 				<h2 className="card-title text-lg font-bold mb-3">{reportTitle}</h2>
 				<section>
 					<h3 className="text-base font-bold mb-2">Organisation</h3>
-					<p className="text-gray-600">{organisation}</p>
+					<p className="text-gray-600">
+						{organisation?.name !== "" ? organisation?.name : "X Inc."}
+					</p>
 				</section>
 				<section>
 					<h3 className="text-base font-bold mb-2">Comments</h3>
 					<p className="text-gray-600">{evaluationContent.comments}</p>
 				</section>
-				<section className="border p-2 my-2">
-					<div className="grid grid-cols-2">
-						<h3 className="text-base font-bold mb-2">People</h3>
-						<p className="text-gray-600 ml-auto text-xl font-semibold">
-							{evaluationContent.people.amount} $
-						</p>
-					</div>
-					<p className="text-gray-600">{evaluationContent.people.comment}</p>
-				</section>
-				<section className="border p-2 my-2">
-					<div className="grid grid-cols-2 gap-4">
-						<h3 className="text-base font-bold mb-2">Planet</h3>
-						<p className="text-gray-600 ml-auto text-xl font-semibold">
-							{evaluationContent.planet.amount} $
-						</p>
-					</div>
-					<p className="text-gray-600">{evaluationContent.planet.comment}</p>
-				</section>
-				<section className="border p-2 my-2">
-					<div className="grid grid-cols-2 gap-4">
-						<h3 className="text-base font-bold mb-2">Profit</h3>
-						<p className="text-gray-600 ml-auto text-xl font-semibold">
-							{evaluationContent.profit.amount} $
-						</p>
-					</div>
-					<p className="text-gray-600">{evaluationContent.profit.comment}</p>
-				</section>
+
 				<section>
 					<h3 className="text-base font-bold mb-2">Planet Justifications</h3>
 					{evaluationContent.planetJustifications.map(

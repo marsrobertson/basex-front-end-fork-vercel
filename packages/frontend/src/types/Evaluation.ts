@@ -3,12 +3,6 @@ export interface Evaluation {
 	reportTitle: string;
 	evaluationContent: {
 		comments: string;
-		people: {
-			amount: number;
-			comment: string;
-		};
-		planet: { amount: number; comment: string };
-		profit: { amount: number; comment: string };
 		planetJustifications: Array<{
 			comment: string;
 			percentage: number;

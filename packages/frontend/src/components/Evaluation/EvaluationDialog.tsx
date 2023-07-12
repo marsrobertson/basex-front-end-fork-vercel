@@ -31,9 +31,6 @@ const EvaluationDialog = ({
 		reportTitle: report.title,
 		evaluationContent: {
 			comments: "",
-			people: { amount: 0, comment: "" },
-			planet: { amount: 0, comment: "" },
-			profit: { amount: 0, comment: "" },
 			planetJustifications: Array.from({ length: 17 }, (_, index) => ({
 				comment: "",
 				percentage: 0,
@@ -53,9 +50,6 @@ const EvaluationDialog = ({
 			reportTitle: "",
 			evaluationContent: {
 				comments: "",
-				people: { amount: 0, comment: "" },
-				planet: { amount: 0, comment: "" },
-				profit: { amount: 0, comment: "" },
 				planetJustifications: Array.from({ length: 17 }, (_, index) => ({
 					comment: "",
 					percentage: 0,
@@ -395,8 +389,8 @@ const EvaluationDialog = ({
 					Title: newEvaluation,
 					"Source URL": "",
 					File: "",
-					Comments: "",
-					"Start Date": "",
+					Comments: newEvaluation.evaluationContent.comments,
+					"Start Date": newEvaluation.date,
 					"End Date": "",
 					"Positive Value": "",
 					"Negative Value": "",
@@ -479,72 +473,13 @@ const EvaluationDialog = ({
 									<p>{report.comments}</p>
 								</div>
 								<div className="my-2">
-									<p className="font-bold my-1">People</p>
-									<label className="input-group my-2">
-										<span>$</span>
-										<input
-											type="number"
-											name="peopleAmount"
-											value={newEvaluation.evaluationContent.people.amount}
-											onChange={handleChange}
-											className="input input-bordered w-full"
-											placeholder="Enter
-										people amount"
-											required
-										/>
-									</label>
+									<p className="font-bold my-1">Comments</p>
 									<textarea
-										name="peopleComment"
-										value={newEvaluation.evaluationContent.people.comment}
+										name="comments"
+										value={newEvaluation.evaluationContent.comments}
 										onChange={handleChange}
 										className="textarea textarea-bordered w-full"
-										placeholder="Enter people comment"
-										required
-									/>
-								</div>
-								<div className="my-2">
-									<p className="font-bold my-1">Planet</p>
-									<label className="input-group my-2">
-										<span>$</span>
-										<input
-											type="number"
-											name="planetAmount"
-											value={newEvaluation.evaluationContent.planet.amount}
-											onChange={handleChange}
-											className="input input-bordered w-full"
-											placeholder="Enter planet amount"
-											required
-										/>
-									</label>
-									<textarea
-										name="planetComment"
-										value={newEvaluation.evaluationContent.planet.comment}
-										onChange={handleChange}
-										className="textarea textarea-bordered w-full"
-										placeholder="Enter planet comment"
-										required
-									/>
-								</div>
-								<div className="my-2">
-									<p className="font-bold my-1">Profit</p>
-									<label className="input-group my-2">
-										<span>$</span>
-										<input
-											type="number"
-											name="profitAmount"
-											value={newEvaluation.evaluationContent.profit.amount}
-											onChange={handleChange}
-											className="input input-bordered w-full"
-											placeholder="Enter profit amount"
-											required
-										/>
-									</label>
-									<textarea
-										name="profitComment"
-										value={newEvaluation.evaluationContent.profit.comment}
-										onChange={handleChange}
-										className="textarea textarea-bordered w-full"
-										placeholder="Enter profit comment"
+										placeholder="Enter comments regarding the report"
 										required
 									/>
 								</div>
