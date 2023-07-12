@@ -4,6 +4,7 @@ import OrganisationDialog from "../components/Organisation/OrganisationDialog";
 import ABI from "../contracts/ABI";
 import ADDRESS from "../contracts/Address";
 import Spinner from "../utils/Spinner";
+import { Organisation } from "../types/Organisation";
 const OrganisationsPage = () => {
 	const { data, isError, isLoading } = useContractRead({
 		address: ADDRESS,
@@ -61,7 +62,7 @@ const OrganisationsPage = () => {
 					</thead>
 					<tbody>
 						{//@ts-ignore
-						data.map((org, i) => {
+						(data ?? []).map((org: Organisation, i: number) => {
 							console.log(org);
 							return (
 								<tr key={i} className="bg-white shadow-md hover:bg-gray-50">
