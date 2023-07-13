@@ -22,7 +22,7 @@ const ReportCard = ({ report }: { report: Report }) => {
 		abi: ABI,
 		functionName: "getOrganisations",
 	});
-	const [organisation, setOrganisation] = useState<Organisation>();
+	const [organisation, setOrganisation] = useState<Organisation>({ name: "" });
 	useEffect(() => {
 		if (getOrganisations.data) {
 			//@ts-ignore
@@ -39,15 +39,19 @@ const ReportCard = ({ report }: { report: Report }) => {
 			<div className="card-body">
 				<h2 className="card-title text-lg font-bold mb-3">{title}</h2>
 				<p className="text-gray-400 mb-2">
-					{organisation?.name !== "" ? organisation?.name : "X Inc."}
+					{organisation?.name ? organisation?.name : "X Inc."}
 				</p>
 				<p className="text-gray-600 mb-2">{comments}</p>
 				<p className="text-gray-600 mb-2">
-					Upload Date: {uploadDate.toDateString()}
+					Upload Date: {(uploadDate ?? new Date()).toDateString()}
 				</p>
 				<p className="text-gray-600 mb-4">
-					Accounting Period: {accountingPeriodStart.toDateString()} -{" "}
-					{accountingPeriodEnd.toDateString()}
+					Accounting Period:{" "}
+					{(accountingPeriodStart ?? new Date()).toDateString()} -{" "}
+					{(
+						accountingPeriodEnd ??
+						new Date(new Date().getTime() + 10 * 24 * 60 * 60 * 1000)
+					).toDateString()}
 				</p>
 				<div className="card-actions justify-end">
 					<a

@@ -391,7 +391,7 @@ const EvaluationDialog = ({
 					File: "",
 					Comments: newEvaluation.evaluationContent.comments,
 					"Start Date": newEvaluation.date,
-					"End Date": "",
+					"End Date": new Date(new Date().getTime() + 10 * 24 * 60 * 60 * 1000),
 					"Positive Value": "",
 					"Negative Value": "",
 					GUID: itemGUID,

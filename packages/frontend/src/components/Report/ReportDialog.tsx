@@ -33,7 +33,9 @@ const ReportDialog = () => {
 		comments: "",
 		uploadDate: new Date(),
 		accountingPeriodStart: new Date(),
-		accountingPeriodEnd: new Date(),
+		accountingPeriodEnd: new Date(
+			new Date().getTime() + 10 * 24 * 60 * 60 * 1000
+		),
 		source: "",
 		ipfs: "",
 		reportGUID: "",
@@ -93,6 +95,11 @@ const ReportDialog = () => {
 						isIdentifier: true,
 					},
 					{
+						label: "Comments",
+						description: "...",
+						type: "text",
+					},
+					{
 						label: "Source",
 						description: "...",
 						type: "text",
@@ -102,8 +109,11 @@ const ReportDialog = () => {
 				],
 				values: {
 					Title: newReport.title,
+					Comments: newReport.comments,
 					Source: newReport.source,
 					Report: newReport.ipfs,
+					"Start Date": new Date(),
+					"End Date": new Date(new Date().getTime() + 10 * 24 * 60 * 60 * 1000),
 					// Set other values based on the form inputs
 				},
 			};
