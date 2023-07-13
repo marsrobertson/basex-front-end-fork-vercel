@@ -110,7 +110,7 @@ const EvaluationsPage = () => {
 		return (
 			<div className="p-4 my-auto flex gap-2 justify-center text-center">
 				<Spinner color="info" />
-				<p className="my-auto text-ßxl">Loading Reports</p>
+				<p className="my-auto text-ßxl">Loading Evaluations</p>
 			</div>
 		);
 	}
@@ -132,7 +132,7 @@ const EvaluationsPage = () => {
 								d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
 							/>
 						</svg>
-						<span>Couldn't load reports</span>
+						<span>Couldn't load evaluations</span>
 					</div>
 				</div>
 			</div>
