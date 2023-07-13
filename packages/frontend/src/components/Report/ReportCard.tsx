@@ -87,7 +87,6 @@ const ReportCard = ({ report }: { report: Report }) => {
 							}
 						}
 					/>
-					d
 				</div>
 			</div>
 		</div>
