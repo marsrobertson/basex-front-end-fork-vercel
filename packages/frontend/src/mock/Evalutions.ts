@@ -1,4 +1,4 @@
-import { Evaluation } from "../types/Evaluation";
+/* import { Evaluation } from "../types/Evaluation";
 
 export const mockEvaluations: Evaluation[] = [
 	{
@@ -349,9 +349,6 @@ export const mockEvaluations: Evaluation[] = [
 		reportTitle: "Report Title",
 		evaluationContent: {
 			comments: "Evaluation comments",
-			people: { amount: 5, comment: "People comment" },
-			planet: { amount: 3, comment: "Planet comment" },
-			profit: { amount: 7, comment: "Profit comment" },
 			planetJustifications: [
 				{
 					comment: "Planet justification comment",
@@ -459,3 +456,4 @@ export const mockEvaluations: Evaluation[] = [
 		date: new Date(),
 	},
 ];
+ */

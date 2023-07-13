@@ -1,16 +1,18 @@
-import { useState, useEffect } from "react";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import { useState } from "react";
 import { Evaluation } from "../types/Evaluation";
 import EvaluationCard from "../components/Evaluation/EvaluationCard";
-import { mockEvaluations } from "../mock/Evalutions";
+/* import { mockEvaluations } from "../mock/Evalutions"; */
 
 const EvaluationsPage = () => {
+	//@ts-ignore
 	const [evaluations, setEvaluations] = useState<Evaluation[]>([]);
 
-	useEffect(() => {
+	/* useEffect(() => {
 		setTimeout(() => {
 			setEvaluations(mockEvaluations);
 		}, 300);
-	}, []);
+	}, []); */
 
 	return (
 		<div className="m-3">
