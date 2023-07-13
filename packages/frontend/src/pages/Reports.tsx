@@ -50,7 +50,6 @@ const ReportsPage = () => {
 					fetch(`https://ipfs.io/ipfs/${ipfsHash}`).then((r) => {
 						r.json().then((response) => {
 							const { values: reportData } = response;
-							console.log(data, reportData);
 
 							setReports((prevReports) => {
 								const newReport = {
