@@ -10,6 +10,7 @@ import { parseEther } from "viem";
 import ABI from "../../contracts/ABI";
 import ADDRESS from "../../contracts/Address";
 import { useContractWrite } from "wagmi";
+import { useTransactor } from "../../hooks/useTransactor";
 const EvaluationDialog = ({
 	report,
 	organisation,
@@ -17,6 +18,7 @@ const EvaluationDialog = ({
 	report: Report;
 	organisation: Organisation;
 }) => {
+	const writeTx = useTransactor();
 	//@ts-ignore
 	const contractAddEval = useContractWrite({
 		address: ADDRESS,
@@ -67,46 +69,16 @@ const EvaluationDialog = ({
 		event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 	) => {
 		const { name, value } = event.target;
-
-		if (
-			name === "peopleAmount" ||
-			name === "planetAmount" ||
-			name === "profitAmount"
-		) {
-			// Handle changes in the amount fields
-			const field = name.split("Amount")[0].toLowerCase();
+		if (name === "comments") {
 			setNewEvaluation((prevEvaluation) => ({
 				...prevEvaluation,
 				evaluationContent: {
 					...prevEvaluation.evaluationContent,
-					[field]: {
-						// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-						//@ts-ignore
-						...prevEvaluation.evaluationContent[field],
-						amount: Number(value),
-					},
+					comments: value,
 				},
 			}));
-		} else if (
-			name === "peopleComment" ||
-			name === "planetComment" ||
-			name === "profitComment"
-		) {
-			// Handle changes in the comment fields
-			const field = name.split("Comment")[0].toLowerCase();
-			setNewEvaluation((prevEvaluation) => ({
-				...prevEvaluation,
-				evaluationContent: {
-					...prevEvaluation.evaluationContent,
-					[field]: {
-						// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-						//@ts-ignore
-						...prevEvaluation.evaluationContent[field],
-						comment: value,
-					},
-				},
-			}));
-		} else if (name.includes("planetJustifications")) {
+		}
+		if (name.includes("planetJustifications")) {
 			// Handle changes in the planetJustifications fields
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 			const [_fieldName, indexString, fieldType] = name.split("-");
@@ -429,7 +401,7 @@ const EvaluationDialog = ({
 				PVTval: 0,
 				NVTval: 0,
 			};
-			//@ts-ignore
+
 			await writeTx(
 				contractAddEval.writeAsync({
 					args: [
