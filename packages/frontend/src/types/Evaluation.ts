@@ -1,14 +1,19 @@
 export interface Evaluation {
 	organisationGUID: string;
-	reportTitle: string;
-	evaluationContent: {
+	targetGUID: string;
+	title?: string;
+	reportTitle?: string;
+	uploadDate?: Date;
+	accountingPeriodStart?: Date;
+	accountingPeriodEnd?: Date;
+	evaluationContent?: {
 		comments: string;
-		planetJustifications: Array<{
+		planetJustifications?: Array<{
 			comment: string;
 			percentage: number;
-			planetImage: string;
+			planetImage?: string;
 		}>;
 	};
-	author: string;
-	date: Date;
+	author?: string;
+	date?: Date;
 }

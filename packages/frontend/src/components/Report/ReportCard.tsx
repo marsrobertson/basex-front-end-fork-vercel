@@ -14,7 +14,6 @@ const ReportCard = ({ report }: { report: Report }) => {
 		uploadDate,
 		accountingPeriodStart,
 		accountingPeriodEnd,
-		source,
 		ipfs,
 	} = report;
 	const getOrganisations = useContractRead({
@@ -53,8 +52,16 @@ const ReportCard = ({ report }: { report: Report }) => {
 						new Date(new Date().getTime() + 10 * 24 * 60 * 60 * 1000)
 					).toDateString()}
 				</p>
-				<div className="card-actions justify-end">
+				<div className="my-1">
 					<a
+						href={`https://ipfs.kleros.io/ipfs/${ipfs}`}
+						className="text-sm link text-black/50"
+					>
+						Other information
+					</a>
+				</div>
+				<div className="card-actions justify-end">
+					{/* <a
 						href={source}
 						className="btn btn-info mr-2"
 						target="_blank"
@@ -69,7 +76,7 @@ const ReportCard = ({ report }: { report: Report }) => {
 						rel="noopener noreferrer"
 					>
 						View on IPFS
-					</a>
+					</a> */}
 					<EvaluationDialog
 						report={report}
 						organisation={
@@ -80,6 +87,7 @@ const ReportCard = ({ report }: { report: Report }) => {
 							}
 						}
 					/>
+					d
 				</div>
 			</div>
 		</div>

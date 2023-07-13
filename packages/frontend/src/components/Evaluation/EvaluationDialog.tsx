@@ -30,6 +30,7 @@ const EvaluationDialog = ({
 	const [loading, setLoading] = useState(false);
 	const [newEvaluation, setNewEvaluation] = useState<Evaluation>({
 		organisationGUID: report.organisationGUID,
+		targetGUID: report.reportGUID,
 		reportTitle: report.title,
 		evaluationContent: {
 			comments: "",
@@ -50,6 +51,7 @@ const EvaluationDialog = ({
 		setNewEvaluation({
 			organisationGUID: "",
 			reportTitle: "",
+			targetGUID: "",
 			evaluationContent: {
 				comments: "",
 				planetJustifications: Array.from({ length: 17 }, (_, index) => ({
@@ -85,7 +87,7 @@ const EvaluationDialog = ({
 			const index = Number(indexString);
 			const field = fieldType === "comment" ? "comment" : "percentage";
 			const updatedPlanetJustifications = [
-				...newEvaluation.evaluationContent.planetJustifications,
+				...(newEvaluation?.evaluationContent?.planetJustifications ?? []),
 			];
 			updatedPlanetJustifications[index] = {
 				...updatedPlanetJustifications[index],
@@ -94,8 +96,9 @@ const EvaluationDialog = ({
 			setNewEvaluation((prevEvaluation) => ({
 				...prevEvaluation,
 				evaluationContent: {
-					...prevEvaluation.evaluationContent,
-					planetJustifications: updatedPlanetJustifications,
+					// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+					...prevEvaluation.evaluationContent!,
+					planetJustifications: updatedPlanetJustifications ?? [],
 				},
 			}));
 		} else {
@@ -109,7 +112,8 @@ const EvaluationDialog = ({
 
 	const handleSliderChange = (index: number, value: number) => {
 		const updatedPlanetJustifications = [
-			...newEvaluation.evaluationContent.planetJustifications,
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			...newEvaluation!.evaluationContent!.planetJustifications!,
 		];
 		updatedPlanetJustifications[index] = {
 			...updatedPlanetJustifications[index],
@@ -118,7 +122,8 @@ const EvaluationDialog = ({
 		setNewEvaluation((prevEvaluation) => ({
 			...prevEvaluation,
 			evaluationContent: {
-				...prevEvaluation.evaluationContent,
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+				...prevEvaluation.evaluationContent!,
 				planetJustifications: updatedPlanetJustifications,
 			},
 		}));
@@ -358,17 +363,17 @@ const EvaluationDialog = ({
 					},
 				],
 				values: {
-					Title: newEvaluation,
+					Title: newEvaluation.reportTitle,
 					"Source URL": "",
 					File: "",
-					Comments: newEvaluation.evaluationContent.comments,
+					Comments: newEvaluation?.evaluationContent?.comments,
 					"Start Date": newEvaluation.date,
 					"End Date": new Date(new Date().getTime() + 10 * 24 * 60 * 60 * 1000),
 					"Positive Value": "",
 					"Negative Value": "",
 					GUID: itemGUID,
 					"GUID Target": report.reportGUID,
-					...newEvaluation.evaluationContent.planetJustifications.reduce(
+					...newEvaluation?.evaluationContent?.planetJustifications?.reduce(
 						(acc, justification, index) => {
 							const sdgValueKey = `SDG${index + 1} Value`;
 							const sdgCommentKey = `SDG${index + 1} Comment`;
@@ -448,7 +453,7 @@ const EvaluationDialog = ({
 									<p className="font-bold my-1">Comments</p>
 									<textarea
 										name="comments"
-										value={newEvaluation.evaluationContent.comments}
+										value={newEvaluation?.evaluationContent?.comments}
 										onChange={handleChange}
 										className="textarea textarea-bordered w-full"
 										placeholder="Enter comments regarding the report"
@@ -457,7 +462,7 @@ const EvaluationDialog = ({
 								</div>
 								<div className="my-2">
 									<p className="font-bold my-1">Planet Justifications</p>
-									{newEvaluation.evaluationContent.planetJustifications.map(
+									{newEvaluation?.evaluationContent?.planetJustifications?.map(
 										(justification, index) => (
 											<div key={index} className="my-2">
 												<div className="flex justify-between">

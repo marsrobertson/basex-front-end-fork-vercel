@@ -7,9 +7,11 @@ import { useContractRead } from "wagmi";
 import ABI from "../contracts/ABI";
 import ADDRESS from "../contracts/Address";
 import Spinner from "../utils/Spinner";
+import isGuidInLocalStorage from "../utils/guidInLocalStorage";
 
 const ReportsPage = () => {
 	const [reports, setReports] = useState<Report[]>([]);
+	const [loading, setLoading] = useState(false);
 	const { data, isError, isLoading } = useContractRead({
 		address: ADDRESS,
 		abi: ABI,
@@ -41,6 +43,7 @@ const ReportsPage = () => {
 
 	useEffect(() => {
 		(async () => {
+			setLoading(true);
 			if (data) {
 				console.log(data);
 				//@ts-ignore
@@ -55,7 +58,7 @@ const ReportsPage = () => {
 							setReports((prevReports) => {
 								const newReport = {
 									organisationGUID: contractReport.targetGuid,
-									title: reportData.Title,
+									title: `${reportData.Title}`,
 									comments: reportData.Comments,
 									uploadDate: new Date(reportData["Start Date"]),
 									accountingPeriodStart: new Date(reportData["Start Date"]),
@@ -64,24 +67,26 @@ const ReportsPage = () => {
 									ipfs: reportData.IPFS,
 									reportGUID: contractReport.itemGuid,
 								};
-
 								// Filter out duplicates based on reportGUID
 								const filteredReports = prevReports.filter(
 									(report) => report.reportGUID !== newReport.reportGUID
 								);
 
 								// Add the new report to the filtered array
-								return [...filteredReports, newReport];
+								if (isGuidInLocalStorage(contractReport.targetGuid))
+									return [...filteredReports, newReport];
+								return filteredReports;
 							});
 						});
 					});
 				});
 			}
+			setLoading(false);
 		})();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	if (isLoading) {
+	if (isLoading || loading) {
 		return (
 			<div className="p-4 my-auto flex gap-2 justify-center text-center">
 				<Spinner color="info" />

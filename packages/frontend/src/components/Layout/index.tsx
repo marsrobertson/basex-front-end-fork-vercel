@@ -1,7 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useContractRead } from "wagmi";
+import ABI from "../../contracts/ABI";
+import ADDRESS from "../../contracts/Address";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
+	const getOrganisations = useContractRead({
+		address: ADDRESS,
+		abi: ABI,
+		functionName: "getOrganisations",
+	});
+
+	useEffect(() => {
+		if (getOrganisations.data) {
+			localStorage.setItem(
+				"organisationsData",
+				JSON.stringify(
+					getOrganisations.data,
+					(_key, value) =>
+						typeof value === "bigint" ? value.toString() : value // return everything else unchanged)
+				)
+			);
+		}
+	}, [getOrganisations.data]);
 	return (
 		<div className="drawer">
 			<input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
