@@ -42,6 +42,7 @@ const ReportsPage = () => {
 	useEffect(() => {
 		(async () => {
 			if (data) {
+				console.log(data);
 				//@ts-ignore
 				await data.map((contractReport: any) => {
 					// grab the report IPFS data using the hash from contractReport.JSONIPFS and log it
@@ -56,9 +57,9 @@ const ReportsPage = () => {
 									organisationGUID: contractReport.targetGuid,
 									title: reportData.Title,
 									comments: reportData.Comments,
-									uploadDate: reportData["Start Date"],
-									accountingPeriodStart: reportData["End Date"],
-									accountingPeriodEnd: reportData["Start Date"],
+									uploadDate: new Date(reportData["Start Date"]),
+									accountingPeriodStart: new Date(reportData["Start Date"]),
+									accountingPeriodEnd: new Date(reportData["End Date"]),
 									source: reportData.Source,
 									ipfs: reportData.IPFS,
 									reportGUID: contractReport.itemGuid,
