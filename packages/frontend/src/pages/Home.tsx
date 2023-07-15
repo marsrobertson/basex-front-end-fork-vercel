@@ -1,46 +1,22 @@
-import { useWalletClient } from "wagmi";
-import FileUpload from "../components/FileUpload";
+import React from "react";
 
 const HomePage = () => {
-	const { data: walletClient, isError, isLoading } = useWalletClient();
-
-	const handleSignMessage = async () => {
-		try {
-			const message = "Hello BaseX";
-			await walletClient?.signMessage({ message });
-			// Perform any additional logic with the signature
-		} catch (error) {
-			console.error("Error signing message:", error);
-			// Handle the error
-		}
-	};
-
 	return (
-		<div className="text-center">
-			<h1 className="my-3 text-3xl font-bold">Home</h1>
-			{isLoading && (
-				<div className="mx-auto my-2">
-					<span className="loading loading-bars loading-lg"></span>
-				</div>
-			)}
-			{isError && (
-				<div className="my-3 text-lg font-semibold">
-					<h5>Couldn't fetch wallet</h5>
-				</div>
-			)}
-			{walletClient && (
-				<div className="text-center mx-auto">
-					<h4>Hello {walletClient.account.address}</h4>
-					<button className="btn btn-neutral my-4" onClick={handleSignMessage}>
-						Sign a message
-					</button>
-					<FileUpload
-						onUpload={(hash) => {
-							console.log(hash);
-						}}
-					/>
-				</div>
-			)}
+		<div className="text-center my-4">
+			<h1 className="my-3 text-3xl font-bold">Welcome to BaseX</h1>
+			<p className="my-5 text-lg">
+				BaseX is a revolutionary evaluation system that brings scalability and
+				trustlessness to the forefront. Utilizing the power of Kleros jurors and
+				their community, BaseX ensures transparent and reliable evaluations. Our
+				system is permissionless, allowing anyone, whether an independent entity
+				or an employee of an organization, to submit reports and evaluations.
+			</p>
+			<a
+				href="/reports"
+				className="btn btn-primary text-white font-bold py-2 px-4 rounded"
+			>
+				Get Started
+			</a>
 		</div>
 	);
 };
