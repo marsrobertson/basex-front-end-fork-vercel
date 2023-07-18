@@ -189,7 +189,7 @@ const OrganisationDialog = () => {
 				New Organisation
 			</button>
 			{open && (
-				<div className="fixed inset-0 flex items-center justify-center z-10">
+				<div className="fixed inset-0 flex items-center justify-center z-20">
 					<div className="modal modal-open">
 						<div className="modal-box" ref={ref}>
 							<button
