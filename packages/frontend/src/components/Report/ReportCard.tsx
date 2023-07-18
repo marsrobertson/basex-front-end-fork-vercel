@@ -36,7 +36,9 @@ const ReportCard = ({ report }: { report: Report }) => {
 	return (
 		<div className="card bg-base-100  my-3 border-2 shadow-xl">
 			<div className="card-body">
-				<h2 className="card-title text-lg font-bold mb-3">{title}</h2>
+				<h2 className="card-title text-lg font-bold mb-3">
+					{title !== "" ? title : "New Report"}
+				</h2>
 				<p className="text-gray-400 mb-2">
 					{organisation?.name ? organisation?.name : "X Inc."}
 				</p>
@@ -52,14 +54,16 @@ const ReportCard = ({ report }: { report: Report }) => {
 						new Date(new Date().getTime() + 10 * 24 * 60 * 60 * 1000)
 					).toDateString()}
 				</p>
-				<div className="my-1">
-					<a
-						href={`https://ipfs.kleros.io/ipfs/${ipfs}`}
-						className="text-sm link text-black/50"
-					>
-						Other information
-					</a>
-				</div>
+				{ipfs && (
+					<div className="my-1">
+						<a
+							href={`https://ipfs.kleros.io/ipfs/${ipfs}`}
+							className="text-sm link text-black/50"
+						>
+							Other information
+						</a>
+					</div>
+				)}
 				<div className="card-actions justify-end">
 					{/* <a
 						href={source}

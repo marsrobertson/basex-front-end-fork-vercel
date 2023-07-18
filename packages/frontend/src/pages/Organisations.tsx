@@ -63,7 +63,7 @@ const OrganisationsPage = () => {
 					<tbody>
 						{//@ts-ignore
 						(data ?? []).map((org: Organisation, i: number) => {
-							console.log(org);
+							// console.log(org);
 							return (
 								<tr key={i} className="bg-white shadow-md hover:bg-gray-50">
 									<td className="border px-4 py-2">{i + 1}</td>

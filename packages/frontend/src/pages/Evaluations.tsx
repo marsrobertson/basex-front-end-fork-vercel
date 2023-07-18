@@ -45,7 +45,7 @@ const EvaluationsPage = () => {
 		(async () => {
 			setLoading(true);
 			if (data) {
-				console.log(data);
+				// console.log(data);
 				//@ts-ignore
 				await data.map((contractEvaluation: any) => {
 					// grab the report IPFS data using the hash from contractReport.JSONIPFS and log it
@@ -91,7 +91,7 @@ const EvaluationsPage = () => {
 										evaluation.organisationGUID !==
 										newEvaluation.organisationGUID
 								);
-								console.log(newEvaluation);
+								// console.log(newEvaluation);
 								// Add the new report to the filtered array
 								if (!isGuidInLocalStorage(contractEvaluation.targetGuid))
 									return [...filteredEvaluations, newEvaluation];

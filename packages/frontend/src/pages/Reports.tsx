@@ -45,7 +45,7 @@ const ReportsPage = () => {
 		(async () => {
 			setLoading(true);
 			if (data) {
-				console.log(data);
+				// console.log(data);
 				//@ts-ignore
 				await data.map((contractReport: any) => {
 					// grab the report IPFS data using the hash from contractReport.JSONIPFS and log it
@@ -64,7 +64,7 @@ const ReportsPage = () => {
 									accountingPeriodStart: new Date(reportData["Start Date"]),
 									accountingPeriodEnd: new Date(reportData["End Date"]),
 									source: reportData.Source,
-									ipfs: reportData.IPFS,
+									ipfs: reportData.Report,
 									reportGUID: contractReport.itemGuid,
 								};
 								// Filter out duplicates based on reportGUID
