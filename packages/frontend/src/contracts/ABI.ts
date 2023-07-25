@@ -44,6 +44,18 @@ const ABI = [
 			 "internalType":"string",
 			 "name":"orgGuid",
 			 "type":"string"
+		  },
+		  {
+			 "indexed":false,
+			 "internalType":"string",
+			 "name":"name",
+			 "type":"string"
+		  },
+		  {
+			 "indexed":false,
+			 "internalType":"address",
+			 "name":"klerosAddress",
+			 "type":"address"
 		  }
 	   ],
 	   "name":"OrganisationAddedToKleros",
@@ -57,6 +69,18 @@ const ABI = [
 			 "internalType":"string",
 			 "name":"orgGuid",
 			 "type":"string"
+		  },
+		  {
+			 "indexed":false,
+			 "internalType":"string",
+			 "name":"name",
+			 "type":"string"
+		  },
+		  {
+			 "indexed":false,
+			 "internalType":"address",
+			 "name":"klerosAddress",
+			 "type":"address"
 		  }
 	   ],
 	   "name":"OrganisationDeployed",
