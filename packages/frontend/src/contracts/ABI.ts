@@ -541,6 +541,25 @@ const ABI = [
 	{
 	   "inputs":[
 		  {
+			 "internalType":"string",
+			 "name":"",
+			 "type":"string"
+		  }
+	   ],
+	   "name":"itemGuidToIndex",
+	   "outputs":[
+		  {
+			 "internalType":"uint256",
+			 "name":"",
+			 "type":"uint256"
+		  }
+	   ],
+	   "stateMutability":"view",
+	   "type":"function"
+	},
+	{
+	   "inputs":[
+		  {
 			 "internalType":"uint256",
 			 "name":"",
 			 "type":"uint256"
@@ -661,6 +680,25 @@ const ABI = [
 			 "internalType":"bytes[]",
 			 "name":"results",
 			 "type":"bytes[]"
+		  }
+	   ],
+	   "stateMutability":"view",
+	   "type":"function"
+	},
+	{
+	   "inputs":[
+		  {
+			 "internalType":"string",
+			 "name":"",
+			 "type":"string"
+		  }
+	   ],
+	   "name":"orgGuidToIndex",
+	   "outputs":[
+		  {
+			 "internalType":"uint256",
+			 "name":"",
+			 "type":"uint256"
 		  }
 	   ],
 	   "stateMutability":"view",
