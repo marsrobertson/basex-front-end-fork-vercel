@@ -21,13 +21,13 @@ const ABI = [
 	   "anonymous":false,
 	   "inputs":[
 		  {
-			 "indexed":false,
+			 "indexed":true,
 			 "internalType":"string",
 			 "name":"orgGuid",
 			 "type":"string"
 		  },
 		  {
-			 "indexed":false,
+			 "indexed":true,
 			 "internalType":"string",
 			 "name":"itemGuid",
 			 "type":"string"
@@ -40,7 +40,7 @@ const ABI = [
 	   "anonymous":false,
 	   "inputs":[
 		  {
-			 "indexed":false,
+			 "indexed":true,
 			 "internalType":"string",
 			 "name":"orgGuid",
 			 "type":"string"
@@ -52,7 +52,7 @@ const ABI = [
 			 "type":"string"
 		  },
 		  {
-			 "indexed":false,
+			 "indexed":true,
 			 "internalType":"address",
 			 "name":"klerosAddress",
 			 "type":"address"
@@ -65,7 +65,7 @@ const ABI = [
 	   "anonymous":false,
 	   "inputs":[
 		  {
-			 "indexed":false,
+			 "indexed":true,
 			 "internalType":"string",
 			 "name":"orgGuid",
 			 "type":"string"
@@ -77,7 +77,7 @@ const ABI = [
 			 "type":"string"
 		  },
 		  {
-			 "indexed":false,
+			 "indexed":true,
 			 "internalType":"address",
 			 "name":"klerosAddress",
 			 "type":"address"
