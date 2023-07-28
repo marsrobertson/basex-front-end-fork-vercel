@@ -14,7 +14,7 @@ import ADDRESS from "../../contracts/Address";
 import { useTransactor } from "../../hooks/useTransactor";
 import GUIDService from "../../services/GUIDService";
 import { parseEther } from "viem";
-import getLatestOrganisation from "../../contracts/utils/getLatestOrganisation";
+import getOrganisationByGUID from "../../contracts/utils/getOrganisationByGUID";
 
 const OrganisationDialog = () => {
 	const [open, setOpen] = useState(false);
@@ -144,7 +144,9 @@ const OrganisationDialog = () => {
 			// DOCS: https://wagmi.sh/examples/contract-write-dynamic
 
 			// STEP 3: retrieve the address of the deployed organisation
-			const deployedOrganisation = await getLatestOrganisation();
+			const deployedOrganisation = await getOrganisationByGUID(
+				deployParams.orgGuid
+			);
 			//@ts-ignore
 			const addOrgToKlerosJSONCopy = JSON.parse(
 				JSON.stringify(AddOrgToKlerosJSON)

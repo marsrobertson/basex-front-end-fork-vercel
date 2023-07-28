@@ -3,29 +3,30 @@ import { publicClient } from "../../utils/client";
 import ABI from "../ABI";
 import ADDRESS from "../Address";
 
-const getLatestOrganisation = async (): Promise<{
+const getOrganisationByGUID = async (guid:string): Promise<{
     index: number ;
      address: `0x${string}`
 }> => {
     
     try {
         //@ts-ignore
-    const lenghtData= await publicClient.readContract({
+    const indexData= await publicClient.readContract({
   address: ADDRESS,
   abi: ABI,
-  functionName: 'organisationsLength',
+        functionName: 'orgGuidToIndex',
+  args:[guid]
     })
-        const latestOrgIndex = Number(lenghtData) - 1;
+        
         const orgData = await publicClient.readContract({
             address: ADDRESS,
             abi: ABI,
-            functionName: 'organisations',
-            args: [BigInt(latestOrgIndex)]
+            functionName: 'getOrganisation',
+            args: [Number(indexData)]
         });
         //@ts-ignore
     return {
         //@ts-ignore
-        index: latestOrgIndex,
+        index: index,
         //@ts-ignore
         address: orgData[3]
     };
@@ -34,4 +35,4 @@ const getLatestOrganisation = async (): Promise<{
         throw new Error("Couldn't grab organisation data")
     }
 }
-export default getLatestOrganisation;
+export default getOrganisationByGUID;
