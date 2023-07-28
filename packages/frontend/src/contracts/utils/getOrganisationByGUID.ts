@@ -21,17 +21,17 @@ const getOrganisationByGUID = async (guid:string): Promise<{
             address: ADDRESS,
             abi: ABI,
             functionName: 'getOrganisation',
-            args: [Number(indexData)]
+            args: [indexData]
         });
         //@ts-ignore
     return {
         //@ts-ignore
-        index: index,
+        index: Number(indexData),
         //@ts-ignore
-        address: orgData[3]
+        address: orgData.klerosAddress
     };
     }
-    catch {
+    catch (e: any) {
         throw new Error("Couldn't grab organisation data")
     }
 }

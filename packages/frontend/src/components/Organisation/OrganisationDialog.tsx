@@ -91,6 +91,10 @@ const OrganisationDialog = () => {
 				new TextEncoder().encode(createOrgJSONCopy)
 			);
 			//@ts-ignore
+			console.log(
+				`https://ipfs.kleros.io/ipfs/${registstrationResponse[0].hash}`
+			);
+			//@ts-ignore
 			const removeOrgJSONCopy = JSON.parse(JSON.stringify(RemoveOrgJSON));
 			removeOrgJSONCopy.title = removeOrgJSONCopy.title.replace(
 				"___NAME___",
@@ -115,7 +119,7 @@ const OrganisationDialog = () => {
 				new TextEncoder().encode(removeOrgJSONCopy)
 			);
 			//@ts-ignore
-			console.log(removeResponse[0].hash);
+			console.log(`https://ipfs.kleros.io/ipfs/${removeResponse[0].hash}`);
 
 			const deployParams = {
 				orgGuid: GUIDService.createGUID(),
@@ -157,8 +161,10 @@ const OrganisationDialog = () => {
 			// STEP 4: upload addOrgToKlerosJSONCopy to IPFS
 			const response = await KlerosIPFSService.publishToKlerosNode(
 				"item.json",
-				new TextEncoder().encode(addOrgToKlerosJSONCopy)
+				new TextEncoder().encode(JSON.stringify(addOrgToKlerosJSONCopy))
 			);
+			//@ts-ignore
+			console.log(`https://ipfs.kleros.io/ipfs/${response[0].hash}`);
 			// Handle the response from IPFS, e.g., save the hash
 			//@ts-ignore
 			console.log(response[0].hash);
@@ -168,12 +174,11 @@ const OrganisationDialog = () => {
 			await writeTx(
 				contractAddOrgToList.writeAsync({
 					args: [
-						//parseEther("0.06"),
-						deployedOrganisation.index,
+						BigInt(deployedOrganisation.index),
 						//@ts-ignore
 						response[0].hash,
 					],
-					value: parseEther("0.1"),
+					value: parseEther("0.08"),
 				})
 			);
 			handleClose();
