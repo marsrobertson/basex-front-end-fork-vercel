@@ -90,8 +90,9 @@ const OrganisationDialog = () => {
 				"item.json",
 				new TextEncoder().encode(createOrgJSONCopy)
 			);
-			//@ts-ignore
+
 			console.log(
+				//@ts-ignore
 				`https://ipfs.kleros.io/ipfs/${registstrationResponse[0].hash}`
 			);
 			//@ts-ignore

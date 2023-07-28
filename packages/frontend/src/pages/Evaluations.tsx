@@ -66,6 +66,8 @@ const EvaluationsPage = () => {
 										comments: evalData.Comments,
 										planetJustifications: [],
 									},
+									pvt: Number(evalData["Positive Value"]),
+									nvt: Number(evalData("Negative Value")),
 									uploadDate: new Date(evalData["Start Date"]),
 									accountingPeriodStart: new Date(evalData["Start Date"]),
 									accountingPeriodEnd: new Date(evalData["End Date"]),

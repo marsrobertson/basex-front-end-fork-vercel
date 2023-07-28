@@ -6,6 +6,8 @@ export interface Evaluation {
 	uploadDate?: Date;
 	accountingPeriodStart?: Date;
 	accountingPeriodEnd?: Date;
+	pvt?: number;
+	nvt?: number;
 	evaluationContent?: {
 		comments: string;
 		planetJustifications?: Array<{

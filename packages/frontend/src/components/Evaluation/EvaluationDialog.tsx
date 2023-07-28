@@ -32,6 +32,8 @@ const EvaluationDialog = ({
 		organisationGUID: report.organisationGUID,
 		targetGUID: report.reportGUID,
 		reportTitle: report.title,
+		nvt: 0,
+		pvt: 0,
 		evaluationContent: {
 			comments: "",
 			planetJustifications: Array.from({ length: 17 }, (_, index) => ({
@@ -52,6 +54,8 @@ const EvaluationDialog = ({
 			organisationGUID: "",
 			reportTitle: "",
 			targetGUID: "",
+			nvt: 0,
+			pvt: 0,
 			evaluationContent: {
 				comments: "",
 				planetJustifications: Array.from({ length: 17 }, (_, index) => ({
@@ -101,6 +105,15 @@ const EvaluationDialog = ({
 					planetJustifications: updatedPlanetJustifications ?? [],
 				},
 			}));
+		} else if (name === "pvt" || name === "nvt") {
+			// Handle changes in pvt and nvt fields, validating the input as an integer between 0 and 100
+			const intValue = parseInt(value);
+			if (!Number.isNaN(intValue) && intValue >= 0 && intValue <= 100) {
+				setNewEvaluation((prevEvaluation) => ({
+					...prevEvaluation,
+					[name]: intValue,
+				}));
+			}
 		} else {
 			// Handle changes in other fields
 			setNewEvaluation((prevEvaluation) => ({
@@ -369,8 +382,8 @@ const EvaluationDialog = ({
 					Comments: newEvaluation?.evaluationContent?.comments,
 					"Start Date": newEvaluation.date,
 					"End Date": new Date(new Date().getTime() + 10 * 24 * 60 * 60 * 1000),
-					"Positive Value": "",
-					"Negative Value": "",
+					"Positive Value": newEvaluation.pvt ?? 0,
+					"Negative Value": newEvaluation.nvt ?? 0,
 					GUID: itemGUID,
 					"GUID Target": report.reportGUID,
 					...newEvaluation?.evaluationContent?.planetJustifications?.reduce(
@@ -403,8 +416,8 @@ const EvaluationDialog = ({
 				orgIndex: organisation.id,
 				//@ts-ignore
 				JSONIPFS: response[0].hash,
-				PVTval: 0,
-				NVTval: 0,
+				PVTval: newEvaluation.pvt,
+				NVTval: newEvaluation.nvt,
 			};
 
 			await writeTx(
@@ -460,6 +473,34 @@ const EvaluationDialog = ({
 										required
 									/>
 								</div>
+								<div className="my-1">
+									<p className="font-bold my-1">Positive Value</p>
+									<input
+										type="number"
+										name="pvt"
+										value={newEvaluation.pvt}
+										onChange={handleChange}
+										min={0}
+										max={100}
+										className="input input-bordered input-sm w-full max-w-xs"
+										placeholder="Positive Value"
+										required
+									/>
+								</div>
+								<div className="my-1">
+									<p className="font-bold my-1">Negative Value</p>
+									<input
+										type="number"
+										name="nvt"
+										value={newEvaluation.nvt}
+										onChange={handleChange}
+										min={0}
+										max={100}
+										className="input input-bordered input-sm w-full max-w-xs"
+										placeholder="Negative Value"
+										required
+									/>
+								</div>
 								<div className="my-2">
 									<p className="font-bold my-1">Planet Justifications</p>
 									{newEvaluation?.evaluationContent?.planetJustifications?.map(
@@ -501,6 +542,7 @@ const EvaluationDialog = ({
 											</div>
 										)
 									)}
+									d
 								</div>
 							</div>
 							<div className="modal-footer space-x-2 text-right mt-3">
