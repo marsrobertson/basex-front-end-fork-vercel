@@ -542,7 +542,6 @@ const EvaluationDialog = ({
 											</div>
 										)
 									)}
-									d
 								</div>
 							</div>
 							<div className="modal-footer space-x-2 text-right mt-3">
