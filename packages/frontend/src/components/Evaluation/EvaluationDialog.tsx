@@ -106,9 +106,9 @@ const EvaluationDialog = ({
 				},
 			}));
 		} else if (name === "pvt" || name === "nvt") {
-			// Handle changes in pvt and nvt fields, validating the input as an integer between 0 and 100
+			// Handle changes in pvt and nvt fields, validating the input as an integer greated than 0
 			const intValue = parseInt(value);
-			if (!Number.isNaN(intValue) && intValue >= 0 && intValue <= 100) {
+			if (!Number.isNaN(intValue) && intValue >= 0) {
 				setNewEvaluation((prevEvaluation) => ({
 					...prevEvaluation,
 					[name]: intValue,
@@ -481,7 +481,6 @@ const EvaluationDialog = ({
 										value={newEvaluation.pvt}
 										onChange={handleChange}
 										min={0}
-										max={100}
 										className="input input-bordered input-sm w-full max-w-xs"
 										placeholder="Positive Value"
 										required
@@ -495,7 +494,6 @@ const EvaluationDialog = ({
 										value={newEvaluation.nvt}
 										onChange={handleChange}
 										min={0}
-										max={100}
 										className="input input-bordered input-sm w-full max-w-xs"
 										placeholder="Negative Value"
 										required
