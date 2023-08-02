@@ -54,13 +54,14 @@ const EvaluationsPage = () => {
 					fetch(`https://ipfs.io/ipfs/${ipfsHash}`).then((r) => {
 						r.json().then((response) => {
 							const { values: evalData } = response;
-
+							console.log(evalData);
 							setEvaluations((prevEvaluations) => {
 								if (isGuidInLocalStorage(contractEvaluation.targetGuid)) {
 									return prevEvaluations;
 								}
 								const newEvaluation: Evaluation = {
 									organisationGUID: "",
+									GUID: `${evalData.GUID}`,
 									title: `${evalData.Title}`,
 									evaluationContent: {
 										comments: evalData.Comments,
@@ -89,9 +90,7 @@ const EvaluationsPage = () => {
 								}
 								// Filter out duplicates based on reportGUID
 								const filteredEvaluations = prevEvaluations.filter(
-									(evaluation) =>
-										evaluation.organisationGUID !==
-										newEvaluation.organisationGUID
+									(evaluation) => evaluation.GUID !== newEvaluation.GUID
 								);
 								// console.log(newEvaluation);
 								// Add the new report to the filtered array

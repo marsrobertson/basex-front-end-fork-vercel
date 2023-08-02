@@ -8,6 +8,7 @@ export interface Evaluation {
 	accountingPeriodEnd?: Date;
 	pvt?: number;
 	nvt?: number;
+	GUID?: string;
 	evaluationContent?: {
 		comments: string;
 		planetJustifications?: Array<{
