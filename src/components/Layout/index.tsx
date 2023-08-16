@@ -3,6 +3,7 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useContractRead } from "wagmi";
 import ABI from "../../contracts/ABI";
 import ADDRESS from "../../contracts/Address";
+import Footer from "./Footer";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
 	const getOrganisations = useContractRead({
@@ -26,7 +27,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<div className="drawer">
 			<input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-			<div className="drawer-content flex flex-col px-4">
+			<div className="drawer-content flex flex-col">
 				{/* Navbar */}
 				<div className="w-full navbar bg-base-100 shadow-md">
 					<div className="flex-none lg:hidden">
@@ -99,7 +100,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 						<ConnectButton />
 					</div>
 				</div>
-				{children}
+				<div className="px-2">{children}</div>
+				<Footer />
 			</div>
 			<div className="drawer-side">
 				<label htmlFor="my-drawer-3" className="drawer-overlay"></label>
@@ -118,7 +120,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 							</svg>
 							Organisations
 						</a>
-					</li>					
+					</li>
 					<li className="flex justify-center gap-1">
 						<a href="/reports">
 							<svg
