@@ -6,7 +6,7 @@ const Footer = () => {
 			<div>
 				<img src={logo} className="inline-block h-14 -mt-1"></img>
 				<p className="font-bold">Empowering Solutions with BaseX</p>
-				<p>Copyright © {new Date().getFullYear()} - All right reserved</p>
+				<p>Open Source {new Date().getFullYear()}</p>
 			</div>
 			<div>
 				<div className="grid grid-flow-col gap-4">
