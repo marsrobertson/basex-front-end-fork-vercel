@@ -9,8 +9,9 @@ import { Organisation } from "../../types/Organisation";
 import { parseEther } from "viem";
 import ABI from "../../contracts/ABI";
 import ADDRESS from "../../contracts/Address";
-import { useContractWrite } from "wagmi";
+import { useAccount, useContractWrite } from "wagmi";
 import { useTransactor } from "../../hooks/useTransactor";
+import ConnectModal from "../utils/ConnectModal";
 const EvaluationDialog = ({
 	report,
 	organisation,
@@ -19,6 +20,7 @@ const EvaluationDialog = ({
 	organisation: Organisation;
 }) => {
 	const writeTx = useTransactor();
+	const { address } = useAccount();
 	//@ts-ignore
 	const contractAddEval = useContractWrite({
 		address: ADDRESS,
@@ -446,7 +448,8 @@ const EvaluationDialog = ({
 			<button className="btn btn-primary" onClick={handleOpen}>
 				Evaluate
 			</button>
-			{open && (
+			{open && !address && <ConnectModal {...{ ref, handleClose }} />}
+			{open && address && (
 				<div className="fixed inset-0 flex items-center justify-center z-10">
 					<div className="modal modal-open">
 						<div className="modal-box" ref={ref}>

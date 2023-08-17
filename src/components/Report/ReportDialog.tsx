@@ -4,16 +4,18 @@ import { Report } from "../../types/Report";
 import { useOnClickOutside } from "usehooks-ts";
 import FileUpload from "../FileUpload";
 import KlerosIPFSService from "../../services/IPFSService";
-import { useContractRead, useContractWrite } from "wagmi";
+import { useAccount, useContractRead, useContractWrite } from "wagmi";
 import ADDRESS from "../../contracts/Address";
 import ABI from "../../contracts/ABI";
 import GUIDService from "../../services/GUIDService";
 import { parseEther } from "viem";
 import { useTransactor } from "../../hooks/useTransactor";
 import { Organisation } from "../../types/Organisation";
+import ConnectModal from "../utils/ConnectModal";
 const ReportDialog = () => {
 	const [open, setOpen] = useState(false);
 	const ref = useRef(null);
+	const { address } = useAccount();
 	const [loading, setLoading] = useState(false);
 	const writeTx = useTransactor();
 	//@ts-ignore
@@ -172,7 +174,8 @@ const ReportDialog = () => {
 			<button className="btn btn-outline btn-primary my-2" onClick={handleOpen}>
 				New Report
 			</button>
-			{open && (
+			{open && !address && <ConnectModal {...{ ref, handleClose }} />}
+			{open && address && (
 				<div className="fixed inset-0 flex items-center justify-center z-10">
 					<div className="modal modal-open">
 						<div className="modal-box" ref={ref}>
@@ -204,15 +207,19 @@ const ReportDialog = () => {
 										<option disabled value="">
 											Select organisation to report on
 										</option>
-										{//@ts-ignore
-										getOrganisations.data?.map((organisation: Organisation) => (
-											<option
-												key={organisation.orgGuid}
-												value={organisation.orgGuid}
-											>
-												{organisation.name}
-											</option>
-										))}
+										{
+											//@ts-ignore
+											getOrganisations.data?.map(
+												(organisation: Organisation) => (
+													<option
+														key={organisation.orgGuid}
+														value={organisation.orgGuid}
+													>
+														{organisation.name}
+													</option>
+												)
+											)
+										}
 									</select>
 								</div>
 								<div className="my-2">

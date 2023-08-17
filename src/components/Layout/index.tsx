@@ -100,7 +100,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 						<ConnectButton />
 					</div>
 				</div>
-				<div className="px-2">{children}</div>
+				<div className="px-2 flex-grow">{children}</div>
 				<Footer />
 			</div>
 			<div className="drawer-side">

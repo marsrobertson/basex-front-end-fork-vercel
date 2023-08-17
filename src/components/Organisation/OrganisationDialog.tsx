@@ -7,7 +7,7 @@ import {
 	RemoveOrgJSON,
 	AddOrgToKlerosJSON,
 } from "../../services/DataScructures";
-import { useContractWrite } from "wagmi";
+import { useAccount, useContractWrite } from "wagmi";
 import KlerosIPFSService from "../../services/IPFSService";
 import ABI from "../../contracts/ABI";
 import ADDRESS from "../../contracts/Address";
@@ -15,10 +15,12 @@ import { useTransactor } from "../../hooks/useTransactor";
 import GUIDService from "../../services/GUIDService";
 import { parseEther } from "viem";
 import getOrganisationByGUID from "../../contracts/utils/getOrganisationByGUID";
+import ConnectModal from "../utils/ConnectModal";
 
 const OrganisationDialog = () => {
 	const [open, setOpen] = useState(false);
 	const writeTx = useTransactor();
+	const { address } = useAccount();
 	const [loading, setLoading] = useState(false);
 	//@ts-ignore
 	const contractAddOrgToList = useContractWrite({
@@ -76,20 +78,23 @@ const OrganisationDialog = () => {
 				"___NAME___",
 				newOrganisation.name
 			);
-			createOrgJSONCopy.metadata.tcrTitle = createOrgJSONCopy.metadata.tcrTitle.replace(
-				"___NAME___",
-				newOrganisation.name
-			);
-			createOrgJSONCopy.metadata.tcrDescription = createOrgJSONCopy.metadata.tcrDescription.replace(
-				"___NAME___",
-				newOrganisation.name
-			);
+			createOrgJSONCopy.metadata.tcrTitle =
+				createOrgJSONCopy.metadata.tcrTitle.replace(
+					"___NAME___",
+					newOrganisation.name
+				);
+			createOrgJSONCopy.metadata.tcrDescription =
+				createOrgJSONCopy.metadata.tcrDescription.replace(
+					"___NAME___",
+					newOrganisation.name
+				);
 
 			// STEP 1A: upload createOrgJSONCopy to IPFS
-			const registstrationResponse = await KlerosIPFSService.publishToKlerosNode(
-				"item.json",
-				new TextEncoder().encode(createOrgJSONCopy)
-			);
+			const registstrationResponse =
+				await KlerosIPFSService.publishToKlerosNode(
+					"item.json",
+					new TextEncoder().encode(createOrgJSONCopy)
+				);
 
 			console.log(
 				//@ts-ignore
@@ -105,14 +110,16 @@ const OrganisationDialog = () => {
 				"___NAME___",
 				newOrganisation.name
 			);
-			removeOrgJSONCopy.metadata.tcrTitle = removeOrgJSONCopy.metadata.tcrTitle.replace(
-				"___NAME___",
-				newOrganisation.name
-			);
-			removeOrgJSONCopy.metadata.tcrDescription = removeOrgJSONCopy.metadata.tcrDescription.replace(
-				"___NAME___",
-				newOrganisation.name
-			);
+			removeOrgJSONCopy.metadata.tcrTitle =
+				removeOrgJSONCopy.metadata.tcrTitle.replace(
+					"___NAME___",
+					newOrganisation.name
+				);
+			removeOrgJSONCopy.metadata.tcrDescription =
+				removeOrgJSONCopy.metadata.tcrDescription.replace(
+					"___NAME___",
+					newOrganisation.name
+				);
 
 			// STEP 1B: upload removeOrgJSONCopy to IPFS
 			const removeResponse = await KlerosIPFSService.publishToKlerosNode(
@@ -196,7 +203,8 @@ const OrganisationDialog = () => {
 			<button className="btn btn-outline btn-primary my-2" onClick={handleOpen}>
 				New Organisation
 			</button>
-			{open && (
+			{open && !address && <ConnectModal {...{ ref, handleClose }} />}
+			{open && address && (
 				<div className="fixed inset-0 flex items-center justify-center z-20">
 					<div className="modal modal-open">
 						<div className="modal-box" ref={ref}>
