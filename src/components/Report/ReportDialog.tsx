@@ -12,8 +12,14 @@ import { parseEther } from "viem";
 import { useTransactor } from "../../hooks/useTransactor";
 import { Organisation } from "../../types/Organisation";
 import ConnectModal from "../utils/ConnectModal";
+interface FieldErrors {
+    organisationGUID?: string;
+    title?: string;
+    ipfs?: string;
+}
 const ReportDialog = () => {
-	const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(false);
+    const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
 	const ref = useRef(null);
 	const { address } = useAccount();
 	const [loading, setLoading] = useState(false);
@@ -85,7 +91,32 @@ const ReportDialog = () => {
 		}));
 	};
 
-	const handleSubmit = async () => {
+    const handleSubmit = async () => {
+        const errors: FieldErrors = {};
+
+    if (!newReport.organisationGUID) {
+        errors.organisationGUID = "Organisation is required";
+    }
+    if (!newReport.title) {
+        errors.title = "Title is required";
+    }
+    if (!newReport.ipfs) {
+        errors.ipfs = "File upload is required";
+    }
+
+    setFieldErrors(errors);
+
+    if (Object.keys(errors).length > 0) {
+        return; // Don't proceed with submission
+    }
+
+    try {
+        setLoading(true);
+        // ... (rest of your handleSubmit logic)
+    } catch (error) {
+        setLoading(false);
+        console.error("Error uploading report", error);
+    }
 		try {
 			setLoading(true);
 			const item = {
@@ -200,9 +231,10 @@ const ReportDialog = () => {
 									/> */}
 									<select
 										name="organisationGUID"
-										className="select select-bordered w-full"
-										value={newReport.organisationGUID}
-										onChange={handleChange}
+										className={`select select-bordered w-full ${fieldErrors.organisationGUID ? 'input-error' : ''}`}
+                                        value={newReport.organisationGUID}
+                                        onChange={handleChange}
+                                        required
 									>
 										<option disabled value="">
 											Select organisation to report on
@@ -220,7 +252,8 @@ const ReportDialog = () => {
 												)
 											)
 										}
-									</select>
+                                    </select>
+                                    {fieldErrors.organisationGUID && <p className="text-red-600 my-1">{fieldErrors.organisationGUID}</p>}
 								</div>
 								<div className="my-2">
 									<p className="font-bold my-1">Title</p>
@@ -229,10 +262,11 @@ const ReportDialog = () => {
 										name="title"
 										value={newReport.title}
 										onChange={handleChange}
-										className="input input-bordered w-full"
+										 className={`input input-bordered w-full ${fieldErrors.title ? 'input-error' : ''}`}
 										placeholder="Enter report title"
 										required
-									/>
+                                    />
+                                       {fieldErrors.title && <p className="text-red-600 my-1">{fieldErrors.title}</p>}
 								</div>
 								<div className="my-2">
 									<p className="font-bold my-1">Comments</p>
@@ -246,7 +280,8 @@ const ReportDialog = () => {
 								</div>
 								<div className="my-2">
 									<p className="font-bold my-1">Add File</p>
-									<FileUpload onUpload={handleFileChange} />
+                                    <FileUpload onUpload={handleFileChange} required />
+                                     {fieldErrors.ipfs && <p className="text-red-600">{fieldErrors.ipfs}</p>}
 								</div>
 								{/* Add other form fields here */}
 							</div>

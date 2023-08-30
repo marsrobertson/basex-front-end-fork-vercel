@@ -4,10 +4,11 @@ import { deepEqual } from "wagmi";
 import KlerosIPFSService, { IPFSResponse } from "../services/IPFSService";
 
 type FileUploadProps = {
-	onUpload: (ipfsHash: string) => void;
+    onUpload: (ipfsHash: string) => void;
+    required?: boolean;
 };
 
-const FileUpload = ({ onUpload }: FileUploadProps) => {
+const FileUpload = ({ onUpload,required }: FileUploadProps) => {
 	const [selectedFile, setSelectedFile] = useState<File | null>(null);
 	const [uploading, setUploading] = useState(false);
 	const [ipfsHash, setIpfsHash] = useState<string | null>(null);
@@ -87,7 +88,8 @@ const FileUpload = ({ onUpload }: FileUploadProps) => {
 				disabled={uploading}
 				type="file"
 				className="file-input file-input-bordered w-full max-w-xs"
-				onChange={handleFileChange}
+                onChange={handleFileChange}
+                required={required}
 			/>
 
 			{uploading && <div>Uploading...</div>}
