@@ -18,7 +18,7 @@ const HomePage = () => {
 				<br />
 				<br />
 
-				<strong>Check our latest video.</strong> It should be shorter. Our target audience already understands the problem space, obviously 😇
+				<strong>Check our latest video.</strong> It should be shorter. Our target audience already understands the problem space, no need to preach to the choir 😇
 			</p>
 
 			<div style={{ maxWidth: '600px' }}>
