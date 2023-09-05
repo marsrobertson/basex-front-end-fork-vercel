@@ -51,7 +51,7 @@ const ReportsPage = () => {
 					// grab the report IPFS data using the hash from contractReport.JSONIPFS and log it
 					// JSONIPFS param looks like /ipfs/XYZ
 					const ipfsHash = contractReport.JSONIPFS.replace("/ipfs/", "");
-					fetch(`https://ipfs.io/ipfs/${ipfsHash}`).then((r) => {
+					fetch(`https://ipfs.kleros.io/ipfs/${ipfsHash}`).then((r) => {
 						r.json().then((response) => {
 							const { values: reportData } = response;
 
