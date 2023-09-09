@@ -16,12 +16,15 @@ import GUIDService from "../../services/GUIDService";
 import { parseEther } from "viem";
 import getOrganisationByGUID from "../../contracts/utils/getOrganisationByGUID";
 import ConnectModal from "../utils/ConnectModal";
+import { useSetAtom } from "jotai";
+import { reloadOrganisations } from "../../atoms/reloadTriggers";
 
 const OrganisationDialog = () => {
 	const [open, setOpen] = useState(false);
 	const writeTx = useTransactor();
 	const { address } = useAccount();
-	const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const setReloadOrganisations = useSetAtom(reloadOrganisations);
 	//@ts-ignore
 	const contractAddOrgToList = useContractWrite({
 		address: ADDRESS,
@@ -190,7 +193,8 @@ const OrganisationDialog = () => {
 				})
 			);
 			handleClose();
-			setLoading(false);
+            setLoading(false);
+            setReloadOrganisations(true);
 		} catch (error) {
 			setLoading(false);
 			// Handle error during upload

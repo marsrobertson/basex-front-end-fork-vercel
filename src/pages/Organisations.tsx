@@ -5,13 +5,25 @@ import ABI from "../contracts/ABI";
 import ADDRESS from "../contracts/Address";
 import Spinner from "../utils/Spinner";
 import { Organisation } from "../types/Organisation";
+import { reloadOrganisations } from "../atoms/reloadTriggers";
+import { useAtom } from "jotai";
+import { useEffect } from "react";
 const OrganisationsPage = () => {
-	const { data, isError, isLoading } = useContractRead({
+    const [hasToReloadOrganisations, setReloadOrganisations]= useAtom(reloadOrganisations);
+	const { data, isError, isLoading,refetch } = useContractRead({
 		address: ADDRESS,
-		abi: ABI,
+        abi: ABI,
 		functionName: "getOrganisations",
 	});
-
+    useEffect(() => {
+        if (hasToReloadOrganisations) {
+            refetch();
+            setReloadOrganisations(false);
+        }
+    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [hasToReloadOrganisations])
+    
 	if (isLoading) {
 		return (
 			<div className="p-4 my-auto flex gap-2 justify-center text-center">
@@ -19,7 +31,7 @@ const OrganisationsPage = () => {
 				<p className="my-auto text-ßxl">Loading Organisations</p>
 			</div>
 		);
-	}
+    }
 	if (isError) {
 		return (
 			<div className="p-4">

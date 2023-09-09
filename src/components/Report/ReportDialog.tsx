@@ -12,12 +12,15 @@ import { parseEther } from "viem";
 import { useTransactor } from "../../hooks/useTransactor";
 import { Organisation } from "../../types/Organisation";
 import ConnectModal from "../utils/ConnectModal";
+import { useSetAtom } from "jotai";
+import { reloadReports } from "../../atoms/reloadTriggers";
 interface FieldErrors {
     organisationGUID?: string;
     title?: string;
     ipfs?: string;
 }
 const ReportDialog = () => {
+    const setReloadReports = useSetAtom(reloadReports);
     const [open, setOpen] = useState(false);
     const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
 	const ref = useRef(null);
@@ -191,7 +194,8 @@ const ReportDialog = () => {
 				}),
 				{ onBlockConfirmation: () => handleClose() }
 			);
-			setLoading(false);
+            setLoading(false);
+            setReloadReports(true);
 			handleClose();
 		} catch (error) {
 			setLoading(false);
@@ -262,7 +266,7 @@ const ReportDialog = () => {
 										name="title"
 										value={newReport.title}
 										onChange={handleChange}
-										 className={`input input-bordered w-full ${fieldErrors.title ? 'input-error' : ''}`}
+										className={`input input-bordered w-full ${fieldErrors.title ? 'input-error' : ''}`}
 										placeholder="Enter report title"
 										required
                                     />
