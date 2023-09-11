@@ -27,9 +27,21 @@ const ABI = [
 			 "type":"string"
 		  },
 		  {
+			 "indexed":false,
+			 "internalType":"string",
+			 "name":"orgName",
+			 "type":"string"
+		  },
+		  {
 			 "indexed":true,
 			 "internalType":"string",
 			 "name":"itemGuid",
+			 "type":"string"
+		  },
+		  {
+			 "indexed":false,
+			 "internalType":"string",
+			 "name":"itemJSONIPFS",
 			 "type":"string"
 		  }
 	   ],
@@ -84,6 +96,31 @@ const ABI = [
 		  }
 	   ],
 	   "name":"OrganisationDeployed",
+	   "type":"event"
+	},
+	{
+	   "anonymous":false,
+	   "inputs":[
+		  {
+			 "indexed":true,
+			 "internalType":"string",
+			 "name":"orgGuid",
+			 "type":"string"
+		  },
+		  {
+			 "indexed":false,
+			 "internalType":"string",
+			 "name":"name",
+			 "type":"string"
+		  },
+		  {
+			 "indexed":true,
+			 "internalType":"address",
+			 "name":"payoutWallet",
+			 "type":"address"
+		  }
+	   ],
+	   "name":"PayoutWalletAssigned",
 	   "type":"event"
 	},
 	{
