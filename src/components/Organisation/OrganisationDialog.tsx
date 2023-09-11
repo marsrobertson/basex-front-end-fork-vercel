@@ -93,7 +93,7 @@ const OrganisationDialog = () => {
 			const registstrationResponse =
 				await KlerosIPFSService.publishToKlerosNode(
 					"item.json",
-					new TextEncoder().encode(createOrgJSONCopy)
+					new TextEncoder().encode(JSON.stringify(createOrgJSONCopy))
 				);
 
 			console.log(
@@ -124,7 +124,7 @@ const OrganisationDialog = () => {
 			// STEP 1B: upload removeOrgJSONCopy to IPFS
 			const removeResponse = await KlerosIPFSService.publishToKlerosNode(
 				"item.json",
-				new TextEncoder().encode(removeOrgJSONCopy)
+				new TextEncoder().encode(JSON.stringify(removeOrgJSONCopy))
 			);
 			//@ts-ignore
 			console.log(`https://ipfs.kleros.io/ipfs/${removeResponse[0].hash}`);
@@ -133,9 +133,9 @@ const OrganisationDialog = () => {
 				orgGuid: GUIDService.createGUID(),
 				name: newOrganisation.name,
 				//@ts-ignore
-				registrationJSONIPFS: registstrationResponse[0].hash,
+				registrationJSONIPFS: `/ipfs/${registstrationResponse[0].hash}`,
 				//@ts-ignore
-				removingJSONIPFS: removeResponse[0].hash,
+				removingJSONIPFS: `/ipfs/${removeResponse[0].hash}`,
 			};
 
 			// STEP 2: send ETH transaction to deploy organisation
@@ -184,7 +184,7 @@ const OrganisationDialog = () => {
 					args: [
 						BigInt(deployedOrganisation.index),
 						//@ts-ignore
-						response[0].hash,
+						`/ipfs/${response[0].hash}`,
 					],
 					value: parseEther("0.08"),
 				})
@@ -215,6 +215,7 @@ const OrganisationDialog = () => {
 								✕
 							</button>
 							<h2 className="text-2xl font-bold">New Organisation</h2>
+							<p>Due to technical limitations in the <span className="font-mono">beta</span> there will be <b>TWO</b> transactions required.</p>
 							<div className="modal-body">
 								<div className="my-2">
 									<p className="font-bold my-1">Name</p>
