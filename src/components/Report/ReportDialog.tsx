@@ -171,7 +171,7 @@ const ReportDialog = () => {
 				targetGuid: newReport.organisationGUID,
 				orgIndex: organizationIndex,
 				//@ts-ignore
-				JSONIPFS: response[0].hash,
+				JSONIPFS: `/ipfs/${response[0].hash}`,
 				PVTval: 0,
 				NVTval: 0,
 			};
