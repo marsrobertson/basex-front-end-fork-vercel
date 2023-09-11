@@ -8,11 +8,14 @@ import ABI from "../contracts/ABI";
 import ADDRESS from "../contracts/Address";
 import Spinner from "../utils/Spinner";
 import isGuidInLocalStorage from "../utils/guidInLocalStorage";
+import { useAtom } from "jotai";
+import { reloadReports } from "../atoms/reloadTriggers";
 
 const ReportsPage = () => {
-	const [reports, setReports] = useState<Report[]>([]);
+    const [reports, setReports] = useState<Report[]>([]);
+    const [hasToReloadReports, setReloadReports]= useAtom(reloadReports);
 	const [loading, setLoading] = useState(false);
-	const { data, isError, isLoading } = useContractRead({
+	const { data, isError, isLoading, refetch } = useContractRead({
 		address: ADDRESS,
 		abi: ABI,
 		functionName: "getItems",
@@ -41,8 +44,13 @@ const ReportsPage = () => {
 		}, */
 	});
 
-	useEffect(() => {
-		(async () => {
+    useEffect(() => {
+        if (hasToReloadReports) {
+            if (hasToReloadReports) {
+                refetch();
+                setReloadReports(false);
+            }
+            (async () => {
 			setLoading(true);
 			if (data) {
 				// console.log(data);
@@ -81,9 +89,12 @@ const ReportsPage = () => {
 					});
 				});
 			}
-			setLoading(false);
-		})();
-	}, [data]);
+            setLoading(false);
+            })();
+        }
+        
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [data,hasToReloadReports]);
 
 	if (isLoading || loading) {
 		return (
