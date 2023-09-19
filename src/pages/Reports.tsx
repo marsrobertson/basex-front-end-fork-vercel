@@ -64,7 +64,7 @@ const ReportsPage = () => {
 			(async () => {
 				setLoading(true);
 				if (import.meta.env.VITE_BACKEND_ENDPOINT) {
-					loadBEReports();
+					await loadBEReports();
 				} else {
 					if (data) {
 						// console.log(data);

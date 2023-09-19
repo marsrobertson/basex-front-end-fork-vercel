@@ -51,7 +51,7 @@ const EvaluationsPage = () => {
 	useEffect(() => {
 		(async () => {
 			setLoading(true);
-			if (import.meta.env.VITE_BACKEND_ENDPOINT) loadBEEvaluations();
+			if (import.meta.env.VITE_BACKEND_ENDPOINT) await loadBEEvaluations();
 			else {
 				if (data) {
 					// console.log(data);
