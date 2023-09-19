@@ -6,6 +6,8 @@ import { useContractRead } from "wagmi";
 import ABI from "../../contracts/ABI";
 import ADDRESS from "../../contracts/Address";
 import { Organisation } from "../../types/Organisation";
+import { toDateTimeString } from '../../utils/dateUtils';
+
 const ReportCard = ({ report }: { report: Report }) => {
 	const {
 		organisationGUID,
@@ -44,7 +46,7 @@ const ReportCard = ({ report }: { report: Report }) => {
 				</p>
 				<p className="text-gray-600 mb-2">{comments}</p>
 				<p className="text-gray-600 mb-2">
-					Upload Date: {new Date(uploadDate).toDateString()}
+					Upload Date: {toDateTimeString(new Date(uploadDate)) }
 				</p>
 				{/* <p className="text-gray-600 mb-4">
 					Accounting Period:{" "}
@@ -59,8 +61,9 @@ const ReportCard = ({ report }: { report: Report }) => {
 						<a
 							href={`https://ipfs.kleros.io/ipfs/${ipfs}`}
 							className="text-sm link text-black/50"
+							target="_blank"
 						>
-							Other information
+							Full report
 						</a>
 					</div>
 				)}

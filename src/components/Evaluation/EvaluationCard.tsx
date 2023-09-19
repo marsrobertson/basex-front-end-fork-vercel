@@ -5,6 +5,8 @@ import ABI from "../../contracts/ABI";
 import ADDRESS from "../../contracts/Address";
 import { Evaluation } from "../../types/Evaluation";
 import { Organisation } from "../../types/Organisation";
+import { toDateTimeString } from '../../utils/dateUtils';
+
 
 const EvaluationCard = ({ evaluation }: { evaluation: Evaluation }) => {
 	const {
@@ -90,7 +92,7 @@ const EvaluationCard = ({ evaluation }: { evaluation: Evaluation }) => {
 				<section>
 					<h3 className="text-base font-bold mb-2">Upload Date</h3>
 					<p className="text-gray-600">
-						{new Date(uploadDate?.toString()).toDateString()}
+						{toDateTimeString (new Date(uploadDate?.toString()) )}
 					</p>
 				</section>
 				{/* <div className="card-actions justify-end">
