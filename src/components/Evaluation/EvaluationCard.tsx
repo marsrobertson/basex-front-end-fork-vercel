@@ -13,7 +13,6 @@ const EvaluationCard = ({ evaluation }: { evaluation: Evaluation }) => {
 		organisationGUID,
 		reportTitle,
 		evaluationContent,
-		author,
 		uploadDate,
 		pvt,
 		nvt,
@@ -92,7 +91,7 @@ const EvaluationCard = ({ evaluation }: { evaluation: Evaluation }) => {
 				<section>
 					<h3 className="text-base font-bold mb-2">Upload Date</h3>
 					<p className="text-gray-600">
-						{toDateTimeString (new Date(uploadDate?.toString()) )}
+						{toDateTimeString (new Date(uploadDate ? uploadDate.toString() : "") )}
 					</p>
 				</section>
 				{/* <div className="card-actions justify-end">

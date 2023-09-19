@@ -14,8 +14,8 @@ const ReportCard = ({ report }: { report: Report }) => {
 		title,
 		comments,
 		uploadDate,
-		accountingPeriodStart,
-		accountingPeriodEnd,
+		// accountingPeriodStart,
+		// accountingPeriodEnd,
 		ipfs,
 	} = report;
 	const getOrganisations = useContractRead({
