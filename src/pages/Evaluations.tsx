@@ -41,66 +41,78 @@ const EvaluationsPage = () => {
 			return await results;
 		}, */
 	});
+	const loadBEEvaluations = async () => {
+		const evalsData = await fetch(
+			`${import.meta.env.VITE_BACKEND_ENDPOINT}/evaluations`
+		);
+		const beEvaluations: Evaluation[] = await evalsData.json();
+		setEvaluations(beEvaluations);
+	};
 	useEffect(() => {
 		(async () => {
 			setLoading(true);
-			if (data) {
-				// console.log(data);
-				//@ts-ignore
-				await data.map((contractEvaluation: any) => {
-					// grab the report IPFS data using the hash from contractReport.JSONIPFS and log it
-					// JSONIPFS param looks like /ipfs/XYZ
-					const ipfsHash = contractEvaluation.JSONIPFS.replace("/ipfs/", "");
-					fetch(`https://ipfs.kleros.io/ipfs/${ipfsHash}`).then((r) => {
-						r.json().then((response) => {
-							const { values: evalData } = response;
-							console.log(evalData);
-							setEvaluations((prevEvaluations) => {
-								if (isGuidInLocalStorage(contractEvaluation.targetGuid)) {
-									return prevEvaluations;
-								}
-								const newEvaluation: Evaluation = {
-									organisationGUID: "",
-									GUID: `${evalData.GUID}`,
-									title: `${evalData.Title}`,
-									evaluationContent: {
-										comments: evalData.Comments,
-										planetJustifications: [],
-									},
-									pvt: Number(evalData["Positive Value"] ?? 0),
-									nvt: Number(evalData["Negative Value"] ?? 0),
-									uploadDate: new Date(evalData["Start Date"]),
-									accountingPeriodStart: new Date(evalData["Start Date"]),
-									accountingPeriodEnd: new Date(evalData["End Date"]),
-									targetGUID: contractEvaluation.targetGuid,
-								};
-
-								for (let i = 1; i <= 17; i++) {
-									const sdgValueKey = `SDG${i} Value`;
-									const sdgCommentKey = `SDG${i} Comment`;
-
-									if (evalData[sdgValueKey] || evalData[sdgCommentKey]) {
-										//@ts-ignore
-										newEvaluation.evaluationContent.planetJustifications.push({
-											comment: evalData[sdgCommentKey],
-											percentage: parseFloat(evalData[sdgValueKey]),
-											planetImage: `/img/sdg${i}.png`,
-										});
+			if (import.meta.env.VITE_BACKEND_ENDPOINT) loadBEEvaluations();
+			else {
+				if (data) {
+					// console.log(data);
+					//@ts-ignore
+					await data.map((contractEvaluation: any) => {
+						// grab the report IPFS data using the hash from contractReport.JSONIPFS and log it
+						// JSONIPFS param looks like /ipfs/XYZ
+						const ipfsHash = contractEvaluation.JSONIPFS.replace("/ipfs/", "");
+						fetch(`https://ipfs.kleros.io/ipfs/${ipfsHash}`).then((r) => {
+							r.json().then((response) => {
+								const { values: evalData } = response;
+								console.log(evalData);
+								setEvaluations((prevEvaluations) => {
+									if (isGuidInLocalStorage(contractEvaluation.targetGuid)) {
+										return prevEvaluations;
 									}
-								}
-								// Filter out duplicates based on reportGUID
-								const filteredEvaluations = prevEvaluations.filter(
-									(evaluation) => evaluation.GUID !== newEvaluation.GUID
-								);
-								// console.log(newEvaluation);
-								// Add the new report to the filtered array
-								if (!isGuidInLocalStorage(contractEvaluation.targetGuid))
-									return [...filteredEvaluations, newEvaluation];
-								return filteredEvaluations;
+									const newEvaluation: Evaluation = {
+										organisationGUID: "",
+										GUID: `${evalData.GUID}`,
+										title: `${evalData.Title}`,
+										evaluationContent: {
+											comments: evalData.Comments,
+											planetJustifications: [],
+										},
+										pvt: Number(evalData["Positive Value"] ?? 0),
+										nvt: Number(evalData["Negative Value"] ?? 0),
+										uploadDate: new Date(evalData["Start Date"]),
+										accountingPeriodStart: new Date(evalData["Start Date"]),
+										accountingPeriodEnd: new Date(evalData["End Date"]),
+										targetGUID: contractEvaluation.targetGuid,
+									};
+
+									for (let i = 1; i <= 17; i++) {
+										const sdgValueKey = `SDG${i} Value`;
+										const sdgCommentKey = `SDG${i} Comment`;
+
+										if (evalData[sdgValueKey] || evalData[sdgCommentKey]) {
+											//@ts-ignore
+											newEvaluation.evaluationContent.planetJustifications.push(
+												{
+													comment: evalData[sdgCommentKey],
+													percentage: parseFloat(evalData[sdgValueKey]),
+													planetImage: `/img/sdg${i}.png`,
+												}
+											);
+										}
+									}
+									// Filter out duplicates based on reportGUID
+									const filteredEvaluations = prevEvaluations.filter(
+										(evaluation) => evaluation.GUID !== newEvaluation.GUID
+									);
+									// console.log(newEvaluation);
+									// Add the new report to the filtered array
+									if (!isGuidInLocalStorage(contractEvaluation.targetGuid))
+										return [...filteredEvaluations, newEvaluation];
+									return filteredEvaluations;
+								});
 							});
 						});
 					});
-				});
+				}
 			}
 			setLoading(false);
 		})();
