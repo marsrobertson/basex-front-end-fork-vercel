@@ -3,7 +3,7 @@ export interface Evaluation {
 	targetGUID: string;
 	title?: string;
 	reportTitle?: string;
-	uploadDate?: Date;
+	uploadDate: Date;
 	accountingPeriodStart?: Date;
 	accountingPeriodEnd?: Date;
 	pvt?: number;

@@ -44,16 +44,16 @@ const ReportCard = ({ report }: { report: Report }) => {
 				</p>
 				<p className="text-gray-600 mb-2">{comments}</p>
 				<p className="text-gray-600 mb-2">
-					Upload Date: {(uploadDate ?? new Date()).toDateString()}
+					Upload Date: {new Date(uploadDate).toDateString()}
 				</p>
-				<p className="text-gray-600 mb-4">
+				{/* <p className="text-gray-600 mb-4">
 					Accounting Period:{" "}
 					{(accountingPeriodStart ?? new Date()).toDateString()} -{" "}
 					{(
 						accountingPeriodEnd ??
 						new Date(new Date().getTime() + 10 * 24 * 60 * 60 * 1000)
 					).toDateString()}
-				</p>
+				</p> */}
 				{ipfs && (
 					<div className="my-1">
 						<a

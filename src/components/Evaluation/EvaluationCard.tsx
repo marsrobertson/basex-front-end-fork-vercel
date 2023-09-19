@@ -83,14 +83,14 @@ const EvaluationCard = ({ evaluation }: { evaluation: Evaluation }) => {
 						)}
 					</section>
 				)}
-				<section>
+				{/* <section>
 					<h3 className="text-base font-bold mb-2">Author</h3>
 					<p className="text-gray-600">{author}</p>
-				</section>
+				</section> */}
 				<section>
-					<h3 className="text-base font-bold mb-2">Date</h3>
+					<h3 className="text-base font-bold mb-2">Upload Date</h3>
 					<p className="text-gray-600">
-						{(uploadDate ?? new Date()).toDateString()}
+						{new Date(uploadDate?.toString()).toDateString()}
 					</p>
 				</section>
 				{/* <div className="card-actions justify-end">
