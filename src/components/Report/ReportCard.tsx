@@ -44,7 +44,7 @@ const ReportCard = ({ report }: { report: Report }) => {
 				<p className="text-gray-400 mb-2">
 					{organisation?.name ? organisation?.name : "X Inc."}
 				</p>
-				<p className="text-gray-600 mb-2">{comments}</p>
+				<p className="text-gray-600 mb-2 max-h-[300px] overflow-y-auto">{comments}</p>
 				<p className="text-gray-600 mb-2">
 					Upload Date: {toDateTimeString(new Date(uploadDate)) }
 				</p>

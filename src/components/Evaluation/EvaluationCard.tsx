@@ -48,7 +48,7 @@ const EvaluationCard = ({ evaluation }: { evaluation: Evaluation }) => {
 				)}
 				<section>
 					<h3 className="text-base font-bold mb-2">Comments</h3>
-					<p className="text-gray-600">
+					<p className="text-gray-600 max-h-[300px] overflow-y-auto">
 						{evaluationContent?.comments ?? "None"}
 					</p>
 				</section>
@@ -62,7 +62,7 @@ const EvaluationCard = ({ evaluation }: { evaluation: Evaluation }) => {
 				)}
 				{evaluationContent?.planetJustifications && (
 					<section>
-						<h3 className="text-base font-bold mb-2">Planet Justifications</h3>
+						<h3 className="text-base font-bold mb-2">SDG Justifications</h3>
 						{evaluationContent?.planetJustifications?.map(
 							(justification, index) => (
 								<div key={index} className="flex items-center mb-4">
@@ -74,7 +74,7 @@ const EvaluationCard = ({ evaluation }: { evaluation: Evaluation }) => {
 										/>
 									</div>
 									<div>
-										<p className="text-gray-600">{justification.comment}</p>
+										<p className="text-gray-600 max-h-[300px] overflow-y-auto">{justification.comment}</p>
 										<p className="text-gray-600">
 											Percentage: {justification.percentage}%
 										</p>
