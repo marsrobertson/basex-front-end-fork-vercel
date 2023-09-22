@@ -1,4 +1,4 @@
-![LinkedIn quote](https://github.com/basexhq/front-end/blob/main/linkedin-quote.jpg)
+![LinkedIn quote](https://github.com/basexhq/front-end/blob/master/linkedin-quote.jpg)
 
 # BaseX front-end
 
