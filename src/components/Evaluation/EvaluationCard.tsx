@@ -70,7 +70,7 @@ const EvaluationCard = ({ evaluation }: { evaluation: Evaluation }) => {
 										<img
 											src={justification.planetImage}
 											alt="Planet Justification"
-											className="object-cover w-full h-full"
+											className="object-cover w-full h-full min-w-[40px]"
 										/>
 									</div>
 									<div>
