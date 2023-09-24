@@ -378,12 +378,12 @@ const EvaluationDialog = ({
 					},
 				],
 				values: {
-					Title: newEvaluation.reportTitle,
-					"Source URL": "",
-					File: "",
+					Title: `Evaluation for ${newEvaluation.reportTitle}`,
+					// "Source URL": "",
+					// File: "",
 					Comments: newEvaluation?.evaluationContent?.comments,
-					"Start Date": newEvaluation.date,
-					"End Date": new Date(new Date().getTime() + 10 * 24 * 60 * 60 * 1000),
+					// "Start Date": newEvaluation.date,
+					// "End Date": new Date(new Date().getTime() + 10 * 24 * 60 * 60 * 1000),
 					"Positive Value": newEvaluation.pvt ?? 0,
 					"Negative Value": newEvaluation.nvt ?? 0,
 					GUID: itemGUID,
@@ -414,6 +414,7 @@ const EvaluationDialog = ({
 			// THE CONTRACT CALL PARAMS
 			const params = {
 				itemGuid: itemGUID,
+				itemName: `Evaluation for ${newEvaluation.reportTitle}`,
 				targetGuid: report.reportGUID,
 				orgIndex: organisation.id,
 				//@ts-ignore
@@ -426,6 +427,7 @@ const EvaluationDialog = ({
 				contractAddEval.writeAsync({
 					args: [
 						params.itemGuid,
+						params.itemName,
 						params.targetGuid,
 						params.orgIndex,
 						params.JSONIPFS,

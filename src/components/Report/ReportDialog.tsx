@@ -171,6 +171,7 @@ const ReportDialog = () => {
 			// THE CONTRACT CALL PARAMS
 			const params = {
 				itemGuid: GUIDService.createGUID(),
+				itemName: newReport.title,
 				targetGuid: newReport.organisationGUID,
 				orgIndex: organizationIndex,
 				//@ts-ignore
@@ -184,6 +185,7 @@ const ReportDialog = () => {
 				contractAddReport.writeAsync({
 					args: [
 						params.itemGuid,
+						params.itemName,
 						params.targetGuid,
 						params.orgIndex,
 						params.JSONIPFS,
