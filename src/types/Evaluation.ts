@@ -2,6 +2,7 @@ export interface Evaluation {
 	organisationGUID: string;
 	targetGUID: string;
 	title?: string;
+	reportTitle?: string;
 	uploadDate?: Date;
 	accountingPeriodStart?: Date;
 	accountingPeriodEnd?: Date;

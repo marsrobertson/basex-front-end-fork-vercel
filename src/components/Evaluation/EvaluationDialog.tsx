@@ -378,12 +378,12 @@ const EvaluationDialog = ({
 					},
 				],
 				values: {
-					Title: `Evaluation for ${newEvaluation.reportTitle}`,
-					// "Source URL": "",
-					// File: "",
+					Title: `Evaluation for ${report.title}`,
+					"Source URL": "",
+					File: "",
 					Comments: newEvaluation?.evaluationContent?.comments,
-					// "Start Date": newEvaluation.date,
-					// "End Date": new Date(new Date().getTime() + 10 * 24 * 60 * 60 * 1000),
+					"Start Date": newEvaluation.date,
+					"End Date": new Date(new Date().getTime() + 10 * 24 * 60 * 60 * 1000),
 					"Positive Value": newEvaluation.pvt ?? 0,
 					"Negative Value": newEvaluation.nvt ?? 0,
 					GUID: itemGUID,
@@ -414,11 +414,11 @@ const EvaluationDialog = ({
 			// THE CONTRACT CALL PARAMS
 			const params = {
 				itemGuid: itemGUID,
-				itemName: `Evaluation for ${newEvaluation.reportTitle}`,
+				itemName: `Evaluation for ${report.title}`,
 				targetGuid: report.reportGUID,
 				orgIndex: organisation.id,
 				//@ts-ignore
-				JSONIPFS: response[0].hash,
+				JSONIPFS: `/ipfs/${response[0].hash}`,
 				PVTval: newEvaluation.pvt,
 				NVTval: newEvaluation.nvt,
 			};
