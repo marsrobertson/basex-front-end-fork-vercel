@@ -52,14 +52,12 @@ const EvaluationCard = ({ evaluation }: { evaluation: Evaluation }) => {
 						{evaluationContent?.comments ?? "None"}
 					</p>
 				</section>
-				{pvt && nvt && (
-					<section>
-						<h3 className="text-base font-bold mb-1">Positive Value</h3>
-						<p className="text-gray-600">{pvt}</p>
-						<h3 className="text-base font-bold mb-1">Negative Value</h3>
-						<p className="text-gray-600">{nvt}</p>
-					</section>
-				)}
+				<section>
+					<h3 className="text-base font-bold mb-1">Positive Value</h3>
+					<p className="text-gray-600">{pvt}</p>
+					<h3 className="text-base font-bold mb-1">Negative Value</h3>
+					<p className="text-gray-600">{nvt}</p>
+				</section>
 				{evaluationContent?.planetJustifications && (
 					<section>
 						<h3 className="text-base font-bold mb-2">SDG Justifications</h3>
