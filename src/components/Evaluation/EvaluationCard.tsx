@@ -11,7 +11,7 @@ import { toDateTimeString } from '../../utils/dateUtils';
 const EvaluationCard = ({ evaluation }: { evaluation: Evaluation }) => {
 	const {
 		organisationGUID,
-		reportTitle,
+		title,
 		evaluationContent,
 		uploadDate,
 		pvt,
@@ -37,7 +37,7 @@ const EvaluationCard = ({ evaluation }: { evaluation: Evaluation }) => {
 	return (
 		<div className="card bg-base-100 my-3 border-2 shadow-xl">
 			<div className="card-body">
-				<h2 className="card-title text-lg font-bold mb-3">{reportTitle}</h2>
+				<h2 className="card-title text-lg font-bold mb-3">{title}</h2>
 				{organisation?.name && (
 					<section>
 						<h3 className="text-base font-bold mb-2">Organisation</h3>
