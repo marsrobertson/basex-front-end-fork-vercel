@@ -50,66 +50,68 @@ const ReportsPage = () => {
 		const beReports: Report[] = await reportsData.json();
 		setReports(beReports);
 	};
+	const loadReports = () => {
+		if (import.meta.env.VITE_BACKEND_ENDPOINT) loadBEReports();
+		else {
+			refetch();
+		}
+		(async () => {
+			setLoading(true);
+			if (import.meta.env.VITE_BACKEND_ENDPOINT) {
+				await loadBEReports();
+			} else {
+				if (data) {
+					// console.log(data);
+					//@ts-ignore
+					await data.map((contractReport: any) => {
+						// grab the report IPFS data using the hash from contractReport.JSONIPFS and log it
+						// JSONIPFS param looks like /ipfs/XYZ
+						const ipfsHash = contractReport.JSONIPFS.replace("/ipfs/", "");
+						fetch(`https://ipfs.kleros.io/ipfs/${ipfsHash}`).then((r) => {
+							r.json().then((response) => {
+								const { values: reportData } = response;
 
-	useEffect(() => {
-		if (hasToReloadReports) {
-			if (hasToReloadReports) {
-				if (import.meta.env.VITE_BACKEND_ENDPOINT) loadBEReports();
-				else {
-					refetch();
-				}
+								setReports((prevReports) => {
+									const newReport = {
+										organisationGUID: contractReport.targetGuid,
+										title: `${reportData.Title}`,
+										comments: reportData.Comments,
+										uploadDate: new Date(reportData["Start Date"]),
+										accountingPeriodStart: new Date(reportData["Start Date"]),
+										accountingPeriodEnd: new Date(reportData["End Date"]),
+										source: reportData.Source,
+										ipfs: reportData.Report,
+										reportGUID: contractReport.itemGuid,
+									};
+									// Filter out duplicates based on reportGUID
+									const filteredReports = prevReports.filter(
+										(report) => report.reportGUID !== newReport.reportGUID
+									);
 
-				setReloadReports(false);
-			}
-			(async () => {
-				setLoading(true);
-				if (import.meta.env.VITE_BACKEND_ENDPOINT) {
-					await loadBEReports();
-				} else {
-					if (data) {
-						// console.log(data);
-						//@ts-ignore
-						await data.map((contractReport: any) => {
-							// grab the report IPFS data using the hash from contractReport.JSONIPFS and log it
-							// JSONIPFS param looks like /ipfs/XYZ
-							const ipfsHash = contractReport.JSONIPFS.replace("/ipfs/", "");
-							fetch(`https://ipfs.kleros.io/ipfs/${ipfsHash}`).then((r) => {
-								r.json().then((response) => {
-									const { values: reportData } = response;
-
-									setReports((prevReports) => {
-										const newReport = {
-											organisationGUID: contractReport.targetGuid,
-											title: `${reportData.Title}`,
-											comments: reportData.Comments,
-											uploadDate: new Date(reportData["Start Date"]),
-											accountingPeriodStart: new Date(reportData["Start Date"]),
-											accountingPeriodEnd: new Date(reportData["End Date"]),
-											source: reportData.Source,
-											ipfs: reportData.Report,
-											reportGUID: contractReport.itemGuid,
-										};
-										// Filter out duplicates based on reportGUID
-										const filteredReports = prevReports.filter(
-											(report) => report.reportGUID !== newReport.reportGUID
-										);
-
-										// Add the new report to the filtered array
-										if (isGuidInLocalStorage(contractReport.targetGuid))
-											return [...filteredReports, newReport];
-										return filteredReports;
-									});
+									// Add the new report to the filtered array
+									if (isGuidInLocalStorage(contractReport.targetGuid))
+										return [...filteredReports, newReport];
+									return filteredReports;
 								});
 							});
 						});
-					}
+					});
 				}
-				setLoading(false);
-			})();
-		}
-
+			}
+			setLoading(false);
+		})();
+	};
+	useEffect(() => {
+		loadReports();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [data, hasToReloadReports]);
+	}, [data]);
+	useEffect(() => {
+		if (hasToReloadReports) {
+			loadReports();
+			setReloadReports(false);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [hasToReloadReports]);
 
 	if (isLoading || loading) {
 		return (
