@@ -5,7 +5,7 @@ const Footer = () => {
 		<footer className="footer footer-center p-10 bg-neutral-focus text-primary-content">
 			<div>
 				<img src={logo} className="inline-block h-14 -mt-1"></img>
-				<p className="font-bold">BaseX - new definition of value</p>
+				<p className="font-bold">BaseX. Universal evaluation engine. Impact. Externalities. Cobenefits.</p>
 			</div>
 			<div>
 				<div className="grid grid-flow-col gap-4">
