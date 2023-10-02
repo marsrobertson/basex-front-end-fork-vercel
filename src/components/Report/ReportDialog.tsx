@@ -223,6 +223,9 @@ const ReportDialog = () => {
 								✕
 							</button>
 							<h2 className="text-2xl font-bold">New Report</h2>
+
+							<p className="mt-3 mb-6">You can upload an existing impact report or create a new one using <a className="link" target="_blank" href="https://docs.google.com/document/d/1X69Fh6_c0RDEQvXzmb--s2Cqzl24AuSnC7HXuDDAALY/edit?usp=sharing">our template</a>.</p>
+
 							<div className="modal-body">
 								<div className="my-2">
 									<p className="font-bold my-1">Organisation</p>
