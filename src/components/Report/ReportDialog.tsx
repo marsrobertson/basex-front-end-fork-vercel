@@ -14,10 +14,13 @@ import { Organisation } from "../../types/Organisation";
 import ConnectModal from "../utils/ConnectModal";
 import { useSetAtom } from "jotai";
 import { reloadReports } from "../../atoms/reloadTriggers";
+import Datepicker from "react-tailwindcss-datepicker";
+import dayjs from "dayjs";
 interface FieldErrors {
     organisationGUID?: string;
     title?: string;
     ipfs?: string;
+	source?: string;
 }
 const ReportDialog = () => {
     const setReloadReports = useSetAtom(reloadReports);
@@ -64,7 +67,9 @@ const ReportDialog = () => {
 			comments: "",
 			uploadDate: new Date(),
 			accountingPeriodStart: new Date(),
-			accountingPeriodEnd: new Date(),
+			accountingPeriodEnd: new Date(
+				new Date().getTime() + 10 * 24 * 60 * 60 * 1000
+			),
 			source: "",
 			ipfs: "",
 			reportGUID: "",
@@ -106,6 +111,9 @@ const ReportDialog = () => {
     if (!newReport.ipfs) {
         errors.ipfs = "File upload is required";
     }
+	if (!newReport.source) {
+		errors.source = "Source URL is required";
+	}
 
     setFieldErrors(errors);
 
@@ -148,8 +156,8 @@ const ReportDialog = () => {
 					Comments: newReport.comments,
 					Source: newReport.source,
 					Report: newReport.ipfs,
-					"Start Date": new Date(),
-					"End Date": new Date(new Date().getTime() + 10 * 24 * 60 * 60 * 1000),
+					"Start Date": newReport.accountingPeriodStart,
+					"End Date": newReport.accountingPeriodEnd,
 					// Set other values based on the form inputs
 				},
 			};
@@ -215,7 +223,7 @@ const ReportDialog = () => {
 			{open && address && (
 				<div className="fixed inset-0 flex items-center justify-center z-10">
 					<div className="modal modal-open">
-						<div className="modal-box" ref={ref}>
+						<div className="modal-box h-screen md:h-auto" ref={ref}>
 							<button
 								onClick={handleClose}
 								className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
@@ -278,6 +286,16 @@ const ReportDialog = () => {
                                        {fieldErrors.title && <p className="text-red-600 my-1">{fieldErrors.title}</p>}
 								</div>
 								<div className="my-2">
+								<p className="font-bold my-1">Accounting period</p>
+								<Datepicker 	
+								useRange={false}
+									primaryColor="blue"
+									value={{startDate:newReport.accountingPeriodStart,endDate:newReport.accountingPeriodEnd}} 
+									onChange={(newVal)=> {setNewReport({...newReport, accountingPeriodStart:dayjs(newVal?.startDate?.toString()).toDate(),accountingPeriodEnd:dayjs(newVal?.endDate?.toString()).toDate()})}} 
+								/> 
+								</div>
+								
+								<div className="mb-2 mt-12">
 									<p className="font-bold my-1">Comments</p>
 									<textarea
 										name="comments"
@@ -286,6 +304,19 @@ const ReportDialog = () => {
 										className="textarea textarea-bordered w-full"
 										placeholder="Enter comments"
 									></textarea>
+								</div>
+								<div className="my-2">
+									<p className="font-bold my-1">Source URL</p>
+									<input
+										type="text"
+										name="source"
+										value={newReport.source}
+										onChange={handleChange}
+										className={`input input-bordered w-full ${fieldErrors.source ? 'input-error' : ''}`}
+										placeholder="Enter report title"
+										required
+                                    />
+                                       {fieldErrors.title && <p className="text-red-600 my-1">{fieldErrors.source}</p>}
 								</div>
 								<div className="my-2">
 									<p className="font-bold my-1">Add File</p>
