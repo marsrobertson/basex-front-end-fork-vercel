@@ -505,7 +505,7 @@ const EvaluationDialog = ({
 									/>
 								</div>
 								<div className="my-2">
-									<p className="font-bold my-1">Planet Justifications</p>
+									<p className="font-bold my-1">EBF Justifications</p>
 									{newEvaluation?.evaluationContent?.planetJustifications?.map(
 										(justification, index) => (
 											<div key={index} className="my-2">
