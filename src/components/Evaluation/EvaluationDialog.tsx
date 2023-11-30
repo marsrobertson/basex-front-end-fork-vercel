@@ -38,10 +38,10 @@ const EvaluationDialog = ({
 		pvt: 0,
 		evaluationContent: {
 			comments: "",
-			planetJustifications: Array.from({ length: 17 }, (_, index) => ({
+			planetJustifications: Array.from({ length: 6 }, (_, index) => ({
 				comment: "",
 				percentage: 0,
-				planetImage: `/img/sdg${index + 1}.png`,
+				planetImage: `/img/ebfs/ebf-${index + 1}.svg`,
 			})),
 		},
 		author: "",
@@ -60,10 +60,10 @@ const EvaluationDialog = ({
 			pvt: 0,
 			evaluationContent: {
 				comments: "",
-				planetJustifications: Array.from({ length: 17 }, (_, index) => ({
+				planetJustifications: Array.from({ length: 6 }, (_, index) => ({
 					comment: "",
 					percentage: 0,
-					planetImage: `/img/sdg${index + 1}.png`,
+					planetImage: `/img/ebfs/ebf-${index + 1}.svg`,
 				})),
 			},
 			author: "",
@@ -505,12 +505,16 @@ const EvaluationDialog = ({
 									/>
 								</div>
 								<div className="my-2">
-									<p className="font-bold my-1">Planet Justifications</p>
+									<p className="font-bold my-1">EBF Justifications</p>
 									{newEvaluation?.evaluationContent?.planetJustifications?.map(
 										(justification, index) => (
 											<div key={index} className="my-2">
 												<div className="flex justify-between">
-													<img src={justification.planetImage} alt="" />
+													<img
+														className="w-16 h-16"
+														src={justification.planetImage}
+														alt=""
+													/>
 													<div className="m-1 mx-2 flex-1">
 														<textarea
 															name={`planetJustifications-${index}-comment`}

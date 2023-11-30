@@ -5,18 +5,11 @@ import ABI from "../../contracts/ABI";
 import ADDRESS from "../../contracts/Address";
 import { Evaluation } from "../../types/Evaluation";
 import { Organisation } from "../../types/Organisation";
-import { toDateTimeString } from '../../utils/dateUtils';
-
+import { toDateTimeString } from "../../utils/dateUtils";
 
 const EvaluationCard = ({ evaluation }: { evaluation: Evaluation }) => {
-	const {
-		organisationGUID,
-		title,
-		evaluationContent,
-		uploadDate,
-		pvt,
-		nvt,
-	} = evaluation;
+	const { organisationGUID, title, evaluationContent, uploadDate, pvt, nvt } =
+		evaluation;
 	const getOrganisations = useContractRead({
 		address: ADDRESS,
 		abi: ABI,
@@ -60,19 +53,21 @@ const EvaluationCard = ({ evaluation }: { evaluation: Evaluation }) => {
 				</section>
 				{evaluationContent?.planetJustifications && (
 					<section>
-						<h3 className="text-base font-bold mb-2">SDG Justifications</h3>
+						<h3 className="text-base font-bold mb-2">Justifications</h3>
 						{evaluationContent?.planetJustifications?.map(
 							(justification, index) => (
 								<div key={index} className="flex items-center mb-4">
 									<div className="w-10 h-10 mr-4">
 										<img
 											src={justification.planetImage}
-											alt="Planet Justification"
-											className="object-cover w-full h-full min-w-[40px]"
+											alt="Justification"
+											className="object-cover max-w-24 max-h-24 min-w-[40px] "
 										/>
 									</div>
 									<div>
-										<p className="text-gray-600 max-h-[300px] overflow-y-auto">{justification.comment}</p>
+										<p className="text-gray-600 max-h-[300px] overflow-y-auto">
+											{justification.comment}
+										</p>
 										<p className="text-gray-600">
 											Percentage: {justification.percentage}%
 										</p>
@@ -89,7 +84,9 @@ const EvaluationCard = ({ evaluation }: { evaluation: Evaluation }) => {
 				<section>
 					<h3 className="text-base font-bold mb-2">Upload Date</h3>
 					<p className="text-gray-600">
-						{toDateTimeString (new Date(uploadDate ? uploadDate.toString() : "") )}
+						{toDateTimeString(
+							new Date(uploadDate ? uploadDate.toString() : "")
+						)}
 					</p>
 				</section>
 				{/* <div className="card-actions justify-end">
