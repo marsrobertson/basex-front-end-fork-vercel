@@ -84,7 +84,7 @@ const EvaluationsPage = () => {
 										targetGUID: contractEvaluation.targetGuid,
 									};
 
-									for (let i = 1; i <= 17; i++) {
+									for (let i = 1; i <= 6; i++) {
 										const sdgValueKey = `SDG${i} Value`;
 										const sdgCommentKey = `SDG${i} Comment`;
 
@@ -94,7 +94,7 @@ const EvaluationsPage = () => {
 												{
 													comment: evalData[sdgCommentKey],
 													percentage: parseFloat(evalData[sdgValueKey]),
-													planetImage: `/img/sdg${i}.png`,
+													planetImage: `/img/ebfs/ebf-${i}.svg`,
 												}
 											);
 										}
