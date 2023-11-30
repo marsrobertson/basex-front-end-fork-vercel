@@ -46,7 +46,26 @@ const EvaluationsPage = () => {
 			`${import.meta.env.VITE_BACKEND_ENDPOINT}/evaluations`
 		);
 		const beEvaluations: Evaluation[] = await evalsData.json();
-		setEvaluations(beEvaluations);
+
+		// HACK FIX CHANGING IMAGE
+		for (let i = 0; i < beEvaluations.length; i++) {
+			let justifications = beEvaluations[i].evaluationContent?.planetJustifications;
+			if (justifications) {
+				for (let j = 0; j < justifications.length; j++) {
+					let justification = justifications[j];
+					if (justification.planetImage && justification.planetImage.includes("/img/sdg")) {
+						
+						justification.planetImage = justification.planetImage.replace("/img/sdg", "/img/ebfs/ebf-").replace(".png", ".svg");
+					}
+				}
+			}
+		}
+
+		// HACK FIX REMOVE THE GUIDS THAT DO NOT HAVE CORRECT IMAGES
+		let toBeRemoved = ["95fe865c-5096-4c6e-a1c3-ad289013d1ce", "838765c7-2ca1-487d-bfef-4ff385fc0f66", "42d56b09-03ae-49d1-bf75-9ef4d91adf2b", "a5b58c94-bfd5-4e44-a0dc-b3b622e06962", "a2237bcf-6003-44b7-aca0-0fb9380b0b6c"]
+		let filteredArray = beEvaluations.filter(item => !toBeRemoved.includes(item.GUID!));
+
+		setEvaluations(filteredArray);
 	};
 	useEffect(() => {
 		(async () => {
