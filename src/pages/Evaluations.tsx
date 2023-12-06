@@ -48,8 +48,9 @@ const EvaluationsPage = () => {
 		}, */
 	});
 	const loadBEEvaluations = async () => {
+		const SUFFIX = import.meta.env.VITE_STAGING ? '_staging' : ''; // Mars HACK to use staging data (temporary solutions that stay forever)
 		const evalsData = await fetch(
-			`${import.meta.env.VITE_BACKEND_ENDPOINT}/evaluations`
+			`${import.meta.env.VITE_BACKEND_ENDPOINT}/evaluations${SUFFIX}`
 		);
 		const beEvaluations: Evaluation[] = await evalsData.json();
 
