@@ -1,7 +1,13 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { publicClient } from "../../utils/client";
-import ABI from "../ABI";
-import ADDRESS from "../Address";
+import ABI_prod from "../../contracts/ABI_prod";
+import ADDRESS_prod from "../../contracts/Address_prod";
+import ABI_staging from "../../contracts/ABI_staging";
+import ADDRESS_staging from "../../contracts/Address_staging";
+
+const STAGING = import.meta.env.VITE_STAGING
+const ABI = STAGING ? ABI_staging : ABI_prod;
+const ADDRESS = STAGING ? ADDRESS_staging : ADDRESS_prod;
 
 const getOrganisationByGUID = async (guid:string): Promise<{
     index: number ;

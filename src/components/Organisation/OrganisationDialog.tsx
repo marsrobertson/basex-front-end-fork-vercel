@@ -9,8 +9,10 @@ import {
 } from "../../services/DataScructures";
 import { useAccount, useContractWrite } from "wagmi";
 import KlerosIPFSService from "../../services/IPFSService";
-import ABI from "../../contracts/ABI";
-import ADDRESS from "../../contracts/Address";
+import ABI_prod from "../../contracts/ABI_prod";
+import ADDRESS_prod from "../../contracts/Address_prod";
+import ABI_staging from "../../contracts/ABI_staging";
+import ADDRESS_staging from "../../contracts/Address_staging";
 import { useTransactor } from "../../hooks/useTransactor";
 import GUIDService from "../../services/GUIDService";
 import { parseEther } from "viem";
@@ -18,6 +20,10 @@ import getOrganisationByGUID from "../../contracts/utils/getOrganisationByGUID";
 import ConnectModal from "../utils/ConnectModal";
 import { useSetAtom } from "jotai";
 import { reloadOrganisations } from "../../atoms/reloadTriggers";
+
+const STAGING = import.meta.env.VITE_STAGING
+const ABI = STAGING ? ABI_staging : ABI_prod;
+const ADDRESS = STAGING ? ADDRESS_staging : ADDRESS_prod;
 
 const OrganisationDialog = () => {
 	const [open, setOpen] = useState(false);

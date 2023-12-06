@@ -1,10 +1,16 @@
 import React, { useEffect } from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useContractRead } from "wagmi";
-import ABI from "../../contracts/ABI";
-import ADDRESS from "../../contracts/Address";
+import ABI_prod from "../../contracts/ABI_prod";
+import ADDRESS_prod from "../../contracts/Address_prod";
+import ABI_staging from "../../contracts/ABI_staging";
+import ADDRESS_staging from "../../contracts/Address_staging";
 import Footer from "./Footer";
 import { Link } from 'react-router-dom';
+
+const STAGING = import.meta.env.VITE_STAGING
+const ABI = STAGING ? ABI_staging : ABI_prod;
+const ADDRESS = STAGING ? ADDRESS_staging : ADDRESS_prod;
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
 	const getOrganisations = useContractRead({

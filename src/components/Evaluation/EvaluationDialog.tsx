@@ -7,11 +7,18 @@ import KlerosIPFSService from "../../services/IPFSService";
 import GUIDService from "../../services/GUIDService";
 import { Organisation } from "../../types/Organisation";
 import { parseEther } from "viem";
-import ABI from "../../contracts/ABI";
-import ADDRESS from "../../contracts/Address";
+import ABI_prod from "../../contracts/ABI_prod";
+import ADDRESS_prod from "../../contracts/Address_prod";
+import ABI_staging from "../../contracts/ABI_staging";
+import ADDRESS_staging from "../../contracts/Address_staging";
 import { useAccount, useContractWrite } from "wagmi";
 import { useTransactor } from "../../hooks/useTransactor";
 import ConnectModal from "../utils/ConnectModal";
+
+const STAGING = import.meta.env.VITE_STAGING
+const ABI = STAGING ? ABI_staging : ABI_prod;
+const ADDRESS = STAGING ? ADDRESS_staging : ADDRESS_prod;
+
 const EvaluationDialog = ({
 	report,
 	organisation,

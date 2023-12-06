@@ -3,11 +3,17 @@ import { useEffect, useState } from "react";
 import { Evaluation } from "../types/Evaluation";
 import EvaluationCard from "../components/Evaluation/EvaluationCard";
 import { useContractRead } from "wagmi";
-import ABI from "../contracts/ABI";
-import ADDRESS from "../contracts/Address";
+import ABI_prod from "../contracts/ABI_prod";
+import ADDRESS_prod from "../contracts/Address_prod";
+import ABI_staging from "../contracts/ABI_staging";
+import ADDRESS_staging from "../contracts/Address_staging";
 import Spinner from "../utils/Spinner";
 import isGuidInLocalStorage from "../utils/guidInLocalStorage";
 /* import { mockEvaluations } from "../mock/Evalutions"; */
+
+const STAGING = import.meta.env.VITE_STAGING
+const ABI = STAGING ? ABI_staging : ABI_prod;
+const ADDRESS = STAGING ? ADDRESS_staging : ADDRESS_prod;
 
 const EvaluationsPage = () => {
 	//@ts-ignore

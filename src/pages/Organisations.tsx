@@ -1,13 +1,21 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useContractRead } from "wagmi";
 import OrganisationDialog from "../components/Organisation/OrganisationDialog";
-import ABI from "../contracts/ABI";
-import ADDRESS from "../contracts/Address";
+import ABI_prod from "../contracts/ABI_prod";
+import ADDRESS_prod from "../contracts/Address_prod";
+import ABI_staging from "../contracts/ABI_staging";
+import ADDRESS_staging from "../contracts/Address_staging";
+
 import Spinner from "../utils/Spinner";
 import { Organisation } from "../types/Organisation";
 import { reloadOrganisations } from "../atoms/reloadTriggers";
 import { useAtom } from "jotai";
 import { useEffect } from "react";
+
+const STAGING = import.meta.env.VITE_STAGING
+const ABI = STAGING ? ABI_staging : ABI_prod;
+const ADDRESS = STAGING ? ADDRESS_staging : ADDRESS_prod;
+
 const OrganisationsPage = () => {
     const [hasToReloadOrganisations, setReloadOrganisations]= useAtom(reloadOrganisations);
 	const { data, isError, isLoading,refetch } = useContractRead({

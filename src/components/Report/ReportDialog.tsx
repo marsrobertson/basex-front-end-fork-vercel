@@ -5,8 +5,10 @@ import { useOnClickOutside } from "usehooks-ts";
 import FileUpload from "../FileUpload";
 import KlerosIPFSService from "../../services/IPFSService";
 import { useAccount, useContractRead, useContractWrite } from "wagmi";
-import ADDRESS from "../../contracts/Address";
-import ABI from "../../contracts/ABI";
+import ABI_prod from "../../contracts/ABI_prod";
+import ADDRESS_prod from "../../contracts/Address_prod";
+import ABI_staging from "../../contracts/ABI_staging";
+import ADDRESS_staging from "../../contracts/Address_staging";
 import GUIDService from "../../services/GUIDService";
 import { parseEther } from "viem";
 import { useTransactor } from "../../hooks/useTransactor";
@@ -16,6 +18,11 @@ import { useSetAtom } from "jotai";
 import { reloadReports } from "../../atoms/reloadTriggers";
 import Datepicker from "react-tailwindcss-datepicker";
 import dayjs from "dayjs";
+
+const STAGING = import.meta.env.VITE_STAGING
+const ABI = STAGING ? ABI_staging : ABI_prod;
+const ADDRESS = STAGING ? ADDRESS_staging : ADDRESS_prod;
+
 interface FieldErrors {
     organisationGUID?: string;
     title?: string;
