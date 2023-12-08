@@ -15,11 +15,6 @@ const STAGING = import.meta.env.VITE_STAGING
 const ABI = STAGING ? ABI_staging : ABI_prod;
 const ADDRESS = STAGING ? ADDRESS_staging : ADDRESS_prod;
 
-console.log("EVALUATION PAGE");
-console.log("STAGING: " + STAGING);
-console.log("ABI: ", ABI);
-console.log("ADDRESS: " + ADDRESS);
-
 const EvaluationsPage = () => {
 	//@ts-ignore
 	const [evaluations, setEvaluations] = useState<Evaluation[]>([]);
@@ -53,7 +48,6 @@ const EvaluationsPage = () => {
 		}, */
 	});
 	const loadBEEvaluations = async () => {
-		console.log("loadBEEvaluations ---> STAGING: " + STAGING);
 		const SUFFIX = import.meta.env.VITE_STAGING ? '_staging' : ''; // Mars HACK to use staging data (temporary solutions that stay forever)
 		const evalsData = await fetch(
 			`${import.meta.env.VITE_BACKEND_ENDPOINT}/evaluations${SUFFIX}`

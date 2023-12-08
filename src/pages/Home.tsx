@@ -1,4 +1,5 @@
 import logo from "../assets/basex-logo.png";
+import blockchainTree from "../assets/basex-blockchain-tree.jpg";
 import './styles.css'; // HACK: I do not know how to TailWind this, AI is quitting on me
 
 
@@ -13,18 +14,28 @@ const HomePage = () => {
 			
 			<h3 className="text-xl font-bold">Universal evaluation engine.</h3>
 			<h3 className="text-xl font-bold">Impact. Externalities. Cobenefits.</h3>
-			
-			<br />
+
+			{/* Imagine blockchain consciousness, genesis blog, sprouting intro tree that is protecting entire earth...
+
+			It sounds like you're envisioning a highly imaginative and abstract concept, combining elements of technology, consciousness, and nature. Let's translate this into a visual description for an image:
+
+	We'll imagine a colossal, vibrant tree, its roots and branches encompassing the entire Earth. This is no ordinary tree; it's a representation of a "genesis blog" in a blockchain network. The tree's trunk and branches are composed of glowing, digital lines, symbolizing the interconnected nature of blockchain technology. From the base of the tree, luminous roots spread out, wrapping around the globe, symbolizing protection and connectivity. This tree is also a manifestation of consciousness, with a radiant aura emanating from it, suggesting intelligence and awareness. The scene is set against a backdrop of the cosmos, highlighting the tree's monumental scale and the futuristic concept it represents. */}
+
+				<img src={blockchainTree}></img>
+
+				Beta deployment <i>(still on testnet</i>: <a className="marslink" href="https://beta.basex.com">beta.basex.com</a> <i>(more serious)</i><br />
+				Staging deployment <i>(loads of dummy data)</i>: <a className="marslink" href="https://beta.basex.com">staging.basex.com</a> <i>(testing)</i>
+
 
 				<br />
 				<br />
 
-				You can browse the BaseX platform and in the "read only" mode.<br />
-
+				You can browse the BaseX platform and in the "read only" mode. In order to interact with organisations, reports, evaluations - you need to have a wallet with some testnet ETH in it - message us if you need any assistance: <a className="marslink" href="mailto:info@basex.com">info@basex.com</a> or <a className="marslink" href="https://twitter.com/basexhq">@basexHQ</a> on Twitter.
+				
 				<br />
 				<br />
 				
-				In order to interact with organisations, reports, evaluations - you need to have a wallet with some testnet ETH in it - message us if you need any assistance: <a className="marslink" href="mailto:info@basex.com">info@basex.com</a> or <a className="marslink" href="https://twitter.com/basexhq">@basexHQ</a> on Twitter.
+				Check our <a className="marslink" href="https://mirror.xyz/0x81e64EFA58bf79F1649F267E16451Fbf836071f6">Mirror blog</a> as well 🌱
 
 				<br />
 				<br />
