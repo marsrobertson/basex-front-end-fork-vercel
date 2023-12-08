@@ -56,9 +56,13 @@ const ReportsPage = () => {
 	});
 	const loadBEReports = async () => {
 		const SUFFIX = import.meta.env.VITE_STAGING ? '_staging' : ''; // Mars HACK to use staging data (temporary solutions that stay forever)
-		const reportsData = await fetch(
-			`${import.meta.env.VITE_BACKEND_ENDPOINT}/reports${SUFFIX}`
-		);
+		const URL = `${import.meta.env.VITE_BACKEND_ENDPOINT}/reports${SUFFIX}`;
+
+		console.log("x: " + import.meta.env.VITE_STAGING);
+		console.log("x: " + SUFFIX);
+		console.log("x: " + URL);
+
+		const reportsData = await fetch(URL);
 		const beReports: Report[] = await reportsData.json();
 		setReports(beReports);
 	};
