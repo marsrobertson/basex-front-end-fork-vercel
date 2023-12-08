@@ -23,7 +23,7 @@ const HomePage = () => {
 
 				<img src={blockchainTree}></img>
 
-				Beta deployment <i>(still on testnet</i>: <a className="marslink" href="https://beta.basex.com">beta.basex.com</a> <i>(more serious)</i><br />
+				Beta deployment <i>(still on testnet)</i>: <a className="marslink" href="https://beta.basex.com">beta.basex.com</a> <i>(more serious)</i><br />
 				Staging deployment <i>(loads of dummy data)</i>: <a className="marslink" href="https://beta.basex.com">staging.basex.com</a> <i>(testing)</i>
 
 
