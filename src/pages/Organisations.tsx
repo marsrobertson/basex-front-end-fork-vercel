@@ -16,7 +16,7 @@ const STAGING = import.meta.env.VITE_STAGING
 const ABI = STAGING ? ABI_staging : ABI_prod;
 const ADDRESS = STAGING ? ADDRESS_staging : ADDRESS_prod;
 
-console.log("ORGANISAION PAGE");
+console.log("ORGANISATION PAGE");
 console.log("STAGING: " + STAGING);
 console.log("ABI: ", ABI);
 console.log("ADDRESS: " + ADDRESS);

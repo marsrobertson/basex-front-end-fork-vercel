@@ -17,6 +17,11 @@ const STAGING = import.meta.env.VITE_STAGING
 const ABI = STAGING ? ABI_staging : ABI_prod;
 const ADDRESS = STAGING ? ADDRESS_staging : ADDRESS_prod;
 
+console.log("REPORTS PAGE");
+console.log("STAGING: " + STAGING);
+console.log("ABI: ", ABI);
+console.log("ADDRESS: " + ADDRESS);
+
 const ReportsPage = () => {
 	const [reports, setReports] = useState<Report[]>([]);
 	const [hasToReloadReports, setReloadReports] = useAtom(reloadReports);
@@ -50,7 +55,6 @@ const ReportsPage = () => {
 		}, */
 	});
 	const loadBEReports = async () => {
-		// console.log("loadBEReports ---> STAGING: " + STAGING);
 		const SUFFIX = import.meta.env.VITE_STAGING ? '_staging' : ''; // Mars HACK to use staging data (temporary solutions that stay forever)
 		const reportsData = await fetch(
 			`${import.meta.env.VITE_BACKEND_ENDPOINT}/reports${SUFFIX}`
