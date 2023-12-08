@@ -16,6 +16,11 @@ const STAGING = import.meta.env.VITE_STAGING
 const ABI = STAGING ? ABI_staging : ABI_prod;
 const ADDRESS = STAGING ? ADDRESS_staging : ADDRESS_prod;
 
+console.log("ORGANISAION PAGE");
+console.log("import.meta.env.VITE_STAGING: " + import.meta.env.VITE_STAGING);
+console.log("ABI: ", ABI);
+console.log("ADDRESS: " + ADDRESS);
+
 const OrganisationsPage = () => {
     const [hasToReloadOrganisations, setReloadOrganisations]= useAtom(reloadOrganisations);
 	const { data, isError, isLoading,refetch } = useContractRead({
