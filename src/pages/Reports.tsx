@@ -50,7 +50,7 @@ const ReportsPage = () => {
 		}, */
 	});
 	const loadBEReports = async () => {
-		console.log("import.meta.env.VITE_STAGING: " + import.meta.env.VITE_STAGING);
+		// console.log("loadBEReports ---> STAGING: " + STAGING);
 		const SUFFIX = import.meta.env.VITE_STAGING ? '_staging' : ''; // Mars HACK to use staging data (temporary solutions that stay forever)
 		const reportsData = await fetch(
 			`${import.meta.env.VITE_BACKEND_ENDPOINT}/reports${SUFFIX}`
