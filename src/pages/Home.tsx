@@ -1,6 +1,7 @@
 import logo from "../assets/basex-logo.png";
 import blockchainTree from "../assets/basex-blockchain-tree.jpg";
 import './styles.css'; // HACK: I do not know how to TailWind this, AI is quitting on me
+import { Link } from 'react-router-dom';
 
 
 const HomePage = () => {
@@ -24,13 +25,29 @@ const HomePage = () => {
 				<img src={blockchainTree}></img>
 
 				Beta deployment <i>(still on testnet)</i>: <a className="marslink" href="https://beta.basex.com">beta.basex.com</a> <i>(more serious)</i><br />
-				Staging deployment <i>(loads of dummy data)</i>: <a className="marslink" href="https://beta.basex.com">staging.basex.com</a> <i>(testing)</i>
+				Staging deployment <i>(loads of dummy data)</i>: <a className="marslink" href="https://staging.basex.com">staging.basex.com</a> <i>(testing)</i>
 
 
 				<br />
 				<br />
+				<Link to="/organisations" className="btn btn-outline text-black font-bold py-2 px-4 rounded">
+					<span className="text-xl">1️⃣</span> &nbsp; Create an organisation
+				</Link>
+				<br />
+				<br />
+				<Link to="/reports" className="btn btn-outline text-black font-bold py-2 px-4 rounded">
+					<span className="text-xl">2️⃣</span> &nbsp; Publish an impact report
+				</Link>
+				<br />
+				<br />
+				<Link to="/evaluations" className="btn btn-outline text-black font-bold py-2 px-4 rounded">
+					<span className="text-xl">3️⃣</span> &nbsp; Submit an evaluation
+				</Link>
 
-				You can browse the BaseX platform and in the "read only" mode. In order to interact with organisations, reports, evaluations - you need to have a wallet with some testnet ETH in it - message us if you need any assistance: <a className="marslink" href="mailto:info@basex.com">info@basex.com</a> or <a className="marslink" href="https://twitter.com/basexhq">@basexHQ</a> on Twitter.
+				<br />
+				<br />
+
+				You can also browse the BaseX platform and in the "read only" mode. In order to interact with <Link to="/organisations" className="marslink">organisations</Link>, <Link to="/reports" className="marslink">reports</Link>, <Link to="/evaluations" className="marslink">evaluations</Link> - you need to have a wallet with some testnet ETH in it - message us if you need any assistance: <a className="marslink" href="mailto:info@basex.com">info@basex.com</a> or <a className="marslink" href="https://twitter.com/basexhq">@basexHQ</a> on Twitter.
 				
 				<br />
 				<br />
