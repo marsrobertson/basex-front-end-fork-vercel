@@ -15,7 +15,7 @@ import { useAccount, useContractWrite } from "wagmi";
 import { useTransactor } from "../../hooks/useTransactor";
 import ConnectModal from "../utils/ConnectModal";
 
-const STAGING = import.meta.env.VITE_STAGING
+const STAGING = import.meta.env.VITE_STAGING;
 const ABI = STAGING ? ABI_staging : ABI_prod;
 const ADDRESS = STAGING ? ADDRESS_staging : ADDRESS_prod;
 
@@ -281,6 +281,7 @@ const EvaluationDialog = ({
 					Comments: newEvaluation?.evaluationContent?.comments,
 					"Start Date": newEvaluation.date,
 					"End Date": new Date(new Date().getTime() + 10 * 24 * 60 * 60 * 1000),
+					"Upload Date": new Date(),
 					"Positive Value": newEvaluation.pvt ?? 0,
 					"Negative Value": newEvaluation.nvt ?? 0,
 					GUID: itemGUID,

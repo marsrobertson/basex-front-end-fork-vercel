@@ -11,7 +11,7 @@ import Spinner from "../utils/Spinner";
 import isGuidInLocalStorage from "../utils/guidInLocalStorage";
 /* import { mockEvaluations } from "../mock/Evalutions"; */
 
-const STAGING = import.meta.env.VITE_STAGING
+const STAGING = import.meta.env.VITE_STAGING;
 const ABI = STAGING ? ABI_staging : ABI_prod;
 const ADDRESS = STAGING ? ADDRESS_staging : ADDRESS_prod;
 
@@ -48,7 +48,7 @@ const EvaluationsPage = () => {
 		}, */
 	});
 	const loadBEEvaluations = async () => {
-		const SUFFIX = import.meta.env.VITE_STAGING ? '_staging' : ''; // Mars HACK to use staging data (temporary solutions that stay forever)
+		const SUFFIX = import.meta.env.VITE_STAGING ? "_staging" : ""; // Mars HACK to use staging data (temporary solutions that stay forever)
 		const evalsData = await fetch(
 			`${import.meta.env.VITE_BACKEND_ENDPOINT}/evaluations${SUFFIX}`
 		);
@@ -56,21 +56,34 @@ const EvaluationsPage = () => {
 
 		// HACK FIX CHANGING IMAGE
 		for (let i = 0; i < beEvaluations.length; i++) {
-			let justifications = beEvaluations[i].evaluationContent?.planetJustifications;
+			const justifications =
+				beEvaluations[i].evaluationContent?.planetJustifications;
 			if (justifications) {
 				for (let j = 0; j < justifications.length; j++) {
-					let justification = justifications[j];
-					if (justification.planetImage && justification.planetImage.includes("/img/sdg")) {
-						
-						justification.planetImage = justification.planetImage.replace("/img/sdg", "/img/ebfs/ebf-").replace(".png", ".svg");
+					const justification = justifications[j];
+					if (
+						justification.planetImage &&
+						justification.planetImage.includes("/img/sdg")
+					) {
+						justification.planetImage = justification.planetImage
+							.replace("/img/sdg", "/img/ebfs/ebf-")
+							.replace(".png", ".svg");
 					}
 				}
 			}
 		}
 
 		// HACK FIX REMOVE THE GUIDS THAT DO NOT HAVE CORRECT IMAGES
-		let toBeRemoved = ["95fe865c-5096-4c6e-a1c3-ad289013d1ce", "838765c7-2ca1-487d-bfef-4ff385fc0f66", "42d56b09-03ae-49d1-bf75-9ef4d91adf2b", "a5b58c94-bfd5-4e44-a0dc-b3b622e06962", "a2237bcf-6003-44b7-aca0-0fb9380b0b6c"]
-		let filteredArray = beEvaluations.filter(item => !toBeRemoved.includes(item.GUID!));
+		const toBeRemoved = [
+			"95fe865c-5096-4c6e-a1c3-ad289013d1ce",
+			"838765c7-2ca1-487d-bfef-4ff385fc0f66",
+			"42d56b09-03ae-49d1-bf75-9ef4d91adf2b",
+			"a5b58c94-bfd5-4e44-a0dc-b3b622e06962",
+			"a2237bcf-6003-44b7-aca0-0fb9380b0b6c",
+		];
+		const filteredArray = beEvaluations.filter(
+			(item) => !toBeRemoved.includes(item.GUID!)
+		);
 
 		setEvaluations(filteredArray);
 	};
@@ -104,7 +117,9 @@ const EvaluationsPage = () => {
 										},
 										pvt: Number(evalData["Positive Value"] ?? 0),
 										nvt: Number(evalData["Negative Value"] ?? 0),
-										uploadDate: new Date(evalData["Start Date"]),
+										uploadDate: new Date(
+											evalData["Upload Date"] ?? evalData["Start Date"]
+										),
 										accountingPeriodStart: new Date(evalData["Start Date"]),
 										accountingPeriodEnd: new Date(evalData["End Date"]),
 										targetGUID: contractEvaluation.targetGuid,

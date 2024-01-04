@@ -13,7 +13,7 @@ import isGuidInLocalStorage from "../utils/guidInLocalStorage";
 import { useAtom } from "jotai";
 import { reloadReports } from "../atoms/reloadTriggers";
 
-const STAGING = import.meta.env.VITE_STAGING
+const STAGING = import.meta.env.VITE_STAGING;
 const ABI = STAGING ? ABI_staging : ABI_prod;
 const ADDRESS = STAGING ? ADDRESS_staging : ADDRESS_prod;
 
@@ -55,7 +55,7 @@ const ReportsPage = () => {
 		}, */
 	});
 	const loadBEReports = async () => {
-		const SUFFIX = import.meta.env.VITE_STAGING ? '_staging' : ''; // Mars HACK to use staging data (temporary solutions that stay forever)
+		const SUFFIX = import.meta.env.VITE_STAGING ? "_staging" : ""; // Mars HACK to use staging data (temporary solutions that stay forever)
 		const URL = `${import.meta.env.VITE_BACKEND_ENDPOINT}/reports${SUFFIX}`;
 		const reportsData = await fetch(URL);
 		const beReports: Report[] = await reportsData.json();
@@ -87,7 +87,9 @@ const ReportsPage = () => {
 										organisationGUID: contractReport.targetGuid,
 										title: `${reportData.Title}`,
 										comments: reportData.Comments,
-										uploadDate: new Date(reportData["Start Date"]),
+										uploadDate: new Date(
+											reportData["Upload Date"] ?? reportData["Start Date"]
+										),
 										accountingPeriodStart: new Date(reportData["Start Date"]),
 										accountingPeriodEnd: new Date(reportData["End Date"]),
 										source: reportData.Source,

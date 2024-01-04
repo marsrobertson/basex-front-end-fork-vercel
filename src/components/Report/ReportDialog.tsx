@@ -19,20 +19,20 @@ import { reloadReports } from "../../atoms/reloadTriggers";
 import Datepicker from "react-tailwindcss-datepicker";
 import dayjs from "dayjs";
 
-const STAGING = import.meta.env.VITE_STAGING
+const STAGING = import.meta.env.VITE_STAGING;
 const ABI = STAGING ? ABI_staging : ABI_prod;
 const ADDRESS = STAGING ? ADDRESS_staging : ADDRESS_prod;
 
 interface FieldErrors {
-    organisationGUID?: string;
-    title?: string;
-    ipfs?: string;
+	organisationGUID?: string;
+	title?: string;
+	ipfs?: string;
 	source?: string;
 }
 const ReportDialog = () => {
-    const setReloadReports = useSetAtom(reloadReports);
-    const [open, setOpen] = useState(false);
-    const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
+	const setReloadReports = useSetAtom(reloadReports);
+	const [open, setOpen] = useState(false);
+	const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
 	const ref = useRef(null);
 	const { address } = useAccount();
 	const [loading, setLoading] = useState(false);
@@ -106,35 +106,35 @@ const ReportDialog = () => {
 		}));
 	};
 
-    const handleSubmit = async () => {
-        const errors: FieldErrors = {};
+	const handleSubmit = async () => {
+		const errors: FieldErrors = {};
 
-    if (!newReport.organisationGUID) {
-        errors.organisationGUID = "Organisation is required";
-    }
-    if (!newReport.title) {
-        errors.title = "Title is required";
-    }
-    if (!newReport.ipfs) {
-        errors.ipfs = "File upload is required";
-    }
-	if (!newReport.source) {
-		errors.source = "Source URL is required";
-	}
+		if (!newReport.organisationGUID) {
+			errors.organisationGUID = "Organisation is required";
+		}
+		if (!newReport.title) {
+			errors.title = "Title is required";
+		}
+		if (!newReport.ipfs) {
+			errors.ipfs = "File upload is required";
+		}
+		if (!newReport.source) {
+			errors.source = "Source URL is required";
+		}
 
-    setFieldErrors(errors);
+		setFieldErrors(errors);
 
-    if (Object.keys(errors).length > 0) {
-        return; // Don't proceed with submission
-    }
+		if (Object.keys(errors).length > 0) {
+			return; // Don't proceed with submission
+		}
 
-    try {
-        setLoading(true);
-        // ... (rest of your handleSubmit logic)
-    } catch (error) {
-        setLoading(false);
-        console.error("Error uploading report", error);
-    }
+		try {
+			setLoading(true);
+			// ... (rest of your handleSubmit logic)
+		} catch (error) {
+			setLoading(false);
+			console.error("Error uploading report", error);
+		}
 		try {
 			setLoading(true);
 			const item = {
@@ -165,6 +165,7 @@ const ReportDialog = () => {
 					Report: newReport.ipfs,
 					"Start Date": newReport.accountingPeriodStart,
 					"End Date": newReport.accountingPeriodEnd,
+					"Upload Date": newReport.uploadDate,
 					// Set other values based on the form inputs
 				},
 			};
@@ -211,8 +212,8 @@ const ReportDialog = () => {
 				}),
 				{ onBlockConfirmation: () => handleClose() }
 			);
-            setLoading(false);
-            setReloadReports(true);
+			setLoading(false);
+			setReloadReports(true);
 			handleClose();
 		} catch (error) {
 			setLoading(false);
@@ -239,7 +240,18 @@ const ReportDialog = () => {
 							</button>
 							<h2 className="text-2xl font-bold">New Report</h2>
 
-							<p className="mt-3 mb-6">You can upload an existing impact report or create a new one using <a className="link" target="_blank" href="https://docs.google.com/document/d/1X69Fh6_c0RDEQvXzmb--s2Cqzl24AuSnC7HXuDDAALY/edit?usp=sharing">our template</a>.</p>
+							<p className="mt-3 mb-6">
+								You can upload an existing impact report or create a new one
+								using{" "}
+								<a
+									className="link"
+									target="_blank"
+									href="https://docs.google.com/document/d/1X69Fh6_c0RDEQvXzmb--s2Cqzl24AuSnC7HXuDDAALY/edit?usp=sharing"
+								>
+									our template
+								</a>
+								.
+							</p>
 
 							<div className="modal-body">
 								<div className="my-2">
@@ -255,10 +267,12 @@ const ReportDialog = () => {
 									/> */}
 									<select
 										name="organisationGUID"
-										className={`select select-bordered w-full ${fieldErrors.organisationGUID ? 'input-error' : ''}`}
-                                        value={newReport.organisationGUID}
-                                        onChange={handleChange}
-                                        required
+										className={`select select-bordered w-full ${
+											fieldErrors.organisationGUID ? "input-error" : ""
+										}`}
+										value={newReport.organisationGUID}
+										onChange={handleChange}
+										required
 									>
 										<option disabled value="">
 											Select organisation to report on
@@ -276,8 +290,12 @@ const ReportDialog = () => {
 												)
 											)
 										}
-                                    </select>
-                                    {fieldErrors.organisationGUID && <p className="text-red-600 my-1">{fieldErrors.organisationGUID}</p>}
+									</select>
+									{fieldErrors.organisationGUID && (
+										<p className="text-red-600 my-1">
+											{fieldErrors.organisationGUID}
+										</p>
+									)}
 								</div>
 								<div className="my-2">
 									<p className="font-bold my-1">Title</p>
@@ -286,22 +304,39 @@ const ReportDialog = () => {
 										name="title"
 										value={newReport.title}
 										onChange={handleChange}
-										className={`input input-bordered w-full ${fieldErrors.title ? 'input-error' : ''}`}
+										className={`input input-bordered w-full ${
+											fieldErrors.title ? "input-error" : ""
+										}`}
 										placeholder="Enter report title"
 										required
-                                    />
-                                       {fieldErrors.title && <p className="text-red-600 my-1">{fieldErrors.title}</p>}
+									/>
+									{fieldErrors.title && (
+										<p className="text-red-600 my-1">{fieldErrors.title}</p>
+									)}
 								</div>
 								<div className="my-2">
-								<p className="font-bold my-1">Accounting period</p>
-								<Datepicker 	
-								useRange={false}
-									primaryColor="blue"
-									value={{startDate:newReport.accountingPeriodStart,endDate:newReport.accountingPeriodEnd}} 
-									onChange={(newVal)=> {setNewReport({...newReport, accountingPeriodStart:dayjs(newVal?.startDate?.toString()).toDate(),accountingPeriodEnd:dayjs(newVal?.endDate?.toString()).toDate()})}} 
-								/> 
+									<p className="font-bold my-1">Accounting period</p>
+									<Datepicker
+										useRange={false}
+										primaryColor="blue"
+										value={{
+											startDate: newReport.accountingPeriodStart,
+											endDate: newReport.accountingPeriodEnd,
+										}}
+										onChange={(newVal) => {
+											setNewReport({
+												...newReport,
+												accountingPeriodStart: dayjs(
+													newVal?.startDate?.toString()
+												).toDate(),
+												accountingPeriodEnd: dayjs(
+													newVal?.endDate?.toString()
+												).toDate(),
+											});
+										}}
+									/>
 								</div>
-								
+
 								<div className="mb-2 mt-12">
 									<p className="font-bold my-1">Comments</p>
 									<textarea
@@ -319,16 +354,22 @@ const ReportDialog = () => {
 										name="source"
 										value={newReport.source}
 										onChange={handleChange}
-										className={`input input-bordered w-full ${fieldErrors.source ? 'input-error' : ''}`}
+										className={`input input-bordered w-full ${
+											fieldErrors.source ? "input-error" : ""
+										}`}
 										placeholder="Enter report title"
 										required
-                                    />
-                                       {fieldErrors.title && <p className="text-red-600 my-1">{fieldErrors.source}</p>}
+									/>
+									{fieldErrors.title && (
+										<p className="text-red-600 my-1">{fieldErrors.source}</p>
+									)}
 								</div>
 								<div className="my-2">
 									<p className="font-bold my-1">Add File</p>
-                                    <FileUpload onUpload={handleFileChange} required />
-                                     {fieldErrors.ipfs && <p className="text-red-600">{fieldErrors.ipfs}</p>}
+									<FileUpload onUpload={handleFileChange} required />
+									{fieldErrors.ipfs && (
+										<p className="text-red-600">{fieldErrors.ipfs}</p>
+									)}
 								</div>
 								{/* Add other form fields here */}
 							</div>
