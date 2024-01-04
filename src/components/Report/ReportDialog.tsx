@@ -17,6 +17,7 @@ import ConnectModal from "../utils/ConnectModal";
 import { useSetAtom } from "jotai";
 import { reloadReports } from "../../atoms/reloadTriggers";
 import Datepicker from "react-tailwindcss-datepicker";
+import RequiredFieldIndicator from "../../utils/RequiredFieldIndicator";
 import dayjs from "dayjs";
 
 const STAGING = import.meta.env.VITE_STAGING
@@ -48,15 +49,18 @@ const ReportDialog = () => {
 		abi: ABI,
 		functionName: "getOrganisations",
 	});
+
+	const currentDate = new Date();
+	const beginningOfPreviousYear = new Date(currentDate.getFullYear() - 1, 0, 1);
+	const endOfPreviousYear = new Date(currentDate.getFullYear() - 1, 11, 31);
+
 	const [newReport, setNewReport] = useState<Report>({
 		organisationGUID: "",
 		title: "",
 		comments: "",
 		uploadDate: new Date(),
-		accountingPeriodStart: new Date(),
-		accountingPeriodEnd: new Date(
-			new Date().getTime() + 10 * 24 * 60 * 60 * 1000
-		),
+		accountingPeriodStart: beginningOfPreviousYear,
+		accountingPeriodEnd: endOfPreviousYear,
 		source: "",
 		ipfs: "",
 		reportGUID: "",
@@ -73,10 +77,8 @@ const ReportDialog = () => {
 			title: "",
 			comments: "",
 			uploadDate: new Date(),
-			accountingPeriodStart: new Date(),
-			accountingPeriodEnd: new Date(
-				new Date().getTime() + 10 * 24 * 60 * 60 * 1000
-			),
+			accountingPeriodStart: beginningOfPreviousYear,
+			accountingPeriodEnd: endOfPreviousYear,
 			source: "",
 			ipfs: "",
 			reportGUID: "",
@@ -118,9 +120,6 @@ const ReportDialog = () => {
     if (!newReport.ipfs) {
         errors.ipfs = "File upload is required";
     }
-	if (!newReport.source) {
-		errors.source = "Source URL is required";
-	}
 
     setFieldErrors(errors);
 
@@ -243,7 +242,7 @@ const ReportDialog = () => {
 
 							<div className="modal-body">
 								<div className="my-2">
-									<p className="font-bold my-1">Organisation</p>
+									<p className="font-bold my-1">Organisation<RequiredFieldIndicator /></p>
 									{/* <input
 										type="text"
 										name="organisation"
@@ -280,7 +279,7 @@ const ReportDialog = () => {
                                     {fieldErrors.organisationGUID && <p className="text-red-600 my-1">{fieldErrors.organisationGUID}</p>}
 								</div>
 								<div className="my-2">
-									<p className="font-bold my-1">Title</p>
+									<p className="font-bold my-1">Title<RequiredFieldIndicator /></p>
 									<input
 										type="text"
 										name="title"
@@ -308,7 +307,7 @@ const ReportDialog = () => {
 										name="comments"
 										value={newReport.comments}
 										onChange={handleChange}
-										className="textarea textarea-bordered w-full"
+										className="textarea textarea-bordered w-full text-base"
 										placeholder="Enter comments"
 									></textarea>
 								</div>
@@ -320,13 +319,12 @@ const ReportDialog = () => {
 										value={newReport.source}
 										onChange={handleChange}
 										className={`input input-bordered w-full ${fieldErrors.source ? 'input-error' : ''}`}
-										placeholder="Enter report title"
-										required
+										placeholder="If the report is hosted on the on the web, enter the URL"
                                     />
                                        {fieldErrors.title && <p className="text-red-600 my-1">{fieldErrors.source}</p>}
 								</div>
 								<div className="my-2">
-									<p className="font-bold my-1">Add File</p>
+									<p className="font-bold my-1">Add File<RequiredFieldIndicator /></p>
                                     <FileUpload onUpload={handleFileChange} required />
                                      {fieldErrors.ipfs && <p className="text-red-600">{fieldErrors.ipfs}</p>}
 								</div>
