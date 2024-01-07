@@ -120,9 +120,6 @@ const ReportDialog = () => {
 		if (!newReport.ipfs) {
 			errors.ipfs = "File upload is required";
 		}
-		if (!newReport.source) {
-			errors.source = "Source URL is required";
-		}
 
 		setFieldErrors(errors);
 
