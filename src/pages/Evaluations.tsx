@@ -9,6 +9,7 @@ import ABI_staging from "../contracts/ABI_staging";
 import ADDRESS_staging from "../contracts/Address_staging";
 import Spinner from "../utils/Spinner";
 import isGuidInLocalStorage from "../utils/guidInLocalStorage";
+import { EvaluationCategories } from "../utils/categoriesEval";
 /* import { mockEvaluations } from "../mock/Evalutions"; */
 
 const STAGING = import.meta.env.VITE_STAGING;
@@ -18,6 +19,7 @@ const ADDRESS = STAGING ? ADDRESS_staging : ADDRESS_prod;
 const EvaluationsPage = () => {
 	//@ts-ignore
 	const [evaluations, setEvaluations] = useState<Evaluation[]>([]);
+	const [selectedCategory, setSelectedCategory] = useState<string>("SDG");
 	const [loading, setLoading] = useState(false);
 	const { data, isError, isLoading } = useContractRead({
 		address: ADDRESS,
@@ -194,6 +196,23 @@ const EvaluationsPage = () => {
 	return (
 		<div className="m-3">
 			<h2 className="my-2 text-4xl text-black/60">Evaluations</h2>
+			<div className="flex flex-row justify-left gap-2">
+				<p className="text-md my-auto">Select category</p>
+				<div role="tablist" className="tabs tabs-boxed bg-transparent">
+					{EvaluationCategories.map((category, i) => (
+						<a
+							key={i}
+							role="tab"
+							className={`tab transition-all ${
+								category === selectedCategory ? "tab-active" : ""
+							}`}
+							onClick={() => setSelectedCategory(category)}
+						>
+							{category}
+						</a>
+					))}
+				</div>
+			</div>
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 place-content-center">
 				{evaluations.map((evaluation, i) => (
 					<EvaluationCard evaluation={evaluation} key={i} />

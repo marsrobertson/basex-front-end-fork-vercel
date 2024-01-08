@@ -14,6 +14,10 @@ import ADDRESS_staging from "../../contracts/Address_staging";
 import { useAccount, useContractWrite } from "wagmi";
 import { useTransactor } from "../../hooks/useTransactor";
 import ConnectModal from "../utils/ConnectModal";
+import {
+	EvaluationCategories,
+	planetaryBoundaries,
+} from "../../utils/categoriesEval";
 
 const STAGING = import.meta.env.VITE_STAGING;
 const ABI = STAGING ? ABI_staging : ABI_prod;
@@ -43,12 +47,13 @@ const EvaluationDialog = ({
 		reportTitle: report.title,
 		nvt: 0,
 		pvt: 0,
+		justificationType: "SDG",
 		evaluationContent: {
 			comments: "",
-			planetJustifications: Array.from({ length: 6 }, (_, index) => ({
+			planetJustifications: Array.from({ length: 17 }, (_, index) => ({
 				comment: "",
 				percentage: 0,
-				planetImage: `/img/ebfs/ebf-${index + 1}.svg`,
+				planetImage: `/img/sdgs/sdg${index + 1}.png`,
 			})),
 		},
 		author: "",
@@ -67,10 +72,10 @@ const EvaluationDialog = ({
 			pvt: 0,
 			evaluationContent: {
 				comments: "",
-				planetJustifications: Array.from({ length: 6 }, (_, index) => ({
+				planetJustifications: Array.from({ length: 17 }, (_, index) => ({
 					comment: "",
 					percentage: 0,
-					planetImage: `/img/ebfs/ebf-${index + 1}.svg`,
+					planetImage: `/img/sdgs/sdg${index + 1}.png`,
 				})),
 			},
 			author: "",
@@ -81,7 +86,9 @@ const EvaluationDialog = ({
 		handleClose();
 	});
 	const handleChange = (
-		event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+		event: React.ChangeEvent<
+			HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+		>
 	) => {
 		const { name, value } = event.target;
 		if (name === "comments") {
@@ -129,6 +136,56 @@ const EvaluationDialog = ({
 				...prevEvaluation,
 				[name]: value,
 			}));
+		}
+		if (name === "justificationType") {
+			switch (value) {
+				case "SDG": {
+					setNewEvaluation((prevEvaluation) => ({
+						...prevEvaluation,
+						evaluationContent: {
+							...prevEvaluation.evaluationContent,
+							planetJustifications: Array.from({ length: 17 }, (_, index) => ({
+								comment: "",
+								percentage: 0,
+								planetImage: `/img/sdgs/sdg${index + 1}.png`,
+							})),
+							comments: prevEvaluation?.evaluationContent?.comments || "", // Provide a default value
+						},
+					}));
+
+					break;
+				}
+				case "EBF": {
+					setNewEvaluation((prevEvaluation) => ({
+						...prevEvaluation,
+						evaluationContent: {
+							...prevEvaluation.evaluationContent,
+							planetJustifications: Array.from({ length: 6 }, (_, index) => ({
+								comment: "",
+								percentage: 0,
+								planetImage: `/img/ebfs/ebf-${index + 1}.svg`,
+							})),
+							comments: prevEvaluation?.evaluationContent?.comments || "", // Provide a default value
+						},
+					}));
+					break;
+				}
+				case "Planetary Boundaries": {
+					setNewEvaluation((prevEvaluation) => ({
+						...prevEvaluation,
+						evaluationContent: {
+							...prevEvaluation.evaluationContent,
+							planetJustifications: Array.from({ length: 6 }, (_, index) => ({
+								comment: "",
+								percentage: 0,
+								planetImage: "planetary",
+							})),
+							comments: prevEvaluation?.evaluationContent?.comments || "", // Provide a default value
+						},
+					}));
+					break;
+				}
+			}
 		}
 	};
 
@@ -285,6 +342,7 @@ const EvaluationDialog = ({
 					"Positive Value": newEvaluation.pvt ?? 0,
 					"Negative Value": newEvaluation.nvt ?? 0,
 					GUID: itemGUID,
+					justificationType: newEvaluation.justificationType,
 					"GUID Target": report.reportGUID,
 					...newEvaluation?.evaluationContent?.planetJustifications?.reduce(
 						(acc, justification, index) => {
@@ -403,17 +461,49 @@ const EvaluationDialog = ({
 									/>
 								</div>
 								<div className="my-2">
-									<p className="font-bold my-1">EBF Justifications</p>
+									<label className="form-control w-full max-w-xs">
+										<div className="label">
+											<span className="font-semibold label-text">
+												Justifications type
+											</span>
+										</div>
+										<select
+											name="justificationType"
+											onChange={handleChange}
+											value={newEvaluation.justificationType}
+											className="select select-bordered"
+										>
+											<option disabled selected>
+												Pick one
+											</option>
+											{EvaluationCategories.map((cat, i) => (
+												<option key={i} value={cat}>
+													{cat}
+												</option>
+											))}
+										</select>
+									</label>
+									<p className="font-bold mt-3 mb-1">
+										{newEvaluation?.justificationType ?? "SDG"} Justifications
+									</p>
 									{newEvaluation?.evaluationContent?.planetJustifications?.map(
 										(justification, index) => (
 											<div key={index} className="my-2">
-												<div className="flex justify-between">
-													<img
-														className="w-16 h-16"
-														src={justification.planetImage}
-														alt=""
-													/>
+												<div className={"flex justify-between"}>
+													{justification.planetImage !== "planetary" && (
+														<img
+															className="w-16 h-16"
+															src={justification.planetImage}
+															alt=""
+														/>
+													)}
+
 													<div className="m-1 mx-2 flex-1">
+														{justification.planetImage === "planetary" && (
+															<p className="mb-1">
+																{planetaryBoundaries[index]}
+															</p>
+														)}
 														<textarea
 															name={`planetJustifications-${index}-comment`}
 															value={justification.comment}
@@ -436,7 +526,7 @@ const EvaluationDialog = ({
 																		Number(e.target.value)
 																	)
 																}
-																className="w-full range range-primary"
+																className="w-full range range-primary mt-1"
 															/>
 															<p className="text-right">
 																{justification.percentage}%
