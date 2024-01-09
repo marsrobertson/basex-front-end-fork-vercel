@@ -1,9 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Barlow&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
 	--account-center-position-top: -12px;
-	font-family: "Poppins", sans-serif;
+	font-family: "Barlow", sans-serif;
 }

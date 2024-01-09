@@ -175,7 +175,7 @@ const EvaluationDialog = ({
 						...prevEvaluation,
 						evaluationContent: {
 							...prevEvaluation.evaluationContent,
-							planetJustifications: Array.from({ length: 6 }, (_, index) => ({
+							planetJustifications: Array.from({ length: 8 }, (_, _index) => ({
 								comment: "",
 								percentage: 0,
 								planetImage: "planetary",
