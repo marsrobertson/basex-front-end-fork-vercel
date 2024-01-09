@@ -41,6 +41,13 @@ const EvaluationDialog = ({
 	const [open, setOpen] = useState(false);
 	const ref = useRef(null);
 	const [loading, setLoading] = useState(false);
+	const [optJustifications, setOptJustifications] = useState<{
+		[key: string]: {
+			comment: string;
+			percentage: number;
+			planetImage?: string | undefined;
+		}[];
+	}>({});
 	const [newEvaluation, setNewEvaluation] = useState<Evaluation>({
 		organisationGUID: report.organisationGUID,
 		targetGUID: report.reportGUID,
@@ -70,6 +77,7 @@ const EvaluationDialog = ({
 			targetGUID: "",
 			nvt: 0,
 			pvt: 0,
+			justificationType: "SDG",
 			evaluationContent: {
 				comments: "",
 				planetJustifications: Array.from({ length: 17 }, (_, index) => ({
@@ -137,7 +145,7 @@ const EvaluationDialog = ({
 				[name]: value,
 			}));
 		}
-		if (name === "justificationType") {
+		/* if (name === "justificationType") {
 			switch (value) {
 				case "SDG": {
 					setNewEvaluation((prevEvaluation) => ({
@@ -186,7 +194,7 @@ const EvaluationDialog = ({
 					break;
 				}
 			}
-		}
+		} */
 	};
 
 	const handleSliderChange = (index: number, value: number) => {
@@ -461,31 +469,125 @@ const EvaluationDialog = ({
 									/>
 								</div>
 								<div className="my-2">
-									<label className="form-control w-full max-w-xs">
-										<div className="label">
-											<span className="font-semibold label-text">
-												Justifications type
-											</span>
-										</div>
-										<select
-											name="justificationType"
-											onChange={handleChange}
-											value={newEvaluation.justificationType}
-											className="select select-bordered"
-										>
-											<option disabled selected>
-												Pick one
-											</option>
-											{EvaluationCategories.map((cat, i) => (
-												<option key={i} value={cat}>
-													{cat}
-												</option>
-											))}
-										</select>
-									</label>
-									<p className="font-bold mt-3 mb-1">
-										{newEvaluation?.justificationType ?? "SDG"} Justifications
-									</p>
+									<div
+										role="tablist"
+										className="tabs tabs-boxed mx-auto w-fit border-primary/40 rounded-md border-2 justify-center bg-transparent"
+									>
+										{EvaluationCategories.map((category, i) => (
+											<a
+												key={i}
+												role="tab"
+												className={` tab ${
+													category === newEvaluation.justificationType
+														? "tab-active"
+														: ""
+												} `}
+												onClick={() => {
+													// Store the current planetJustifications in optJustifications
+													setOptJustifications((prevOptJustifications: any) => {
+														return {
+															...prevOptJustifications,
+															[newEvaluation.justificationType || ""]:
+																newEvaluation.evaluationContent
+																	?.planetJustifications || [],
+														};
+													});
+
+													setNewEvaluation((evaluation) => ({
+														...evaluation,
+														justificationType: category,
+													}));
+													if (Array.isArray(optJustifications[category])) {
+														setNewEvaluation(
+															(prevEvaluation: any) =>
+																({
+																	...prevEvaluation,
+																	evaluationContent: {
+																		...prevEvaluation.evaluationContent,
+																		planetJustifications: [
+																			...optJustifications[category],
+																		],
+																	},
+																} as Evaluation)
+														);
+													} else {
+														switch (category) {
+															case "SDG": {
+																setNewEvaluation((prevEvaluation) => ({
+																	...prevEvaluation,
+																	evaluationContent: {
+																		...prevEvaluation.evaluationContent,
+																		planetJustifications: Array.from(
+																			{
+																				length: 17,
+																			},
+																			(_, index) => ({
+																				comment: "",
+																				percentage: 0,
+																				planetImage: `/img/sdgs/sdg${
+																					index + 1
+																				}.png`,
+																			})
+																		),
+																		comments:
+																			prevEvaluation?.evaluationContent
+																				?.comments || "", // Provide a default value
+																	},
+																}));
+
+																break;
+															}
+															case "EBF": {
+																setNewEvaluation((prevEvaluation) => ({
+																	...prevEvaluation,
+																	evaluationContent: {
+																		...prevEvaluation.evaluationContent,
+																		planetJustifications: Array.from(
+																			{ length: 6 },
+																			(_, index) => ({
+																				comment: "",
+																				percentage: 0,
+																				planetImage: `/img/ebfs/ebf-${
+																					index + 1
+																				}.svg`,
+																			})
+																		),
+																		comments:
+																			prevEvaluation?.evaluationContent
+																				?.comments || "", // Provide a default value
+																	},
+																}));
+																break;
+															}
+															case "Planetary Boundaries": {
+																setNewEvaluation((prevEvaluation) => ({
+																	...prevEvaluation,
+																	evaluationContent: {
+																		...prevEvaluation.evaluationContent,
+																		planetJustifications: Array.from(
+																			{ length: 8 },
+																			(_, _index) => ({
+																				comment: "",
+																				percentage: 0,
+																				planetImage: "planetary",
+																			})
+																		),
+																		comments:
+																			prevEvaluation?.evaluationContent
+																				?.comments || "", // Provide a default value
+																	},
+																}));
+																break;
+															}
+														}
+													}
+												}}
+											>
+												{category}
+											</a>
+										))}
+									</div>
+
 									{newEvaluation?.evaluationContent?.planetJustifications?.map(
 										(justification, index) => (
 											<div key={index} className="my-2">
