@@ -8,9 +8,6 @@ module.exports = {
 	],
 	theme: {
 		extend: {},
-		fontFamily: {
-			sans: ["Barlow", "sans-serif"],
-		},
 	},
 	darkMode: "class",
 	plugins: [require("daisyui")],
