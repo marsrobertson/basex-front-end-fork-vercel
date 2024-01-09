@@ -8,8 +8,9 @@ import ADDRESS_staging from "../../contracts/Address_staging";
 import { Evaluation } from "../../types/Evaluation";
 import { Organisation } from "../../types/Organisation";
 import { toDateTimeString } from "../../utils/dateUtils";
+import { planetaryBoundaries } from "../../utils/categoriesEval";
 
-const STAGING = import.meta.env.VITE_STAGING
+const STAGING = import.meta.env.VITE_STAGING;
 const ABI = STAGING ? ABI_staging : ABI_prod;
 const ADDRESS = STAGING ? ADDRESS_staging : ADDRESS_prod;
 
@@ -63,14 +64,19 @@ const EvaluationCard = ({ evaluation }: { evaluation: Evaluation }) => {
 						{evaluationContent?.planetJustifications?.map(
 							(justification, index) => (
 								<div key={index} className="flex items-center mb-4">
-									<div className="w-10 h-10 mr-4">
-										<img
-											src={justification.planetImage}
-											alt="Justification"
-											className="object-cover max-w-24 max-h-24 min-w-[40px] "
-										/>
-									</div>
+									{justification.planetImage !== "planetary" && (
+										<div className="w-10 h-10 mr-4">
+											<img
+												src={justification.planetImage}
+												alt="Justification"
+												className="object-cover max-w-24 max-h-24 min-w-[40px] "
+											/>
+										</div>
+									)}
 									<div>
+										{justification.planetImage === "planetary" && (
+											<p className="mb-1">{planetaryBoundaries[index]}</p>
+										)}
 										<p className="text-gray-600 max-h-[300px] overflow-y-auto">
 											{justification.comment}
 										</p>

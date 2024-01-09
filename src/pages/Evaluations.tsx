@@ -52,17 +52,20 @@ const EvaluationsPage = () => {
 	const loadBEEvaluations = async () => {
 		const SUFFIX = import.meta.env.VITE_STAGING ? "_staging" : ""; // Mars HACK to use staging data (temporary solutions that stay forever)
 		const evalsData = await fetch(
-			`${import.meta.env.VITE_BACKEND_ENDPOINT}/evaluations${SUFFIX}`
+			`${import.meta.env.VITE_BACKEND_ENDPOINT}/evaluations${SUFFIX}${
+				selectedCategory ? `/${selectedCategory}` : ""
+			}`
 		);
 		const beEvaluations: Evaluation[] = await evalsData.json();
 
-		// HACK FIX CHANGING IMAGE
+		/* // HACK FIX CHANGING IMAGE
 		for (let i = 0; i < beEvaluations.length; i++) {
 			const justifications =
 				beEvaluations[i].evaluationContent?.planetJustifications;
 			if (justifications) {
 				for (let j = 0; j < justifications.length; j++) {
-					const justification = justifications[j];
+                    const justification = justifications[j];
+                    
 					if (
 						justification.planetImage &&
 						justification.planetImage.includes("/img/sdg")
@@ -73,7 +76,7 @@ const EvaluationsPage = () => {
 					}
 				}
 			}
-		}
+		} */
 
 		// HACK FIX REMOVE THE GUIDS THAT DO NOT HAVE CORRECT IMAGES
 		const toBeRemoved = [
