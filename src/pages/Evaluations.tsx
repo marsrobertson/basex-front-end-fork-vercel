@@ -49,11 +49,22 @@ const EvaluationsPage = () => {
 			return await results;
 		}, */
 	});
+	useEffect(() => {
+		if (selectedCategory) loadBEEvaluations();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [selectedCategory]);
+
 	const loadBEEvaluations = async () => {
 		const SUFFIX = import.meta.env.VITE_STAGING ? "_staging" : ""; // Mars HACK to use staging data (temporary solutions that stay forever)
 		const evalsData = await fetch(
 			`${import.meta.env.VITE_BACKEND_ENDPOINT}/evaluations${SUFFIX}${
-				selectedCategory ? `/${selectedCategory}` : ""
+				selectedCategory
+					? `/${
+							selectedCategory === "Planetary Boundaries"
+								? "planetary"
+								: selectedCategory
+					  }`
+					: ""
 			}`
 		);
 		const beEvaluations: Evaluation[] = await evalsData.json();
