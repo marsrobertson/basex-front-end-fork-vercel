@@ -76,7 +76,8 @@ const EvaluationCard = ({ evaluation }: { evaluation: Evaluation }) => {
 									<div>
 										{justification.planetImage === "planetary" && (
 											<p className="font-bold text-gray-400 mt-2">
-												{planetaryBoundaries[index]}
+												{justification.planetaryBoundary ??
+													planetaryBoundaries[index]}
 											</p>
 										)}
 										<p className="text-gray-600 max-h-[300px] overflow-y-auto">

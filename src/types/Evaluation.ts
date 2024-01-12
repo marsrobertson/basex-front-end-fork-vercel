@@ -16,6 +16,7 @@ export interface Evaluation {
 			comment: string;
 			percentage: number;
 			planetImage?: string;
+			planetaryBoundary?: string;
 		}>;
 	};
 	author?: string;
