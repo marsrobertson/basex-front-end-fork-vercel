@@ -55,6 +55,7 @@ const EvaluationsPage = () => {
 	}, [selectedCategory]);
 
 	const loadBEEvaluations = async () => {
+		setLoading(true);
 		const SUFFIX = import.meta.env.VITE_STAGING ? "_staging" : ""; // Mars HACK to use staging data (temporary solutions that stay forever)
 		const evalsData = await fetch(
 			`${import.meta.env.VITE_BACKEND_ENDPOINT}/evaluations${SUFFIX}${
@@ -102,6 +103,7 @@ const EvaluationsPage = () => {
 		);
 
 		setEvaluations(filteredArray);
+		setLoading(false);
 	};
 	useEffect(() => {
 		(async () => {
@@ -173,6 +175,7 @@ const EvaluationsPage = () => {
 			}
 			setLoading(false);
 		})();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data]);
 
 	if (isLoading || loading) {
