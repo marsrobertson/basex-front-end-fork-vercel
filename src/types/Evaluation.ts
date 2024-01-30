@@ -1,3 +1,10 @@
+export interface Justification {
+	comment: string;
+	percentage: number;
+	imageURL?: string;
+	planetaryBoundary?: string;
+}
+
 export interface Evaluation {
 	organisationGUID: string;
 	targetGUID: string;
@@ -8,16 +15,18 @@ export interface Evaluation {
 	accountingPeriodEnd?: Date;
 	pvt?: number;
 	nvt?: number;
-	justificationType?: string;
 	GUID?: string;
 	evaluationContent?: {
 		comments: string;
-		planetJustifications?: Array<{
+		/* planetJustifications?: Array<{
 			comment: string;
 			percentage: number;
 			planetImage?: string;
 			planetaryBoundary?: string;
-		}>;
+		}>; */
+		justifications?: {
+			[key: string]: Array<Justification>;
+		};
 	};
 	author?: string;
 	date?: Date;

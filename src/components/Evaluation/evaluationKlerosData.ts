@@ -6,14 +6,15 @@ export const evaluationKlerosData = (evaluation: Evaluation) => {
 		evaluation.evaluationContent?.justifications || {};
 
 	const descriptionData: { [key: string]: string | number } = {
-		title: evaluation.title ?? "",
-		startDate: dayjs(evaluation.accountingPeriodStart).toISOString(),
-		endDate: dayjs(evaluation.accountingPeriodEnd).toISOString(),
+		Title: evaluation.title ?? "",
+		"Start Date": dayjs(evaluation.accountingPeriodStart).toISOString(),
+		"End Date": dayjs(evaluation.accountingPeriodEnd).toISOString(),
+		"Upload Date": dayjs().toISOString(),
 		comments: evaluation.evaluationContent?.comments ?? "",
-		guid: evaluation.GUID ?? "",
-		guidTarget: evaluation.targetGUID,
-		positiveValue: evaluation.pvt ?? 0,
-		negativeValue: evaluation.nvt ?? 0,
+		GUID: evaluation.GUID ?? "",
+		"GUID Target": evaluation.targetGUID,
+		"Positive Value": evaluation.pvt ?? 0,
+		"Negative Value": evaluation.nvt ?? 0,
 	};
 
 	Object.keys(justifications).forEach((category) => {

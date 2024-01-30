@@ -1,4 +1,9 @@
-export const EvaluationCategories = ["SDG", "EBF",  "Planetary Boundaries"];
+export const EvaluationCategories = [
+	"SDG",
+	"EBF",
+	"Planetary Boundaries",
+	"United Planet",
+];
 
 export const planetaryBoundaries = [
 	"Climate Change",
