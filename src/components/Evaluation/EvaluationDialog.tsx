@@ -42,7 +42,7 @@ const EvaluationDialog = ({
     const [open, setOpen] = useState(false);
     const ref = useRef(null);
     const [loading, setLoading] = useState(false);
-    const [selectedJustification, setSelectedJustification] = useState<string>("SDG");
+    const [selectedJustification, setSelectedJustification] = useState<string>("Basic");
     const [newEvaluation, setNewEvaluation] = useState<Evaluation>({
         organisationGUID: report.organisationGUID,
         targetGUID: report.reportGUID,
