@@ -1,4 +1,5 @@
 export const EvaluationCategories = [
+	"Basic",
 	"SDG",
 	"EBF",
 	"Planetary Boundaries",

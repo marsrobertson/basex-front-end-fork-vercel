@@ -477,42 +477,17 @@ const EvaluationDialog = ({
                                         required
                                     />
                                 </div>
-                                <div className="my-1">
-                                    <p className="font-bold my-1">Positive Value</p>
-                                    <input
-                                        type="number"
-                                        name="pvt"
-                                        value={newEvaluation.pvt}
-                                        onChange={handleChange}
-                                        min={0}
-                                        className="input input-bordered input-sm w-full max-w-xs"
-                                        placeholder="Positive Value"
-                                        required
-                                    />
-                                </div>
-                                <div className="my-1">
-                                    <p className="font-bold my-1">Negative Value</p>
-                                    <input
-                                        type="number"
-                                        name="nvt"
-                                        value={newEvaluation.nvt}
-                                        onChange={handleChange}
-                                        min={0}
-                                        className="input input-bordered input-sm w-full max-w-xs"
-                                        placeholder="Negative Value"
-                                        required
-                                    />
-                                </div>
+
                                 <div className="my-2">
                                     <div
                                         role="tablist"
-                                        className="tabs tabs-boxed w-fit border-black/40 rounded-md border-2 my-3 justify-center bg-transparent"
+                                        className="tabs tabs-boxed w-fit text-xs border-black/40 rounded-md border-2 my-3 justify-center bg-transparent"
                                     >
                                         {EvaluationCategories.map((category, i) => (
                                             <a
                                                 key={i}
                                                 role="tab"
-                                                className={` tab ${category === selectedJustification
+                                                className={`text-xs tab ${category === selectedJustification
                                                     ? "bg-black/80 text-white"
                                                     : ""
                                                     } `}
@@ -524,8 +499,73 @@ const EvaluationDialog = ({
                                             </a>
                                         ))}
                                     </div>
-
-                                    {newEvaluation?.evaluationContent?.justifications?.[selectedJustification]?.map(
+                                    {selectedJustification === "Basic" && (
+                                        <div className="my-2">
+                                            <div className="my-1">
+                                                <p className="font-bold my-1">Positive Value</p>
+                                                <input
+                                                    type="number"
+                                                    name="pvt"
+                                                    value={newEvaluation.pvt}
+                                                    onChange={handleChange}
+                                                    min={0}
+                                                    className="input input-bordered input-sm w-full max-w-xs"
+                                                    placeholder="Positive Value"
+                                                    required
+                                                />
+                                            </div>
+                                            <div className="my-1">
+                                                <p className="font-bold my-1">Negative Value</p>
+                                                <input
+                                                    type="number"
+                                                    name="nvt"
+                                                    value={newEvaluation.nvt}
+                                                    onChange={handleChange}
+                                                    min={0}
+                                                    className="input input-bordered input-sm w-full max-w-xs"
+                                                    placeholder="Negative Value"
+                                                    required
+                                                />
+                                            </div>
+                                            <div>
+                                                <div>
+                                                    <p className="font-bold mb-1 mt-4">Water consumption</p>
+                                                    <input
+                                                        type="range"
+                                                        name="h2o"
+                                                        value={newEvaluation.h2o}
+                                                        min={-100}
+                                                        max={100}
+                                                        step={1}
+                                                        onChange={handleChange}
+                                                        className="w-full range range-primary mt-1"
+                                                    />
+                                                    <p className="text-right">
+                                                        {newEvaluation.h2o ?? "0"}%
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div>
+                                                    <p className="font-bold mb-1">Greenhouse gas output</p>
+                                                    <input
+                                                        type="range"
+                                                        name="co2"
+                                                        value={newEvaluation.co2}
+                                                        min={-100}
+                                                        max={100}
+                                                        step={1}
+                                                        onChange={handleChange}
+                                                        className="w-full range range-secondary mt-1"
+                                                    />
+                                                    <p className="text-right">
+                                                        {newEvaluation.co2 ?? "0"}%
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+                                    {selectedJustification !== "Basic" && newEvaluation?.evaluationContent?.justifications?.[selectedJustification]?.map(
                                         (justification, index) => (
                                             <div key={`${selectedJustification}-${index}`} className="my-2">
                                                 <div className={"flex justify-between"}>

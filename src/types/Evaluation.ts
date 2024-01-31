@@ -15,6 +15,8 @@ export interface Evaluation {
 	accountingPeriodEnd?: Date;
 	pvt?: number;
 	nvt?: number;
+	co2?: number;
+	h2o?: number;
 	GUID?: string;
 	evaluationContent?: {
 		comments: string;

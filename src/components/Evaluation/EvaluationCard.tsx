@@ -58,37 +58,54 @@ const EvaluationCard = ({ evaluation }: { evaluation: Evaluation }) => {
                     <p className="text-gray-600">{pvt}</p>
                     <h3 className="text-base font-bold mb-1">Negative Value</h3>
                     <p className="text-gray-600">{nvt}</p>
+                    {evaluation.h2o !== 0 && (
+                        <>
+                            <h3 className="text-base font-bold mb-1">Water consumption</h3>
+                            <p className="text-gray-600">{evaluation.h2o}</p>
+                        </>
+                    )}
+                    {evaluation.co2 !== 0 && (
+                        <>
+                            <h3 className="text-base font-bold mb-1">
+                                Greenhouse gas output
+                            </h3>
+                            <p className="text-gray-600">{evaluation.co2}</p>
+                        </>
+                    )}
                 </section>
 
-                {justifications && Object.keys(justifications).flatMap((category) => {
-                    return (justifications[category] ?? []).map((justification, index) => (
-                        <div key={index} className="flex items-center mb-4">
-                            {justification.imageURL !== "planetary" && (
-                                <div className="w-10 h-10 mr-4">
-                                    <img
-                                        src={justification.imageURL}
-                                        alt="Justification"
-                                        className="object-cover max-w-24 max-h-24 min-w-[40px] "
-                                    />
+                {justifications &&
+                    Object.keys(justifications).flatMap((category) => {
+                        return (justifications[category] ?? []).map(
+                            (justification, index) => (
+                                <div key={index} className="flex items-center mb-4">
+                                    {justification.imageURL !== "planetary" && (
+                                        <div className="w-10 h-10 mr-4">
+                                            <img
+                                                src={justification.imageURL}
+                                                alt="Justification"
+                                                className="object-cover max-w-24 max-h-24 min-w-[40px] "
+                                            />
+                                        </div>
+                                    )}
+                                    <div>
+                                        {justification.imageURL === "planetary" && (
+                                            <p className="font-bold text-gray-400 mt-2">
+                                                {justification.planetaryBoundary ??
+                                                    planetaryBoundaries[index]}
+                                            </p>
+                                        )}
+                                        <p className="text-gray-600 max-h-[300px] overflow-y-auto">
+                                            {justification.comment}
+                                        </p>
+                                        <p className="text-gray-600">
+                                            Percentage: {justification.percentage}%
+                                        </p>
+                                    </div>
                                 </div>
-                            )}
-                            <div>
-                                {justification.imageURL === "planetary" && (
-                                    <p className="font-bold text-gray-400 mt-2">
-                                        {justification.planetaryBoundary ??
-                                            planetaryBoundaries[index]}
-                                    </p>
-                                )}
-                                <p className="text-gray-600 max-h-[300px] overflow-y-auto">
-                                    {justification.comment}
-                                </p>
-                                <p className="text-gray-600">
-                                    Percentage: {justification.percentage}%
-                                </p>
-                            </div>
-                        </div>
-                    ))
-                })}
+                            )
+                        );
+                    })}
                 {/* <section>
 					<h3 className="text-base font-bold mb-2">Author</h3>
 					<p className="text-gray-600">{author}</p>

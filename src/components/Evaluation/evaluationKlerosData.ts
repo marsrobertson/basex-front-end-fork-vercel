@@ -15,6 +15,8 @@ export const evaluationKlerosData = (evaluation: Evaluation) => {
 		"GUID Target": evaluation.targetGUID,
 		"Positive Value": evaluation.pvt ?? 0,
 		"Negative Value": evaluation.nvt ?? 0,
+		CO2: evaluation.co2 ?? 0,
+		H2O: evaluation.h2o ?? 0,
 	};
 
 	Object.keys(justifications).forEach((category) => {
