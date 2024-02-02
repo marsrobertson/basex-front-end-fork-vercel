@@ -8,9 +8,6 @@ import ADDRESS_prod from "../contracts/Address_prod";
 import ABI_staging from "../contracts/ABI_staging";
 import ADDRESS_staging from "../contracts/Address_staging";
 import Spinner from "../utils/Spinner";
-import isGuidInLocalStorage from "../utils/guidInLocalStorage";
-import { EvaluationCategories } from "../utils/categoriesEval";
-/* import { mockEvaluations } from "../mock/Evalutions"; */
 
 const STAGING = import.meta.env.VITE_STAGING;
 const ABI = STAGING ? ABI_staging : ABI_prod;
