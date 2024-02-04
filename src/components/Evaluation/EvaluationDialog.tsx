@@ -17,6 +17,9 @@ import ConnectModal from "../utils/ConnectModal";
 import {
     EvaluationCategories,
     planetaryBoundaries,
+    EBF,
+    SDG,
+    unitedPlanet
 } from "../../utils/categoriesEval";
 import { evaluationKlerosData } from "./evaluationKlerosData";
 
@@ -56,21 +59,25 @@ const EvaluationDialog = ({
                     comment: "",
                     percentage: 0,
                     imageURL: `/img/sdgs/sdg${index + 1}.png`,
+                    title: SDG[index]
                 })),
                 "EBF": Array.from({ length: 6 }, (_, index) => ({
                     comment: "",
                     percentage: 0,
                     imageURL: `/img/ebfs/ebf-${index + 1}.svg`,
+                    tile: EBF[index]
                 })),
                 "United Planet": Array.from({ length: 16 }, (_, index) => ({
                     comment: "",
                     percentage: 0,
                     imageURL: `/img/unitedplanet/up${index + 1}.png`,
+                    title: unitedPlanet[index]
                 })),
-                "Planetary Boundaries": Array.from({ length: 8 }, (_, index) => ({
+                "Planetary Boundaries": Array.from({ length: 9 }, (_, index) => ({
                     comment: "",
                     percentage: 0,
-                    planetaryBoundary: planetaryBoundaries[index]
+                    imageURL: `/img/planetary-boundaries.png`,
+                    title: planetaryBoundaries[index]
                 })),
             }
 
@@ -96,21 +103,25 @@ const EvaluationDialog = ({
                         comment: "",
                         percentage: 0,
                         imageURL: `/img/sdgs/sdg${index + 1}.png`,
+                        title: SDG[index]
                     })),
                     "EBF": Array.from({ length: 6 }, (_, index) => ({
                         comment: "",
                         percentage: 0,
                         imageURL: `/img/ebfs/ebf-${index + 1}.svg`,
+                        title: EBF[index]
                     })),
                     "United Planet": Array.from({ length: 16 }, (_, index) => ({
                         comment: "",
                         percentage: 0,
                         imageURL: `/img/unitedplanet/up${index + 1}.png`,
+                        title: unitedPlanet[index]
                     })),
                     "Planetary Boundaries": Array.from({ length: 8 }, (_, index) => ({
                         comment: "",
                         percentage: 0,
-                        planetaryBoundary: planetaryBoundaries[index]
+                        imageURL: `/img/planetary-boundaries.png`,
+                        title: planetaryBoundaries[index]
                     })),
                 }
             },
@@ -558,20 +569,19 @@ const EvaluationDialog = ({
                                         (justification, index) => (
                                             <div key={`${selectedJustification}-${index}`} className="my-2">
                                                 <div className={"flex justify-between"}>
-                                                    {selectedJustification !== "Planetary Boundaries" && (
-                                                        <img
-                                                            className="w-16 h-16"
-                                                            src={justification.imageURL}
-                                                            alt=""
-                                                        />
-                                                    )}
+
+                                                    <img
+                                                        className="w-16 h-16"
+                                                        src={justification.imageURL}
+                                                        alt=""
+                                                    />
 
                                                     <div className="m-1 mx-2 flex-1">
-                                                        {selectedJustification === "Planetary Boundaries" && (
-                                                            <p className="mb-1">
-                                                                {planetaryBoundaries[index]}
-                                                            </p>
-                                                        )}
+                                                        
+                                                        <p className="mb-1">
+                                                            {justification.title}
+                                                        </p>
+                                                        
                                                         <textarea
                                                             name={`justifications-${index}-comment`}
                                                             value={justification.comment}

@@ -54,24 +54,25 @@ const EvaluationCard = ({ evaluation }: { evaluation: Evaluation }) => {
                     </p>
                 </section>
                 <section>
-                    <h3 className="text-base font-bold mb-1">Positive Value</h3>
+                    <h3 className="text-base font-bold mb-1">Positive value in $</h3>
                     <p className="text-gray-600">{pvt}</p>
-                    <h3 className="text-base font-bold mb-1">Negative Value</h3>
+                    <h3 className="text-base font-bold mb-1">Negative value in $</h3>
                     <p className="text-gray-600">{nvt}</p>
-                    {evaluation.h2o !== 0 && (
-                        <>
-                            <h3 className="text-base font-bold mb-1">Water consumption</h3>
-                            <p className="text-gray-600">{evaluation.h2o}</p>
-                        </>
-                    )}
                     {evaluation.co2 !== 0 && (
                         <>
                             <h3 className="text-base font-bold mb-1">
-                                Greenhouse gas output
+                            CO<sub>2</sub> emissions in tonnes
                             </h3>
                             <p className="text-gray-600">{evaluation.co2}</p>
                         </>
                     )}
+                    {evaluation.h2o !== 0 && (
+                        <>
+                            <h3 className="text-base font-bold mb-1">Water consumption in liters</h3>
+                            <p className="text-gray-600">{evaluation.h2o}</p>
+                        </>
+                    )}
+                    
                 </section>
 
                 {justifications &&
