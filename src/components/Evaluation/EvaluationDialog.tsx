@@ -502,7 +502,7 @@ const EvaluationDialog = ({
                                     {selectedJustification === "Basic" && (
                                         <div className="my-2">
                                             <div className="my-1">
-                                                <p className="font-bold my-1">Positive Value</p>
+                                                <p className="font-bold my-1">Positive value in $</p>
                                                 <input
                                                     type="number"
                                                     name="pvt"
@@ -515,7 +515,7 @@ const EvaluationDialog = ({
                                                 />
                                             </div>
                                             <div className="my-1">
-                                                <p className="font-bold my-1">Negative Value</p>
+                                                <p className="font-bold my-1">Negative value in $</p>
                                                 <input
                                                     type="number"
                                                     name="nvt"
@@ -528,41 +528,30 @@ const EvaluationDialog = ({
                                                 />
                                             </div>
                                             <div>
-                                                <div>
-                                                    <p className="font-bold mb-1 mt-4">Water consumption</p>
-                                                    <input
-                                                        type="range"
-                                                        name="h2o"
-                                                        value={newEvaluation.h2o}
-                                                        min={-100}
-                                                        max={100}
-                                                        step={1}
-                                                        onChange={handleChange}
-                                                        className="w-full range range-primary mt-1"
-                                                    />
-                                                    <p className="text-right">
-                                                        {newEvaluation.h2o ?? "0"}%
-                                                    </p>
-                                                </div>
+                                                <p className="font-bold mb-1">CO<sub>2</sub> emissions in tonnes</p>
+                                                <input
+                                                    type="number"
+                                                    name="co2"
+                                                    value={newEvaluation.co2}
+                                                    onChange={handleChange}
+                                                    className="input input-bordered input-sm w-full max-w-xs"
+                                                    placeholder="Can be negative if carbon drawdown"
+                                                    required
+                                                />
                                             </div>
                                             <div>
-                                                <div>
-                                                    <p className="font-bold mb-1">Greenhouse gas output</p>
+                                                <p className="font-bold mb-1 mt-4">Water consumption in liters</p>
                                                     <input
-                                                        type="range"
-                                                        name="co2"
-                                                        value={newEvaluation.co2}
-                                                        min={-100}
-                                                        max={100}
-                                                        step={1}
-                                                        onChange={handleChange}
-                                                        className="w-full range range-secondary mt-1"
-                                                    />
-                                                    <p className="text-right">
-                                                        {newEvaluation.co2 ?? "0"}%
-                                                    </p>
-                                                </div>
+                                                    type="number"
+                                                    name="h2o"
+                                                    value={newEvaluation.h2o}
+                                                    onChange={handleChange}
+                                                    className="input input-bordered input-sm w-full max-w-xs"
+                                                    placeholder="Can be negative if water reclamation"
+                                                    required
+                                                />
                                             </div>
+
                                         </div>
                                     )}
                                     {selectedJustification !== "Basic" && newEvaluation?.evaluationContent?.justifications?.[selectedJustification]?.map(
