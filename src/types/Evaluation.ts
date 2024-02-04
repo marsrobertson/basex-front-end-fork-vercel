@@ -2,7 +2,7 @@ export interface Justification {
 	comment: string;
 	percentage: number;
 	imageURL?: string;
-	planetaryBoundary?: string;
+	title?: string;
 }
 
 export interface Evaluation {

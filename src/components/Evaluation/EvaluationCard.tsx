@@ -8,7 +8,6 @@ import ADDRESS_staging from "../../contracts/Address_staging";
 import { Evaluation } from "../../types/Evaluation";
 import { Organisation } from "../../types/Organisation";
 import { toDateTimeString } from "../../utils/dateUtils";
-import { planetaryBoundaries } from "../../utils/categoriesEval";
 
 const STAGING = import.meta.env.VITE_STAGING;
 const ABI = STAGING ? ABI_staging : ABI_prod;
@@ -80,22 +79,17 @@ const EvaluationCard = ({ evaluation }: { evaluation: Evaluation }) => {
                         return (justifications[category] ?? []).map(
                             (justification, index) => (
                                 <div key={index} className="flex items-center mb-4">
-                                    {justification.imageURL !== "planetary" && (
-                                        <div className="w-10 h-10 mr-4">
-                                            <img
-                                                src={justification.imageURL}
-                                                alt="Justification"
-                                                className="object-cover max-w-24 max-h-24 min-w-[40px] "
-                                            />
-                                        </div>
-                                    )}
+                                    <div className="w-10 h-10 mr-4">
+                                        <img
+                                            src={justification.imageURL}
+                                            alt="Justification"
+                                            className="object-cover max-w-24 max-h-24 min-w-[40px] "
+                                        />
+                                    </div>
                                     <div>
-                                        {justification.imageURL === "planetary" && (
-                                            <p className="font-bold text-gray-400 mt-2">
-                                                {justification.planetaryBoundary ??
-                                                    planetaryBoundaries[index]}
-                                            </p>
-                                        )}
+                                        <p className="font-bold text-gray-400 mt-2">
+                                            {justification.title}
+                                        </p>
                                         <p className="text-gray-600 max-h-[300px] overflow-y-auto">
                                             {justification.comment}
                                         </p>

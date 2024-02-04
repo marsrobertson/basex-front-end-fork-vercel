@@ -65,7 +65,7 @@ const EvaluationDialog = ({
                     comment: "",
                     percentage: 0,
                     imageURL: `/img/ebfs/ebf-${index + 1}.svg`,
-                    tile: EBF[index]
+                    title: EBF[index]
                 })),
                 "United Planet": Array.from({ length: 16 }, (_, index) => ({
                     comment: "",
