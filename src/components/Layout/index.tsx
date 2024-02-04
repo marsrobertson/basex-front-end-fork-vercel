@@ -18,6 +18,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         abi: ABI,
         functionName: "getOrganisations",
     });
+    const closeDrawer = () => {
+        const drawerToggleLabel = document.getElementById('my-drawer-3');
+        if (drawerToggleLabel) {
+            drawerToggleLabel.click();
+        }
+    };
 
     useEffect(() => {
         if (getOrganisations.data) {
@@ -114,7 +120,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                             </li>
                         </ul>
                     </div>
-                    <div className="flex-none ml-3">
+                    <div className="flex-none">
                         <ConnectButton />
                     </div>
                 </div>
@@ -143,8 +149,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                         </svg>
                     </label>
                     {/* Sidebar content here */}
-                    <li className="flex justify-center gap-1">
-                        <Link to="/organisations">
+                    <li className="flex justify-center gap-1" >
+                        <Link to="/organisations" onClick={closeDrawer}>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="32"
@@ -158,7 +164,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                         </Link>
                     </li>
                     <li className="flex justify-center gap-1">
-                        <Link to="/reports">
+                        <Link to="/reports" onClick={closeDrawer}>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="32"
@@ -172,7 +178,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                         </Link>
                     </li>
                     <li className="flex justify-center gap-1">
-                        <Link to="/evaluations">
+                        <Link to="/evaluations" onClick={closeDrawer}>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="32"
