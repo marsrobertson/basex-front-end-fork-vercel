@@ -3,6 +3,7 @@ import blockchainTree from "../assets/basex-blockchain-tree.jpg";
 import './styles.css'; // HACK: I do not know how to TailWind this, AI is quitting on me
 import { Link } from 'react-router-dom';
 
+const STAGING = import.meta.env.VITE_STAGING;
 
 const HomePage = () => {
 	return (
@@ -24,11 +25,22 @@ const HomePage = () => {
 
 				<img src={blockchainTree}></img>
 
-				Beta deployment <i>(still on testnet)</i>: <a className="marslink" href="https://beta.basex.com">beta.basex.com</a> <i>(more serious)</i><br />
-				Staging deployment <i>(loads of dummy data)</i>: <a className="marslink" href="https://staging.basex.com">staging.basex.com</a> <i>(testing)</i>
+				{ STAGING && 
+					<>
+						<p>This is <strong>testing</strong> deployment <i>(with loads of dummy data)</i> located at: <a className="marslink" href="https://staging.basex.com">staging.basex.com</a></p>
+						<p>When you are ready for <strong>production</strong> version <i>(with real data)</i> check: <a className="marslink" href="https://beta.basex.com">beta.basex.com</a></p>
+					</>
+				}
 
+				{ !STAGING && 
+					<>
+						<p>This is <strong>beta production</strong> deployment <i>(with real data)</i> located at: <a className="marslink" href="https://beta.basex.com">beta.basex.com</a></p>
+						<p>If you just want to <strong>test</strong> the platform <i>(with dummy data)</i> please refer to: <a className="marslink" href="https://staging.basex.com">staging.basex.com</a></p>
+					</>
+				}
 
 				<br />
+				Flow of operations:
 				<br />
 				<Link to="/organisations" className="btn btn-outline text-black font-bold py-2 px-4 rounded">
 					<span className="text-xl">1️⃣</span> &nbsp; Create an organisation
@@ -47,12 +59,10 @@ const HomePage = () => {
 				<br />
 				<br />
 
-				You can also browse the BaseX platform and in the "read only" mode. In order to interact with <Link to="/organisations" className="marslink">organisations</Link>, <Link to="/reports" className="marslink">reports</Link>, <Link to="/evaluations" className="marslink">evaluations</Link> - you need to have a wallet with some testnet ETH in it - message us if you need any assistance: <a className="marslink" href="mailto:info@basex.com">info@basex.com</a> or <a className="marslink" href="https://twitter.com/basexhq">@basexHQ</a> on Twitter.
-				
+				You can also browse the BaseX platform and in the "read only" mode. In order to interact with <Link to="/organisations" className="marslink">organisations</Link>, <Link to="/reports" className="marslink">reports</Link>, <Link to="/evaluations" className="marslink">evaluations</Link> - you need to have a wallet with some testnet Goerli ETH.
 				<br />
 				<br />
-				
-				Check our <a className="marslink" href="https://mirror.xyz/0x81e64EFA58bf79F1649F267E16451Fbf836071f6">Mirror blog</a> as well 🌱
+				Contact us if you need any assistance: <a className="marslink" href="mailto:info@basex.com">info@basex.com</a> or <a className="marslink" href="https://twitter.com/basexhq">@basexHQ</a> on Twitter. You can check our <a className="marslink" href="https://mirror.xyz/0x81e64EFA58bf79F1649F267E16451Fbf836071f6">Mirror blog</a> as well 🌱
 
 				<br />
 				<br />
