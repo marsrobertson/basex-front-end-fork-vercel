@@ -571,7 +571,7 @@ const EvaluationDialog = ({
                                                 <div className={"flex justify-between"}>
 
                                                     <img
-                                                        className="w-16 h-16"
+                                                        className="w-16 h-16 mt-8"
                                                         src={justification.imageURL}
                                                         alt=""
                                                     />
