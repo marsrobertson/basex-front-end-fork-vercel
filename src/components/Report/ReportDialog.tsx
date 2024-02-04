@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Report } from "../../types/Report";
 import { useOnClickOutside } from "usehooks-ts";
 import FileUpload from "../FileUpload";
@@ -19,6 +19,7 @@ import { reloadReports } from "../../atoms/reloadTriggers";
 import Datepicker from "react-tailwindcss-datepicker";
 import RequiredFieldIndicator from "../../utils/RequiredFieldIndicator";
 import dayjs from "dayjs";
+import CleanupService from "../../services/CleanupService";
 
 const STAGING = import.meta.env.VITE_STAGING;
 const ABI = STAGING ? ABI_staging : ABI_prod;
@@ -44,11 +45,19 @@ const ReportDialog = () => {
 		abi: ABI,
 		functionName: "addItem",
 	});
-	const getOrganisations = useContractRead({
+	const { data } = useContractRead({
 		address: ADDRESS,
-		abi: ABI,
+        abi: ABI,
 		functionName: "getOrganisations",
 	});
+
+	const [filteredData, setFilteredData] = useState<Organisation[]>([]);
+	useEffect(() => {
+		if (data) {
+			let newData = CleanupService.removeOrganisationGUIDs(data as Organisation[]);
+			setFilteredData(newData)
+		}
+	}, [data]);
 
 	const currentDate = new Date();
 	const beginningOfPreviousYear = new Date(currentDate.getFullYear() - 1, 0, 1);
@@ -179,7 +188,7 @@ const ReportDialog = () => {
 			//@ts-ignore
 			console.log(response[0].hash);
 			//@ts-ignore
-			const organizationIndex = getOrganisations.data.findIndex(
+			const organizationIndex = data.findIndex(
 				(organization: Organisation) =>
 					organization.orgGuid === newReport.organisationGUID
 			);
@@ -279,9 +288,10 @@ const ReportDialog = () => {
 										<option disabled value="">
 											Select organisation to report on
 										</option>
+
 										{
 											//@ts-ignore
-											getOrganisations.data?.map(
+											filteredData.map(
 												(organisation: Organisation) => (
 													<option
 														key={organisation.orgGuid}

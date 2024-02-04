@@ -10,7 +10,9 @@ import Spinner from "../utils/Spinner";
 import { Organisation } from "../types/Organisation";
 import { reloadOrganisations } from "../atoms/reloadTriggers";
 import { useAtom } from "jotai";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
+import CleanupService from "../services/CleanupService";
 
 const STAGING = import.meta.env.VITE_STAGING
 const ABI = STAGING ? ABI_staging : ABI_prod;
@@ -23,6 +25,15 @@ const OrganisationsPage = () => {
         abi: ABI,
 		functionName: "getOrganisations",
 	});
+
+	const [filteredData, setFilteredData] = useState<Organisation[]>([]);
+	useEffect(() => {
+		if (data) {
+			let newData = CleanupService.removeOrganisationGUIDs(data as Organisation[]);
+			setFilteredData(newData)
+		}
+	}, [data]);
+
     useEffect(() => {
         if (hasToReloadOrganisations) {
             refetch();
@@ -82,7 +93,8 @@ const OrganisationsPage = () => {
 					</thead>
 					<tbody>
 						{//@ts-ignore
-						(data ?? []).map((org: Organisation, i: number) => {
+
+						(filteredData ?? []).map((org: Organisation, i: number) => {
 							// console.log(org);
 							return (
 								<tr key={i} className="bg-white shadow-md hover:bg-gray-50">
