@@ -36,7 +36,7 @@ const EvaluationCard = ({ evaluation }: { evaluation: Evaluation }) => {
 
     return (
         <div className="card bg-base-100 my-3 border-2 shadow-xl">
-            <div className="card-body">
+            <div className="card-body max-h-[1000px] overflow-auto">
                 <h2 className="card-title text-lg font-bold mb-3">{title}</h2>
                 {organisation?.name && (
                     <section>
